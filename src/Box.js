@@ -1,17 +1,12 @@
-import React, { useState } from 'react'
+import React, { useReducer, useState } from 'react'
 
 export default function Box(props) {
-  const [color, setColor] = useState("red")
+  // const [color, setColor] = useReducer("red")
 
   return (
-    <button
-        onClick={setColor(() => {
-          return color === "red" ? "blue" : "red"
-        })
-
-      }>
-      {color}
-    </button>
+    <div className={props.className}>
+      <p>{props.text}</p>
+    </div>
 
   )
 }
