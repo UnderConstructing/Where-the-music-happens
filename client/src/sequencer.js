@@ -211,7 +211,7 @@ return (
       ))}
     </div>
     <h2>Melody</h2>
-    <div>
+    <div >
       {melodyArray.map((row, i) => (
         <div id={row[i].note} className="row">
           {row.map(subdivision => (
@@ -225,6 +225,6 @@ return (
       )
       )}
     </div>
-    <button key="start" className={"play"} onClick={startSequence}>startSequence</button>
+    <a key="start" className={"button play"} onClick={startSequence}></a>
   </div>
 )}
