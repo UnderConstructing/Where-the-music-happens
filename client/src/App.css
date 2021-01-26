@@ -1,14 +1,64 @@
-/* .row input {
-    position: absolute;
+* {
+    box-sizing: border-box;
+}
+body {
+    background-color: black;
+}
+h1, h2, h3 {
+    font-family: Garamond;
+    color: wheat
+}
+
+.title {
+    font-size: 4rem;
+}
+
+.main {
+    width: 100%;
+    text-align: center;
+}
+
+.sub {
+    display: inline-block;
+}
+
+.parent label {
+    cursor: crosshair;
+    display: flex;
+}
+
+.parent input[type="checkbox"] {
+    cursor: crosshair;
     opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-} */
+    position: absolute;
+}
+
+.parent label::before {
+    content: '';
+    width: 3em;
+    height: 3em;
+    border-radius: .3em;
+    border: 10px #aca3a3;
+    margin: 5px;
+    background: radial-gradient(#ada5a5, #9198e5);
+    box-shadow: 0 0 10px rgb(117, 116, 116)
+}
+
+.parent label:hover::before,
+.parent input[type="checkbox"]:hover + label::before {
+    background: radial-gradient(rgb(226, 213, 139), #9198e5);
+    box-shadow: 0 0 13px rgb(224, 218, 153)
+}
+
+.parent input[type='checkbox']:checked + label::before {
+    background: radial-gradient(#ada5a5, #565a88, rgb(92, 33, 33)); 
+}
 
 .row {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
     min-height: 40px;
     flex-wrap: nowrap;
 }
@@ -23,10 +73,11 @@
     border-radius: 5%;
     justify-content: center;
     align-items: center;
+    color: #0079bf;
 }
 
-.row .box:checked ~ .checkmark {
-
+.box:checked {
+    background-color: red;
 }
 
 .white {
@@ -34,4 +85,12 @@
 }
 .red {
     background-color: red;
+}
+
+.play {
+    height: 3rem;
+    width: 7rem;
+    color:wheat;
+    border-radius: 50%;
+    background-image: radial-gradient(rgb(122, 68, 68), black);
 }
