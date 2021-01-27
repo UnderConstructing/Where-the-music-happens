@@ -2,14 +2,14 @@ import React from 'react';
 import kickArray from './kick.json';
 import snareArray from './snare.json';
 import * as Tone from 'tone';
-import Box from './Box'
 import { isNote, MembraneSynth } from 'tone';
-import Row from './Row'
 import melodyArray from './melody.json'
 import './App.css'
 import Sequencer from './sequencer'
 import Hi from './attempt'
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"
+import Register from './register';
+import Login from './Login'
 
 
 export default function App() {
@@ -36,7 +36,12 @@ export default function App() {
           <Route exact path="/hi">
             <Hi />
           </Route>
-
+          <Route exact path="/registeruser">
+            <Register />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
         </Switch>
       </div>
     </Router>

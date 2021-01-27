@@ -8,6 +8,7 @@ import * as Tone from 'tone';
 
 
 export default function Sequencer() {
+
 console.log(snareArray)
 const gainNode = new Tone.Gain(0).toDestination()
 function activateSnare(event) {
@@ -42,14 +43,14 @@ function activateNote(e) {
   // console.log(melodyArray[e.target.getAttribute("row") - 1][(parseInt(e.target.id)/parseInt(e.target.getAttribute('row'))) - 1].id)
 }
 
-const filter = new Tone.Filter(1000, 'highpass', -48)
-const filter1 = new Tone.Filter(1000, 'highpass', -48)
-const filter2 = new Tone.Filter(1000, 'highpass', -48)
-const filter3 = new Tone.Filter(1000, 'highpass', -48)
-const filter4 = new Tone.Filter(1000, 'highpass', -48)
-const filter5 = new Tone.Filter(1000, 'highpass', -48)
-const filter6 = new Tone.Filter(1000, 'highpass', -48)
-const filter7 = new Tone.Filter(1000, 'highpass', -48)
+const filter = new Tone.Filter(200, 'lowpass')
+// const filter1 = new Tone.Filter(1000, 'highpass', -48)
+// const filter2 = new Tone.Filter(1000, 'highpass', -48)
+// const filter3 = new Tone.Filter(1000, 'highpass', -48)
+// const filter4 = new Tone.Filter(1000, 'highpass', -48)
+// const filter5 = new Tone.Filter(1000, 'highpass', -48)
+// const filter6 = new Tone.Filter(1000, 'highpass', -48)
+// const filter7 = new Tone.Filter(1000, 'highpass', -48)
 //get transport moving
 let index = 0;
 let reverb = new Tone.JCReverb({
@@ -89,7 +90,7 @@ const synths = [
       decay: 1,
       release: 2
     }
-  }).connect(filter),
+  }),
   new Tone.Synth({
     oscillator: {type: "square"},
     envelope: {
@@ -98,7 +99,7 @@ const synths = [
       decay: 1,
       release: 2
     }
-  }).connect(filter1),
+  }),
   new Tone.Synth({
     oscillator: {type: "square"},
     envelope: {
@@ -107,7 +108,7 @@ const synths = [
       decay: 1,
       release: 2
     }
-  }).connect(filter2),
+  }),
   new Tone.Synth({
     oscillator: {type: "square"},
     envelope: {
@@ -116,7 +117,7 @@ const synths = [
       decay: 1,
       release: 2
     }
-  }).connect(filter3),
+  }),
   new Tone.Synth({
     oscillator: {type: "square"},
     envelope: {
@@ -125,7 +126,7 @@ const synths = [
       decay: 1,
       release: 2
     }
-  }).connect(filter4),
+  }),
   new Tone.Synth({
     oscillator: {type: "square"},
     envelope: {
@@ -134,7 +135,7 @@ const synths = [
       decay: 1,
       release: 2
     }
-  }).connect(filter5), 
+  }), 
   new Tone.Synth({
     oscillator: {type: "square"},
     envelope: {
@@ -143,7 +144,7 @@ const synths = [
       decay: 1,
       release: 2
     }
-  }).connect(filter6),
+  }),
   new Tone.Synth({
     oscillator: {type: "square"},
     envelope: {
@@ -152,7 +153,7 @@ const synths = [
       decay: 1,
       release: 2
     }
-  }).connect(filter7)
+  })
 ]
 
 
@@ -160,23 +161,24 @@ synths.forEach(synth => synth.sync())
 // synths.forEach(synth => {
 //   synth.connect(filter)})
 Tone.Transport.scheduleRepeat(repeat, "16n")
-Tone.Transport.bpm.value = 80
-
+Tone.Transport.bpm.value = 50
 //callback for note triggering
-function repeat() {
+async function repeat(time) {
+  Tone.setContext(new Tone.Context({ latencyHint: 'playback'}))
+  await Tone.start()
   let step = index % 16
   if (snareArray[step].isActive === true) {
-    snare.triggerAttackRelease('C2', '8n').toDestination()
+    snare.triggerAttackRelease('C2', '8n', time).toDestination()
   }
   if (kickArray[step].isActive === true) {
-    kick.triggerAttackRelease('C1', '8n').toDestination()
+    kick.triggerAttackRelease('C1', '8n', time).toDestination()
   }
   for (var i = 0; i < melodyArray.length; i++) {
     let row = melodyArray[i]
     let note = row[i].note
     let $synth = synths[i]
     if (row[step].isActive === true) {
-      $synth.triggerAttackRelease(note, '8n').toDestination()
+      $synth.triggerAttackRelease(note, '8n', time).toDestination()
     }
   }
   index++
@@ -185,7 +187,18 @@ function startSequence() {
   Tone.start()
   Tone.Transport.start()
 }
-
+function testSynth() {
+  const tester = new Tone.Synth({
+    oscillator: {type: "square"},
+    envelope: {
+      attack: 0.001,
+      sustain: .001,
+      decay: 1,
+      release: 2
+    }
+  }).connect(filter)
+  tester.triggerAttackRelease('C4', '4n').toDestination()
+}
 return (
   <div className="main">
     <div className="sub">
@@ -226,5 +239,6 @@ return (
       )}
     </div>
     <a key="start" className={"button play"} onClick={startSequence}></a>
+    <button onClick={testSynth}>Test filter hookup</button>
   </div>
 )}
