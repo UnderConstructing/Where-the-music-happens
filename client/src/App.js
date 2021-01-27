@@ -10,6 +10,7 @@ import Hi from './attempt'
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"
 import Register from './register';
 import Login from './Login'
+import PrivateRoute from './PrivateRoute'
 
 
 export default function App() {
@@ -42,6 +43,9 @@ export default function App() {
           <Route exact path="/login">
             <Login />
           </Route>
+          <PrivateRoute exact path= "dashboard/:user">
+
+          </PrivateRoute>
         </Switch>
       </div>
     </Router>

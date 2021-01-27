@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import kickArray from './kick.json';
 import snareArray from './snare.json';
 import melodyArray from './melody.json'
 import * as Tone from 'tone';
+import { PromiseProvider } from 'mongoose';
 
 
 
 export default function Sequencer() {
-
+const [playing, setPlaying] = useState("not-playing")
 console.log(snareArray)
 const gainNode = new Tone.Gain(0).toDestination()
 function activateSnare(event) {
@@ -82,76 +83,220 @@ const snare = new Tone.MetalSynth({
   snare.connect(reverb)
 
 const synths = [
-  new Tone.Synth({
-    oscillator: {type: "square"},
-    envelope: {
-      attack: 0.001,
-      sustain: .001,
-      decay: 1,
-      release: 2
+  new Tone.MonoSynth({
+    frequency : 'C4',
+    detune : 0 ,
+    oscillator : {
+    type : 'square'
+    } ,
+    filter : {
+    frequency: 100,
+    type : 'lowpass' ,
+    rolloff : -48
+    } ,
+    envelope : {
+    attack : 0.1 ,
+    decay : 0.1 ,
+    sustain : 0.9 ,
+    release : 1
+    } ,
+    filterEnvelope : {
+    attack : .1 ,
+    decay : .5,
+    sustain : 1 ,
+    release : 2 ,
+    baseFrequency : 100 ,
+    octaves : 2 ,
+    exponent : 2
     }
   }),
-  new Tone.Synth({
-    oscillator: {type: "square"},
-    envelope: {
-      attack: 0.001,
-      sustain: .001,
-      decay: 1,
-      release: 2
+  new Tone.MonoSynth({
+    frequency : 'C4',
+    detune : 0 ,
+    oscillator : {
+    type : 'square'
+    } ,
+    filter : {
+    frequency: 100,
+    type : 'lowpass' ,
+    rolloff : -48
+    } ,
+    envelope : {
+    attack : 0.1 ,
+    decay : 0.1 ,
+    sustain : 0.9 ,
+    release : 1
+    } ,
+    filterEnvelope : {
+    attack : .1 ,
+    decay : .5,
+    sustain : 1 ,
+    release : 2 ,
+    baseFrequency : 100 ,
+    octaves : 2 ,
+    exponent : 2
     }
   }),
-  new Tone.Synth({
-    oscillator: {type: "square"},
-    envelope: {
-      attack: 0.001,
-      sustain: .001,
-      decay: 1,
-      release: 2
+  new Tone.MonoSynth({
+    frequency : 'C4',
+    detune : 0 ,
+    oscillator : {
+    type : 'square'
+    } ,
+    filter : {
+    frequency: 100,
+    type : 'lowpass' ,
+    rolloff : -48
+    } ,
+    envelope : {
+    attack : 0.1 ,
+    decay : 0.1 ,
+    sustain : 0.9 ,
+    release : 1
+    } ,
+    filterEnvelope : {
+    attack : .1 ,
+    decay : .5,
+    sustain : 1 ,
+    release : 2 ,
+    baseFrequency : 100 ,
+    octaves : 2 ,
+    exponent : 2
     }
   }),
-  new Tone.Synth({
-    oscillator: {type: "square"},
-    envelope: {
-      attack: 0.001,
-      sustain: .001,
-      decay: 1,
-      release: 2
+  new Tone.MonoSynth({
+    frequency : 'C4',
+    detune : 0 ,
+    oscillator : {
+    type : 'square'
+    } ,
+    filter : {
+    frequency: 100,
+    type : 'lowpass' ,
+    rolloff : -48
+    } ,
+    envelope : {
+    attack : 0.1 ,
+    decay : 0.1 ,
+    sustain : 0.9 ,
+    release : 1
+    } ,
+    filterEnvelope : {
+    attack : .1 ,
+    decay : .5,
+    sustain : 1 ,
+    release : 2 ,
+    baseFrequency : 100 ,
+    octaves : 2 ,
+    exponent : 2
     }
   }),
-  new Tone.Synth({
-    oscillator: {type: "square"},
-    envelope: {
-      attack: 0.001,
-      sustain: .001,
-      decay: 1,
-      release: 2
+  new Tone.MonoSynth({
+    frequency : 'C4',
+    detune : 0 ,
+    oscillator : {
+    type : 'square'
+    } ,
+    filter : {
+    frequency: 100,
+    type : 'lowpass' ,
+    rolloff : -48
+    } ,
+    envelope : {
+    attack : 0.1 ,
+    decay : 0.1 ,
+    sustain : 0.9 ,
+    release : 1
+    } ,
+    filterEnvelope : {
+    attack : .1 ,
+    decay : .5,
+    sustain : 1 ,
+    release : 2 ,
+    baseFrequency : 100 ,
+    octaves : 2 ,
+    exponent : 2
     }
   }),
-  new Tone.Synth({
-    oscillator: {type: "square"},
-    envelope: {
-      attack: 0.001,
-      sustain: .001,
-      decay: 1,
-      release: 2
+  new Tone.MonoSynth({
+    frequency : 'C4',
+    detune : 0 ,
+    oscillator : {
+    type : 'square'
+    } ,
+    filter : {
+    frequency: 100,
+    type : 'lowpass' ,
+    rolloff : -48
+    } ,
+    envelope : {
+    attack : 0.1 ,
+    decay : 0.1 ,
+    sustain : 0.9 ,
+    release : 1
+    } ,
+    filterEnvelope : {
+    attack : .1 ,
+    decay : .5,
+    sustain : 1 ,
+    release : 2 ,
+    baseFrequency : 100 ,
+    octaves : 2 ,
+    exponent : 2
     }
   }), 
-  new Tone.Synth({
-    oscillator: {type: "square"},
-    envelope: {
-      attack: 0.001,
-      sustain: .001,
-      decay: 1,
-      release: 2
+  new Tone.MonoSynth({
+    frequency : 'C4',
+    detune : 0 ,
+    oscillator : {
+    type : 'square'
+    } ,
+    filter : {
+    frequency: 100,
+    type : 'lowpass' ,
+    rolloff : -48
+    } ,
+    envelope : {
+    attack : 0.1 ,
+    decay : 0.1 ,
+    sustain : 0.9 ,
+    release : 1
+    } ,
+    filterEnvelope : {
+    attack : .1 ,
+    decay : .5,
+    sustain : 1 ,
+    release : 2 ,
+    baseFrequency : 100 ,
+    octaves : 2 ,
+    exponent : 2
     }
   }),
-  new Tone.Synth({
-    oscillator: {type: "square"},
-    envelope: {
-      attack: 0.001,
-      sustain: .001,
-      decay: 1,
-      release: 2
+  new Tone.MonoSynth({
+    frequency : 'C4',
+    detune : 0 ,
+    oscillator : {
+    type : 'square'
+    } ,
+    filter : {
+    frequency: 100,
+    type : 'lowpass' ,
+    rolloff : -48
+    } ,
+    envelope : {
+    attack : 0.1 ,
+    decay : 0.1 ,
+    sustain : 0.9 ,
+    release : 1
+    } ,
+    filterEnvelope : {
+    attack : .1 ,
+    decay : .5,
+    sustain : 1 ,
+    release : 2 ,
+    baseFrequency : 100 ,
+    octaves : 2 ,
+    exponent : 2
     }
   })
 ]
@@ -161,10 +306,11 @@ synths.forEach(synth => synth.sync())
 // synths.forEach(synth => {
 //   synth.connect(filter)})
 Tone.Transport.scheduleRepeat(repeat, "16n")
-Tone.Transport.bpm.value = 50
+Tone.Transport.bpm.value = 80
 //callback for note triggering
 async function repeat(time) {
-  Tone.setContext(new Tone.Context({ latencyHint: 'playback'}))
+  Tone.setContext(new Tone.Context({ latencyHint: 0}))
+  Tone.Transport.context.lookAhead = 1
   await Tone.start()
   let step = index % 16
   if (snareArray[step].isActive === true) {
@@ -186,18 +332,40 @@ async function repeat(time) {
 function startSequence() {
   Tone.start()
   Tone.Transport.start()
+  setPlaying()
 }
+
+//try to connect synth to filter
 function testSynth() {
-  const tester = new Tone.Synth({
-    oscillator: {type: "square"},
-    envelope: {
-      attack: 0.001,
-      sustain: .001,
-      decay: 1,
-      release: 2
+  const tester = new Tone.MonoSynth({
+    frequency : 'C4',
+    detune : 0 ,
+    oscillator : {
+    type : 'square'
+    } ,
+    filter : {
+    frequency: 100,
+    type : 'lowpass' ,
+    rolloff : -48
+    } ,
+    envelope : {
+    attack : 0.1 ,
+    decay : 0.1 ,
+    sustain : 0.9 ,
+    release : 1
+    } ,
+    filterEnvelope : {
+    attack : .1 ,
+    decay : .5,
+    sustain : 1 ,
+    release : 2 ,
+    baseFrequency : 100 ,
+    octaves : 2 ,
+    exponent : 2
     }
-  }).connect(filter)
-  tester.triggerAttackRelease('C4', '4n').toDestination()
+  })
+
+  tester.triggerAttackRelease('C4', '2n').toDestination()
 }
 return (
   <div className="main">
@@ -238,7 +406,7 @@ return (
       )
       )}
     </div>
-    <a key="start" className={"button play"} onClick={startSequence}></a>
+    <a key="start" className={"button play"} onClick={startSequence}><p></p></a>
     <button onClick={testSynth}>Test filter hookup</button>
   </div>
 )}
