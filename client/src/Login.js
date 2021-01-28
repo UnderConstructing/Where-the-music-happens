@@ -4,7 +4,8 @@ import axios from 'axios'
 export default function Login() {
     const [loginUsername, setLoginUsername] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
-    const login = () => {
+    const login = (e) => {
+        e.preventDefault()
         axios({
             method: "post",
             data: {
@@ -13,7 +14,8 @@ export default function Login() {
             },
             withCredentials: true,
             url: 'http://localhost:4000/api/login'
-        }).then(response => console.log(`response: ${response}`))
+        }).then(response => window.location.href = `/dashboard/${response.data.username}`)
+    
     }
     return (
         <div>

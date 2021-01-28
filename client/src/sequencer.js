@@ -1,15 +1,42 @@
 import React, { useState } from 'react'
 import './App.css'
-import kickArray from './kick.json';
-import snareArray from './snare.json';
-import melodyArray from './melody.json'
+import kickArray from './templates/kick.json';
+import snareArray from './templates/snare.json';
+import melodyArray from './templates/melody.json'
 import * as Tone from 'tone';
 import { PromiseProvider } from 'mongoose';
+import Chat from './Chat'
 
-
+// function makeGrid() {
+//   const grid = []
+//   let column = [
+//     {note: "A4", isActive: false, type: "drum"},
+//     {note: "A4", isActive: false, type: "drum"},
+//     {note: "A4", isActive: false, type: "drum"},
+//     {note: "A4", isActive: false, type: "drum"},
+//     {note: "C4", isActive: false, type: "melody"},
+//     {note: "D4", isActive: false, type: "melody"},
+//     {note: "E4", isActive: false, type: "melody"},
+//     {note: "F4", isActive: false, type: "melody"},
+//     {note: "G4", isActive: false, type: "melody"},
+//     {note: "A4", isActive: false, type: "melody"},
+//     {note: "B4", isActive: false, type: "melody"},
+//     {note: "C5", isActive: false, type: "melody"},
+//     {note: "C2", isActive: false, type: "bass"},
+//     {note: "D2", isActive: false, type: "bass"},
+//     {note: "E2", isActive: false, type: "bass"},
+//     {note: "F2", isActive: false, type: "bass"},
+//     {note: "G2", isActive: false, type: "bass"},
+//     {note: "A2", isActive: false, type: "bass"},
+//     {note: "B2", isActive: false, type: "bass"},
+//     {note: "C3", isActive: false, type: "bass"}
+//   ]
+// }
 
 export default function Sequencer() {
-const [playing, setPlaying] = useState("not-playing")
+
+const synth = new Tone.PolySynth
+
 console.log(snareArray)
 const gainNode = new Tone.Gain(0).toDestination()
 function activateSnare(event) {
@@ -332,7 +359,7 @@ async function repeat(time) {
 function startSequence() {
   Tone.start()
   Tone.Transport.start()
-  setPlaying()
+
 }
 
 //try to connect synth to filter
@@ -368,12 +395,13 @@ function testSynth() {
   tester.triggerAttackRelease('C4', '2n').toDestination()
 }
 return (
+  <div className="center">
   <div className="main">
-    <div className="sub">
+    {/* <div className="sub"> */}
       <h1 className="title">Sequencer!</h1>
-    </div>
+    {/* </div> */}
     <h2 key="drums">Drums</h2>
-    <div key="snare" className="row">
+    <div key="snare" className="row snare">
       {snareArray.map((note) => (
         <div className="parent">
         <input type="checkbox" text={note.note} onClick={activateSnare} key={note.id+16} className="box" id={note.id}>
@@ -382,7 +410,7 @@ return (
         </div>
       ))}
     </div>
-    <div key="kick" className="row">
+    <div key="kick" className="row snare">
       {kickArray.map((note) => (
         <div className="parent">
         <input type="checkbox" text={note.note} onClick={activateKick} key={note.id + 8} className="box" id={note.id}>
@@ -391,8 +419,8 @@ return (
         </div>
       ))}
     </div>
-    <h2>Melody</h2>
-    <div >
+    {/* <h2>Melody</h2> */}
+    <div key="melody" className="melody">
       {melodyArray.map((row, i) => (
         <div id={row[i].note} className="row">
           {row.map(subdivision => (
@@ -407,6 +435,7 @@ return (
       )}
     </div>
     <a key="start" className={"button play"} onClick={startSequence}><p></p></a>
-    <button onClick={testSynth}>Test filter hookup</button>
+      <Chat />
+  </div>
   </div>
 )}

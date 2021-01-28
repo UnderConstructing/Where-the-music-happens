@@ -14,17 +14,18 @@ const bodyParser = require('body-parser');
 const User = require('./user')
 const strategy = require('./passportConfig')
 
+
 mongoose.connect('mongodb://localhost:27017/User?readPreference=primary&appname=MongoDB%20Compass&ssl=false', {
     useNewUrlParser: true,
     useUnifiedTopology: true
-}, () => {console.log('mongoosed')})
+}, () => { console.log('mongoosed') })
 
 //MIDDLEWARE
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors({
     origin: "http://localhost:3000",
-    credentials:true
+    credentials: true
 }))
 app.use(expressSession({
     secret: "itsasecret",
@@ -52,7 +53,7 @@ passport.serializeUser((user, callback) => {
     callback(null, user.id)
 });
 passport.deserializeUser((id, callback) => {
-    User.findOne({_id: id}, (err, user) => {
+    User.findOne({ _id: id }, (err, user) => {
         callback(err, user)
     })
 })
@@ -70,7 +71,7 @@ app.get('/about/api', (req, res) => {
 })
 
 app.post("/api/register", (req, res,) => {
-    User.findOne({username: req.body.username}, async (err, document) => {
+    User.findOne({ username: req.body.username }, async (err, document) => {
         if (document) res.send("Username is already taken.")
         if (!document) {
             const hashedPassword = await bcrypt.hash(req.body.password, 12)
@@ -86,28 +87,47 @@ app.post("/api/register", (req, res,) => {
 
 app.post("/api/login", (req, res, next) => {
     console.log(req.body)
-    passport.authenticate("local", function(err, user, info) {
+    passport.authenticate("local", function (err, user, info) {
         console.log("in auth")
         if (err) {
-            return next(err)}
+            return next(err)
+        }
         if (!user) {
             return res.send("We couldn't authenticate your username or password")
         }
         else {
             req.logIn(user, err => {
+                console.log(user)
                 if (err) throw next(err);
-                console.log(req.user)
-                return res.json(req.user)
+                //  res.redirect(`https://localhost:3000/dashboard/${user.username}`)
+                res.json(user)
             })
         }
     })(req, res, next);
 })
 
-app.get("/dashboard/:user", (req, res) => {
-    console.log(req.body)
+app.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/");
+});
+app.get("/api/getuser", (req, res) => {
+    if (req.user) {
+        User.findOne(
+            {
+                _id: req.user._id
+            }
+        ).then(user => {
+            console.log(user)
+            res.json(user)
+        })
+    }
 })
 
-app.listen(PORT, function(err) {
-    if (err) console.log("error fail")
-    console.log("Server listening on Port", PORT)
-})
+const server = app.listen(PORT, () => console.log("server listening on port:", PORT))
+
+const io = require('socket.io')(server)
+
+io.on("connection", socket => {
+    const { id } = socket.client;
+    console.log(`User connected: ${id}`);
+});

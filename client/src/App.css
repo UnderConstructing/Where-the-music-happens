@@ -4,6 +4,11 @@
 body {
     background-color: black;
 }
+
+.profile {
+  color:white;
+}
+
 h1, h2, h3 {
     font-family: Garamond;
     color: wheat
@@ -187,4 +192,17 @@ h1, h2, h3 {
     }
   }
 
+.chat {
+  position: fixed;
+  right: 1rem;
+  top: 6rem;
+  width: 20%;
+}
+
+.chat-area {
+  min-height: 60rem;
+  border-radius: 5%;
+  background-color: white;
+  height: 60rem;
   
+}
