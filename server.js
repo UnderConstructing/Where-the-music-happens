@@ -5,14 +5,14 @@ const https = require('https');
 const app = express();
 const cors = require('cors');
 const passport = require('passport')
-const passportLocal = require('passport-local').Strategy;
+const localStrategy = require('passport-local').Strategy;
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt')
 const expressSession = require('express-session')
 const PORT = process.env.PORT || 4000
 const bodyParser = require('body-parser');
 const User = require('./user')
-
+const strategy = require('./passportConfig')
 
 mongoose.connect('mongodb://localhost:27017/User?readPreference=primary&appname=MongoDB%20Compass&ssl=false', {
     useNewUrlParser: true,
@@ -32,11 +32,35 @@ app.use(expressSession({
     saveUninitialized: true
 }));
 
+passport.use(
+    new localStrategy((username, password, done) => {
+        User.findOne({ username: username }, (err, user) => {
+            //Database error
+            if (err) throw done(err);
+            if (!user) return done(null, false);
+            bcrypt.compare(password, user.password, (err, res) => {
+                if (err) throw err;
+                if (res === true) {
+                    return done(null, user)
+                }
+                else done(null, false)
+            })
+        })
+    })
+)
+passport.serializeUser((user, callback) => {
+    callback(null, user.id)
+});
+passport.deserializeUser((id, callback) => {
+    User.findOne({_id: id}, (err, user) => {
+        callback(err, user)
+    })
+})
 
 app.use(cookieParser("itsasecret"))
 app.use(passport.initialize())
 app.use(passport.session())
-require('./passportConfig')
+
 
 
 //ROUTES
@@ -61,23 +85,25 @@ app.post("/api/register", (req, res,) => {
 })
 
 app.post("/api/login", (req, res, next) => {
+    console.log(req.body)
     passport.authenticate("local", function(err, user, info) {
+        console.log("in auth")
         if (err) {
             return next(err)}
         if (!user) {
             return res.send("We couldn't authenticate your username or password")
         }
         else {
-            user.logIn(user, err => {
-                if (err) throw err;
-                res.send("You've logged in!")
+            req.logIn(user, err => {
+                if (err) throw next(err);
                 console.log(req.user)
+                return res.json(req.user)
             })
         }
-    })
+    })(req, res, next);
 })
 
-app.get("/user", (req, res) => {
+app.get("/dashboard/:user", (req, res) => {
     console.log(req.body)
 })
 

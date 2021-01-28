@@ -16,40 +16,37 @@ import PrivateRoute from './PrivateRoute'
 export default function App() {
   return (
     <div>
-  <Router>
-    <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/about">About</Link>
-        </li>
-        <li>
-          <Link to="/dashboard">Dashboard</Link>
-        </li>
-      </ul>
-      <hr />
-      <Switch>
-          <Route exact path="/">
-          <Sequencer />
-          </Route>
-          <Route exact path="/hi">
-            <Hi />
-          </Route>
-          <Route exact path="/registeruser">
-            <Register />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <PrivateRoute exact path= "dashboard/:user">
+      <Router>
+        <div>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/dashboard">Dashboard</Link>
+            </li>
+          </ul>
+          <hr />
+          <Switch>
+            <Route exact path="/">
+              <Sequencer />
+            </Route>
+            <Route exact path="/hi">
+              <Hi />
+            </Route>
+            <Route exact path="/registeruser">
+              <Register />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
 
-          </PrivateRoute>
-        </Switch>
-      </div>
-    </Router>
-
-  </div>
+    </div>
   )
 }
