@@ -39,7 +39,7 @@ const Chat = props => {
         }
         </div>
         <input className="chat-input" type="text" value={state.message} onChange={e => setState({ ...state, message: e.target.value })} />
-        <button className="chat-submit" onClick={submitMessage}>Submit</button>
+        <button className="chat-submit" onClick={submitMessage}>Send</button>
     </div>
     )
 }

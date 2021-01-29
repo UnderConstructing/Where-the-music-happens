@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import './App.css'
 import kickArray from './templates/kick.json';
 import snareArray from './templates/snare.json';
@@ -7,34 +7,11 @@ import * as Tone from 'tone';
 import { PromiseProvider } from 'mongoose';
 import Chat from './Chat'
 
-// function makeGrid() {
-//   const grid = []
-//   let column = [
-//     {note: "A4", isActive: false, type: "drum"},
-//     {note: "A4", isActive: false, type: "drum"},
-//     {note: "A4", isActive: false, type: "drum"},
-//     {note: "A4", isActive: false, type: "drum"},
-//     {note: "C4", isActive: false, type: "melody"},
-//     {note: "D4", isActive: false, type: "melody"},
-//     {note: "E4", isActive: false, type: "melody"},
-//     {note: "F4", isActive: false, type: "melody"},
-//     {note: "G4", isActive: false, type: "melody"},
-//     {note: "A4", isActive: false, type: "melody"},
-//     {note: "B4", isActive: false, type: "melody"},
-//     {note: "C5", isActive: false, type: "melody"},
-//     {note: "C2", isActive: false, type: "bass"},
-//     {note: "D2", isActive: false, type: "bass"},
-//     {note: "E2", isActive: false, type: "bass"},
-//     {note: "F2", isActive: false, type: "bass"},
-//     {note: "G2", isActive: false, type: "bass"},
-//     {note: "A2", isActive: false, type: "bass"},
-//     {note: "B2", isActive: false, type: "bass"},
-//     {note: "C3", isActive: false, type: "bass"}
-//   ]
-// }
+import AuthContext from './utils/Context/AuthContext'
 
 export default function Sequencer() {
-
+const userInfo = useContext(AuthContext)
+console.log(userInfo)
 const synth = new Tone.PolySynth
 
 console.log(snareArray)
@@ -394,6 +371,7 @@ function testSynth() {
 
   tester.triggerAttackRelease('C4', '2n').toDestination()
 }
+
 return (
   <div className="center">
   <div className="main">

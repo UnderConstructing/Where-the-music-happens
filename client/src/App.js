@@ -8,9 +8,10 @@ import Register from './register';
 import Login from './Login'
 import Grid from './Grid'
 import axios from 'axios'
-import PrivateRoute from './PrivateRoute'
 import AuthContext from './utils/Context/AuthContext'
 import Profile from './profilePage';
+
+
 export default function App() {
   const [auth, setAuth] = useState(null)
   useEffect(() => {
