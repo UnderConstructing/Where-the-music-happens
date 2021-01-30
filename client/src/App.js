@@ -11,6 +11,8 @@ import axios from 'axios';
 import AuthContext from './utils/Context/AuthContext';
 import Profile from './profilePage';
 import HeaderSection from './HeaderSection';
+import MainBody from './MainBody';
+import Footer from './Footer';
 
 
 export default function App() {
@@ -23,33 +25,9 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ user: auth }}>
       <div>
-        <Router>
-          <div>
-      <HeaderSection/>
-            <Switch>
-              <Route exact path="/profile">
-                  <Profile />
-              </Route>
-              <Route exact path="/">
-                {/* home page */}
- 
-              </Route>
-              <Route exact path="/registeruser">
-                <Register />
-              </Route>
-              <Route exact path="/login">
-                <Login />
-              </Route>
-              {(auth) &&
-                <Route exact path={"/dashboard/:user"}
-                  component={Sequencer}>
-                </Route>
-              }
-            </Switch>
-
-          </div>
-        </Router>
-
+   <HeaderSection/>
+        <MainBody/>
+            <Footer/>
       </div>
     </AuthContext.Provider>
   )
