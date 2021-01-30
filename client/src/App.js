@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 
-import './App.css'
-import Sequencer from './sequencer'
-import Hi from './attempt'
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"
+import './App.css';
+import Sequencer from './sequencer';
+import Hi from './attempt';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Register from './register';
-import Login from './Login'
-import Grid from './Grid'
-import axios from 'axios'
-import AuthContext from './utils/Context/AuthContext'
+import Login from './Login';
+import Grid from './Grid';
+import axios from 'axios';
+import AuthContext from './utils/Context/AuthContext';
 import Profile from './profilePage';
-import Idea from './Idea'
-import Tones from './Tones'
+import HeaderSection from './HeaderSection';
+import MainBody from './MainBody';
+import Footer from './Footer';
 
 
 export default function App() {
