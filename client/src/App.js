@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
-import './App.css'
-import Sequencer from './sequencer'
-import Hi from './attempt'
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom"
+import './App.css';
+import Sequencer from './sequencer';
+import Hi from './attempt';
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Register from './register';
-import Login from './Login'
-import Grid from './Grid'
-import axios from 'axios'
-import AuthContext from './utils/Context/AuthContext'
+import Login from './Login';
+import Grid from './Grid';
+import axios from 'axios';
+import AuthContext from './utils/Context/AuthContext';
 import Profile from './profilePage';
+import HeaderSection from './HeaderSection';
 
 
 export default function App() {
@@ -24,17 +25,7 @@ export default function App() {
       <div>
         <Router>
           <div>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/dashboard">Dashboard</Link>
-              </li>
-            </ul>
+      <HeaderSection/>
             <Switch>
               <Route exact path="/profile">
                   <Profile />
