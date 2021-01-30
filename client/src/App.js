@@ -10,6 +10,8 @@ import Grid from './Grid'
 import axios from 'axios'
 import AuthContext from './utils/Context/AuthContext'
 import Profile from './profilePage';
+import Idea from './Idea'
+import Tones from './Tones'
 
 
 export default function App() {
@@ -29,19 +31,18 @@ export default function App() {
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/about">About</Link>
+                <Link to="/dashboard">About</Link>
               </li>
               <li>
-                <Link to="/dashboard">Dashboard</Link>
+                <Link to="/login">Login</Link>
               </li>
             </ul>
             <Switch>
               <Route exact path="/profile">
-                  <Profile />
+                <Profile />
               </Route>
               <Route exact path="/">
-                {/* home page */}
- 
+              <Tones />
               </Route>
               <Route exact path="/registeruser">
                 <Register />
@@ -54,6 +55,9 @@ export default function App() {
                   component={Sequencer}>
                 </Route>
               }
+              <Route exact path={'/grid'}>
+                <Grid />
+              </Route>
             </Switch>
 
           </div>

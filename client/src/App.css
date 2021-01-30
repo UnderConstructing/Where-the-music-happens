@@ -216,3 +216,15 @@ h1, h2, h3 {
   height: 4rem;
   text-emphasis: bold;
 }
+
+.sequencer-wrapper {
+  display:inline  block;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.reRow {
+  display: inline block;
+  max-inline-size: 40%;
+  min-height: 60px
+}
