@@ -13,6 +13,8 @@ import Profile from './profilePage';
 import HeaderSection from './HeaderSection';
 import MainBody from './MainBody';
 import Footer from './Footer';
+import ExampleModal from './ExampleModal';
+
 
 
 export default function App() {
@@ -26,6 +28,7 @@ export default function App() {
     <AuthContext.Provider value={{ user: auth }}>
       <div>
    <HeaderSection/>
+  <ExampleModal/>
         <MainBody/>
             <Footer/>
       </div>
