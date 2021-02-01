@@ -30,6 +30,8 @@ export default function App() {
     <AuthContext.Provider value={{ user: auth }}>
       <div>
         <Router>
+
+
           <div>
             <ul>
               <li>
