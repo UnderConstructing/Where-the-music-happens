@@ -9,6 +9,7 @@ import { PromiseProvider } from 'mongoose';
 import Chat from './Chat'
 import Grid from './Grid'
 
+
 import AuthContext from './utils/Context/AuthContext'
 import axios from 'axios';
 
@@ -139,7 +140,7 @@ export default function Sequencer() {
         $synth.triggerAttackRelease(note, '16n', time).toDestination()
       }
     }
-    
+
     index++
   }
 
