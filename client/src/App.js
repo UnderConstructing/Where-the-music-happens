@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import './App.css';
 import Sequencer from './sequencer';
-import Hi from './attempt';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Register from './register';
 import Login from './Login';
@@ -13,15 +12,18 @@ import Profile from './profilePage';
 import HeaderSection from './HeaderSection';
 import MainBody from './MainBody';
 import Footer from './Footer';
+import FourOhFour from './FourOhFour'
 
 
 export default function App() {
   const [auth, setAuth] = useState(null)
   useEffect(() => {
     axios.get('/api/getuser')
-      .then(res => setAuth(res.data)
-      )
+      .then(res => {
+        setAuth(res.data);
+        console.log(auth)})
   }, [])
+
   return (
     <AuthContext.Provider value={{ user: auth }}>
       <div>
@@ -43,7 +45,7 @@ export default function App() {
                 <Profile />
               </Route>
               <Route exact path="/">
-              <Tones />
+                <MainBody />
               </Route>
               <Route exact path="/registeruser">
                 <Register />
@@ -59,7 +61,11 @@ export default function App() {
               <Route exact path={'/grid'}>
                 <Grid />
               </Route>
+              <Route>
+                <FourOhFour />
+              </Route>
             </Switch>
+
 
           </div>
         </Router>
