@@ -12,7 +12,9 @@ import Profile from './profilePage';
 import HeaderSection from './HeaderSection';
 import MainBody from './MainBody';
 import Footer from './Footer';
+import ExampleModal from './ExampleModal';
 import FourOhFour from './FourOhFour'
+
 
 
 export default function App() {
@@ -69,7 +71,6 @@ export default function App() {
 
           </div>
         </Router>
-
       </div>
     </AuthContext.Provider>
   )
