@@ -13,7 +13,8 @@ import Melody from '../Melody'
 import Bass from '../Bass'
 import HiHat from '../HiHat'
 import OpenHh from '../OpenHH'
-import axios from 'axios'
+import '../sequencer.css'
+
 // import Grid from './Grid'
 
 import AuthContext from '../utils/Context/AuthContext'
@@ -163,21 +164,27 @@ export default function Sequencer() {
 
   return (
     <div className="center">
-      <Chat />
+      {/* <Chat /> */}
+      <h1 className="title">Sequencer!</h1>
+      <h2 key="drums">Drums</h2>
       <div className="main">
         {/* <div className="sub"> */}
-        <h1 className="title">Sequencer!</h1>
         {/* </div> */}
-        <h2 key="drums">Drums</h2>
+
+        <div className="grid">
+
           <HiHat />
           <OpenHh />
           <Snare />
           <Kick />
-        <hr></hr>
+        </div>
         {/* <h2>Melody</h2> */}
+        <div className="grid">
           <Melody />
-        <hr></hr>
+          </div>
+          <div className="grid">
           <Bass />
+          </div>
         <button data-playing={playing} onClick={startSequence}>Test</button>
         <div>
           <input type="range"
@@ -187,7 +194,7 @@ export default function Sequencer() {
             onChange={({ target: { value: radius } }) =>
               setBpm(radius)}></input>
         </div>
-        <button onClick={saveSequence}>Save!</button>
+        <button className="save-button" onClick={saveSequence}>Save!</button>
       </div>
     </div>
   )

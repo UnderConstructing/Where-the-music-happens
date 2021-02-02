@@ -8,15 +8,14 @@ export default function HiHat() {
         }
         else {
           hiHatArray[event.target.id - 1].isActive = false
-          hiHatArray[event.target.id - 1].addAttribute('className', 'disapper')
         }
         console.log(event.target)
       }
     return (
-        <div key="hihat" className="row snare">
+        <div key="hihat" className="row hi-hat">
         {hiHatArray.map((note) => (
           <div className="parent">
-            <input type="checkbox" text={note.note} onClick={activateHiHat} key={"hihat" + note.id} className="box" id={note.id}>
+            <input type="checkbox" text={note.note} onClick={activateHiHat} key={"hihat" + note.id} className={`box col${note.id} `} id={note.id}>
             </input>
             <label></label>
           </div>

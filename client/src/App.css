@@ -2,11 +2,7 @@
     box-sizing: border-box;
 }
 body {
-    background-color:black;
-}
-
-.links{
-  color: white;
+    background-color: black;
 }
 
 .profile {
@@ -88,9 +84,6 @@ h1, h2, h3 {
     color: #0079bf;
 }
 
-.box:checked {
-    background-color: red;
-}
 
 .white {
     background-image: radial-gradient(rgb(207, 200, 200), rgb(240, 240, 203));
@@ -205,7 +198,6 @@ h1, h2, h3 {
 
 .chat-area {
   min-height: 40%;
-  z-index: 99;
   border-radius: 5%;
   border: 10px inset rgba(110, 32, 32, 0.8);
   background-color: white;
@@ -232,13 +224,4 @@ h1, h2, h3 {
   display: inline block;
   max-inline-size: 40%;
   min-height: 60px
-}
-
-.modal {
-  min-width: 50%;
-  min-width: 50%;
-}
-
-.disappear {
-  display: none;
 }

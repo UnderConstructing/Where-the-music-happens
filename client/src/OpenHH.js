@@ -12,10 +12,10 @@ export default function OpenHh() {
         console.log(event.target)
       }
     return (
-        <div key="openhh" className="row snare">
+        <div key="openhh" className="row openhh">
         {openHhArray.map((note) => (
           <div className="parent">
-            <input type="checkbox" text={note.note} onClick={activateOpenhh} key={"openhh" +note.id} className="box" id={note.id}>
+            <input type="checkbox" text={note.note} onClick={activateOpenhh} key={"openhh" +note.id} className={`box col${note.id} `} id={note.id}>
             </input>
             <label></label>
           </div>
