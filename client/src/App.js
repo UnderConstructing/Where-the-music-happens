@@ -1,29 +1,30 @@
 import React, { useEffect, useState } from 'react';
-
-import './App.css';
-import Sequencer from './sequencer';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import Register from './register';
-import Login from './Login';
-import Grid from './Grid';
-import axios from 'axios';
+
+import API from './utils/API'
 import AuthContext from './utils/Context/AuthContext';
-import Profile from './profilePage';
 import HeaderSection from './HeaderSection';
-import MainBody from './MainBody';
 import Footer from './Footer';
 import ExampleModal from './ExampleModal';
-import FourOhFour from './FourOhFour'
+
+import Sequencer from './pages/sequencer';
+import Register from './pages/register';
+import Grid from './pages/Grid';
+import Login from './pages/Login';
+import Profile from './pages/profilePage';
+import MainBody from './pages/MainBody';
+import FourOhFour from './pages/FourOhFour'
 
 
 
 export default function App() {
   const [auth, setAuth] = useState(null)
   useEffect(() => {
-    axios.get('/api/getuser')
+    API.getUsers()
       .then(res => {
         setAuth(res.data);
-        console.log(auth)})
+        console.log(auth)
+      })
   }, [])
 
   return (
@@ -43,29 +44,16 @@ export default function App() {
               </li>
             </ul>
             <Switch>
-              <Route exact path="/profile">
-                <Profile />
-              </Route>
-              <Route exact path="/">
-                <MainBody />
-              </Route>
-              <Route exact path="/registeruser">
-                <Register />
-              </Route>
-              <Route exact path="/login">
-                <Login />
-              </Route>
+              <Route path={"/dashboard"} component={Sequencer} />
               {(auth) &&
-                <Route exact path={"/dashboard/:user"}
-                  component={Sequencer}>
-                </Route>
+                <Route path={"/dashboard"} component={Sequencer} />
               }
-              <Route exact path={'/grid'}>
-                <Grid />
-              </Route>
-              <Route>
-                <FourOhFour />
-              </Route>
+              <Route exact path="/" component={MainBody} />
+              <Route exact path="/profile" component={Profile} />
+              <Route exact path="/registeruser" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path={'/grid'} component={Grid} />
+              <Route component={FourOhFour} />
             </Switch>
 
 

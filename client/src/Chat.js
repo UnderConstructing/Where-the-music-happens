@@ -1,4 +1,5 @@
 import React from 'react'
+import API from "./utils/API"
 import { socket } from './utils/socket'
 
 const Chat = props => {
@@ -10,8 +11,7 @@ const Chat = props => {
     React.useEffect(() => {
         const getData = async () => {
             try {
-                const res = await fetch("/api")
-                const messages = await res.json()
+                const messages = await API.getMessages()
                 setState(state => ({ ...state, messages }))
             } catch (error) {
                 console.log(error)
@@ -21,26 +21,32 @@ const Chat = props => {
         socket.on("reload", getData)
     }, [])
 
-    const submitMessage = () => {
-        socket.emit("message", state.message)
+    const submitMessage = async () => {
+        try {
+            await API.postMessage({ message: state.message })
+            socket.emit("message", state.message)
 
-        setState({
-            ...state,
-            message: "",
-            messages: [...state.messages, state.message]
-        })
+            setState({
+                ...state,
+                message: "",
+                messages: [...state.messages, state.message]
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
-    <div className="chat">
-        <div className="chat-area">
+        <div className="chat">
+            Chat
+            <div className="chat-area">
                 {
-            state.messages.map((x, i) => <div key={i + '-msg'}>{x}</div>)
-        }
+                    state.messages.map((x, i) => <div key={i + '-msg'}>{x}</div>)
+                }
+            </div>
+            <input className="chat-input" type="text" value={state.message} onChange={e => setState({ ...state, message: e.target.value })} />
+            <button className="chat-submit" onClick={submitMessage}>Send</button>
         </div>
-        <input className="chat-input" type="text" value={state.message} onChange={e => setState({ ...state, message: e.target.value })} />
-        <button className="chat-submit" onClick={submitMessage}>Send</button>
-    </div>
     )
 }
 
