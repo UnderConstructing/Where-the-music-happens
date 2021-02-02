@@ -25,7 +25,6 @@ class ExampleModal extends React.Component {
            isOpen={this.state.showModal}
            contentLabel="Minimal Modal Example"
         >
-          <Chat />
           <button onClick={this.handleCloseModal}>Close Modal</button>
         </ReactModal>
       </div>
