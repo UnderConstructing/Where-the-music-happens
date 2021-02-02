@@ -13,10 +13,10 @@ export default function Kick() {
         console.log(event.target)
       }
     return (
-        <div key="kick" className="row snare">
+        <div key="kick" className="row kick">
         {kickArray.map((note) => (
           <div className="parent">
-            <input type="checkbox" text={note.note} onClick={activateKick} key={"kick" + note.id} className="box" id={note.id}>
+            <input type="checkbox" text={note.note} onClick={activateKick} key={"kick" + note.id} className={`box col${note.id} `} id={note.id}>
             </input>
             <label></label>
           </div>

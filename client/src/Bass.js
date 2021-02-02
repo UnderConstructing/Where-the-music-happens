@@ -16,7 +16,7 @@ export default function Bass() {
                 <div key={row + row[i].note} id={row[i].note} className="row">
                     {row.map(subdivision => (
                         <div className='parent'>
-                            <input type="checkbox" text={subdivision.note} onChange={activateBassNote} key={`bass${subdivision.row}${subdivision.id}`} row={subdivision.row} className={`box ${subdivision.backgroundColor} `} id={subdivision.id}></input>
+                            <input type="checkbox" text={subdivision.note} onChange={activateBassNote} key={`bass${subdivision.row}${subdivision.id}`} row={subdivision.row} className={`box col${subdivision.id}`} id={subdivision.id}></input>
                             <label></label>
                         </div>
                     )
