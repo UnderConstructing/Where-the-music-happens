@@ -16,7 +16,7 @@ export default function Snare() {
     <div key="snare" className="row snare">
     {snareArray.map((note) => (
       <div className="parent">
-        <input type="checkbox" text={note.note} onClick={activateSnare} key={note.id + 16} className="box" id={note.id}>
+        <input type="checkbox" text={note.note} onClick={activateSnare} key={"snare" + note.id} className="box" id={note.id}>
         </input>
         <label></label>
       </div>

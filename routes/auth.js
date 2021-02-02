@@ -31,7 +31,6 @@ router.post("/login", (req, res, next) => {
         }
         else {
             req.logIn(user, err => {
-                console.log(user)
                 if (err) throw next(err);
                 //  res.redirect(`https://localhost:3000/dashboard/${user.username}`)
                 res.json(user)

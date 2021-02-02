@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from 'react'
 import kickArray from '../templates/kick.json';
 import snareArray from '../templates/snare.json';
 import melodyArray from '../templates/melody.json';
+import hihatArray from '../templates/hihat.json'
+import openHhArray from '../templates/openhh.json'
 import bassArray from '../templates/bass.json'
 import * as Tone from 'tone';
 import Chat from '../Chat'
@@ -9,6 +11,8 @@ import Kick from '../Kick'
 import Snare from '../SnareSequence'
 import Melody from '../Melody'
 import Bass from '../Bass'
+import HiHat from '../HiHat'
+import OpenHh from '../OpenHH'
 import axios from 'axios'
 // import Grid from './Grid'
 
@@ -23,8 +27,32 @@ export default function Sequencer() {
   //INSTRUMENT CONSTRUCTORS!
   const kick = new Tone.MembraneSynth();
   kick.toDestination()
-  const snare = new Tone.MetalSynth();
+  const snare = new Tone.NoiseSynth({
+    noise: {
+      type: "brown"
+    },
+    envelope: {
+      attack: 0,
+      decay: 0.05,
+      sustain: 0.008
+    }
+  })
+  const openhh = new Tone.MembraneSynth()
+  openhh.toDestination()
   snare.toDestination()
+  const hihat = new Tone.MetalSynth({
+    frequency: 200,
+    envelope: {
+      attack: 0.008,
+      decay: 0.052,
+      release: 0.002
+    },
+    harmonicity: 5.1,
+    modulationIndex: 32,
+    resonance: 3000,
+    octaves: 1.5
+  });
+  kick.toDestination()
 
   const synths = [
     new Tone.Synth(),
@@ -59,13 +87,20 @@ export default function Sequencer() {
   let index = 0;
   function repeat(time) {
     let notesPlayed = [];
-    let step = index % 16
+    let step = index % 32
+    if (hihatArray[step].isActive === true) {
+      hihat.triggerAttackRelease('C2', '16n', time).toDestination()
+    }
+    if (openHhArray[step].isActive === true) {
+      openhh.triggerAttackRelease('C2', '16n', time).toDestination()
+    }
     if (snareArray[step].isActive === true) {
-      snare.triggerAttackRelease('C2', '16n', time).toDestination()
+      snare.triggerAttackRelease('16n', time).toDestination()
     }
     if (kickArray[step].isActive === true) {
       kick.triggerAttackRelease('C1', '16n', time).toDestination()
     }
+
     for (var i = 0; i < melodyArray.length; i++) {
       let row = melodyArray[i]
       let note = row[i].note
@@ -89,9 +124,12 @@ export default function Sequencer() {
   function saveSequence() {
     console.log(userInfo.user.username)
     Tone.Transport.stop()
-    let data = {    
-      data: {    
+    Tone.Transport.clear()
+    let data = [   
+      {    
       username: userInfo.user.username,
+      hihatArray: hihatArray,
+      openHhArray: openHhArray,
       snareArray: snareArray,
       kickArray: kickArray,
       melodyRowOne: melodyArray[0],
@@ -112,13 +150,9 @@ export default function Sequencer() {
       bassRowSeven: bassArray[6],
       bassRowEight: bassArray[7],
       bassRowNine: bassArray[8]
-    }}
+    }]
     console.log(data)
-    axios.post({
-      url: 'http://localhost:4000/api/save',
-      data: data,
-      withCredentials: true
-    }).then(res => alert("You have saved the sequence!"))
+    API.saveTone(data).then(res => alert("You have saved the sequence!"))
     .catch(err => console.error(err))
   }
   async function startSequence(event) {
@@ -129,15 +163,16 @@ export default function Sequencer() {
 
   return (
     <div className="center">
-      {/* <Chat /> */}
+      <Chat />
       <div className="main">
         {/* <div className="sub"> */}
         <h1 className="title">Sequencer!</h1>
         {/* </div> */}
         <h2 key="drums">Drums</h2>
-          <Kick />
+          <HiHat />
+          <OpenHh />
           <Snare />
-
+          <Kick />
         <hr></hr>
         {/* <h2>Melody</h2> */}
           <Melody />

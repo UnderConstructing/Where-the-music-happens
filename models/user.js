@@ -8,35 +8,31 @@ const objectArray = new mongoose.Schema({
     backgroundColor: String
 })
 
-const row = new mongoose.Schema({
-    array1: [objectArray]
-})
-
 const user = new mongoose.Schema({
     username: String,
     password: String,
-    kickArray: [objectArray],
-    snareArray: [objectArray],
-    melodyRowOne: [objectArray],
-    melodyRowTwo: [objectArray],
-    melodyRowThree: [objectArray],
-    melodyRowFour: [objectArray],
-    melodyRowFive: [objectArray],
-    melodyRowSix: [objectArray],
-    melodyRowSeven: [objectArray],
-    melodyRowEight: [objectArray],
-    melodyRowNine: [objectArray],
-    melodyRowTen: [objectArray],
-    bassRowOne: [objectArray],
-    bassRowTwo: [objectArray],
-    bassRowThree: [objectArray],
-    bassRowFour: [objectArray],
-    bassRowFive: [objectArray],
-    bassRowSix: [objectArray],
-    bassRowSeven: [objectArray],
-    bassRowEight: [objectArray],
-    bassRowNine: [objectArray],
-    bassRowTen: [objectArray],
+    hihatArray: [[objectArray]],
+    openHhArray: [[objectArray]],
+    kickArray: [[objectArray]],
+    snareArray: [[objectArray]],
+    melodyRowOne: [[objectArray]],
+    melodyRowTwo: [[objectArray]],
+    melodyRowThree: [[objectArray]],
+    melodyRowFour: [[objectArray]],
+    melodyRowFive: [[objectArray]],
+    melodyRowSix: [[objectArray]],
+    melodyRowSeven: [[objectArray]],
+    melodyRowEight: [[objectArray]],
+    melodyRowNine: [[objectArray]],
+    bassRowOne: [[objectArray]],
+    bassRowTwo: [[objectArray]],
+    bassRowThree: [[objectArray]],
+    bassRowFour: [[objectArray]],
+    bassRowFive: [[objectArray]],
+    bassRowSix: [[objectArray]],
+    bassRowSeven: [[objectArray]],
+    bassRowEight: [[objectArray]],
+    bassRowNine: [[objectArray]],
     description: String
 })
 
