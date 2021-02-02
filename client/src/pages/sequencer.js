@@ -2,9 +2,18 @@ import React, { useState, useContext, useEffect } from 'react'
 import kickArray from '../templates/kick.json';
 import snareArray from '../templates/snare.json';
 import melodyArray from '../templates/melody.json';
+import hihatArray from '../templates/hihat.json'
+import openHhArray from '../templates/openhh.json'
 import bassArray from '../templates/bass.json'
 import * as Tone from 'tone';
 import Chat from '../Chat'
+import Kick from '../Kick'
+import Snare from '../SnareSequence'
+import Melody from '../Melody'
+import Bass from '../Bass'
+import HiHat from '../HiHat'
+import OpenHh from '../OpenHH'
+import axios from 'axios'
 // import Grid from './Grid'
 
 import AuthContext from '../utils/Context/AuthContext'
@@ -15,71 +24,38 @@ export default function Sequencer() {
   const [bpm, setBpm] = useState(100)
   const userInfo = useContext(AuthContext)
 
-
-
-
-  const gainNode = new Tone.Gain(0).toDestination()
-  function activateSnare(event) {
-    console.log("id= " + event.target.id)
-    if (snareArray[event.target.id - 1].isActive === false) {
-      snareArray[event.target.id - 1].isActive = true
-    }
-    else {
-      snareArray[event.target.id - 1].isActive = false
-    }
-    console.log(`test is active: ${snareArray[event.target.id - 1].isActive}`)
-  }
-
-  function activateKick(event) {
-    console.log(event.target)
-    if (kickArray[event.target.id - 1].isActive === false) {
-      kickArray[event.target.id - 1].isActive = true
-    }
-    else {
-      kickArray[event.target.id - 1].isActive = false
-    }
-    console.log(event.target)
-  }
-
-  function activateNote(e) {
-    if (melodyArray[e.target.getAttribute("row") - 1][(e.target.id - 1)].isActive === false) {
-      melodyArray[e.target.getAttribute("row") - 1][(e.target.id - 1)].isActive = true
-    }
-    else {
-      melodyArray[e.target.getAttribute("row") - 1][(e.target.id - 1)].isActive = false
-    }
-    console.log(melodyArray)
-    // console.log(melodyArray[e.target.getAttribute("row") - 1][(parseInt(e.target.id)/parseInt(e.target.getAttribute('row'))) - 1].id)
-  }
-
-  function activateBassNote(e) {
-    if (bassArray[e.target.getAttribute("row") - 1][(e.target.id - 1)].isActive === false) {
-      bassArray[e.target.getAttribute("row") - 1][(e.target.id - 1)].isActive = true
-    }
-    else {
-      bassArray[e.target.getAttribute("row") - 1][(e.target.id - 1)].isActive = false
-    }
-    console.log(bassArray)
-    // console.log(melodyArray[e.target.getAttribute("row") - 1][(parseInt(e.target.id)/parseInt(e.target.getAttribute('row'))) - 1].id)
-  }
-
-  const filter = new Tone.Filter(200, 'lowpass')
-  // const filter1 = new Tone.Filter(1000, 'highpass', -48)
-  // const filter2 = new Tone.Filter(1000, 'highpass', -48)
-  // const filter3 = new Tone.Filter(1000, 'highpass', -48)
-  // const filter4 = new Tone.Filter(1000, 'highpass', -48)
-  // const filter5 = new Tone.Filter(1000, 'highpass', -48)
-  // const filter6 = new Tone.Filter(1000, 'highpass', -48)
-  // const filter7 = new Tone.Filter(1000, 'highpass', -48)
-  //get transport moving
-  let index = 0;
-
+  //INSTRUMENT CONSTRUCTORS!
   const kick = new Tone.MembraneSynth();
   kick.toDestination()
-  const snare = new Tone.MetalSynth();
+  const snare = new Tone.NoiseSynth({
+    noise: {
+      type: "brown"
+    },
+    envelope: {
+      attack: 0,
+      decay: 0.05,
+      sustain: 0.008
+    }
+  })
+  const openhh = new Tone.MembraneSynth()
+  openhh.toDestination()
   snare.toDestination()
+  const hihat = new Tone.MetalSynth({
+    frequency: 200,
+    envelope: {
+      attack: 0.008,
+      decay: 0.052,
+      release: 0.002
+    },
+    harmonicity: 5.1,
+    modulationIndex: 32,
+    resonance: 3000,
+    octaves: 1.5
+  });
+  kick.toDestination()
 
   const synths = [
+    new Tone.Synth(),
     new Tone.Synth(),
     new Tone.Synth(),
     new Tone.Synth(),
@@ -98,6 +74,7 @@ export default function Sequencer() {
     new Tone.Synth({ oscillator: { type: 'fatsquare' } }),
     new Tone.Synth({ oscillator: { type: 'fatsquare' } }),
     new Tone.Synth({ oscillator: { type: 'fatsquare' } }),
+    new Tone.Synth({ oscillator: { type: 'fatsquare' } }),
     new Tone.Synth({ oscillator: { type: 'fatsquare' } })
   ]
 
@@ -105,22 +82,25 @@ export default function Sequencer() {
     Tone.Transport.scheduleRepeat(repeat, "16n")
     Tone.Transport.bpm.value = [bpm]
   }, [])
-  // synths.forEach(synth => synth.sync())
-  // synths.forEach(synth => {
-  //   synth.connect(filter)})
-
+  
   //callback for note triggering
+  let index = 0;
   function repeat(time) {
-    // Tone.setContext(new Tone.Context({ latencyHint: 1}))
-    // Tone.Transport.context.lookAhead = 1
     let notesPlayed = [];
-    let step = index % 16
+    let step = index % 32
+    if (hihatArray[step].isActive === true) {
+      hihat.triggerAttackRelease('C2', '16n', time).toDestination()
+    }
+    if (openHhArray[step].isActive === true) {
+      openhh.triggerAttackRelease('C2', '16n', time).toDestination()
+    }
     if (snareArray[step].isActive === true) {
-      snare.triggerAttackRelease('C2', '16n', time).toDestination()
+      snare.triggerAttackRelease('16n', time).toDestination()
     }
     if (kickArray[step].isActive === true) {
       kick.triggerAttackRelease('C1', '16n', time).toDestination()
     }
+
     for (var i = 0; i < melodyArray.length; i++) {
       let row = melodyArray[i]
       let note = row[i].note
@@ -142,71 +122,45 @@ export default function Sequencer() {
   }
 
   function saveSequence() {
+    console.log(userInfo.user.username)
     Tone.Transport.stop()
-    let saveArray = []
-    saveArray.push(kickArray, snareArray, melodyArray, bassArray)
-    console.log(saveArray)
-    
-    API.saveTone({
-      sequences: saveArray,
-      username: AuthContext.username
-    }).then(res => alert("You have saved the sequence!"))
+    Tone.Transport.clear()
+    let data = [   
+      {    
+      username: userInfo.user.username,
+      hihatArray: hihatArray,
+      openHhArray: openHhArray,
+      snareArray: snareArray,
+      kickArray: kickArray,
+      melodyRowOne: melodyArray[0],
+      melodyRowTwo: melodyArray[1],
+      melodyRowThree: melodyArray[2],
+      melodyRowFour: melodyArray[3],
+      melodyRowFive: melodyArray[4],
+      melodyRowSix: melodyArray[5],
+      melodyRowSeven: melodyArray[6],
+      melodyRowEight: melodyArray[7],
+      melodyRowNine: melodyArray[8],
+      bassRowOne: bassArray[0],
+      bassRowTwo: bassArray[1],
+      bassRowThree: bassArray[2],
+      bassRowFour: bassArray[3],
+      bassRowFive: bassArray[4],
+      bassRowSix: bassArray[5],
+      bassRowSeven: bassArray[6],
+      bassRowEight: bassArray[7],
+      bassRowNine: bassArray[8]
+    }]
+    console.log(data)
+    API.saveTone(data).then(res => alert("You have saved the sequence!"))
+    .catch(err => console.error(err))
   }
   async function startSequence(event) {
     event.preventDefault()
     Tone.start()
     Tone.Transport.start()
-    // var isPlaying = event.target.getAttribute('data-playing')
-    // if (!isPlaying) {
-    //   await setPlaying(true) 
-    //   Tone.Transport.start()
-    //   console.log(playing)
-    // } 
-    // else {
-    //   setPlaying(false)
-    //   console.log(playing)
-    // }
-
-    // useEffect(() => {
-    //   Tone.Transport.start()
-    // }
-
-
   };
 
-  //try to connect synth to filter
-  function testSynth() {
-    const tester = new Tone.MonoSynth({
-      frequency: 'C4',
-      detune: 0,
-      oscillator: {
-        type: 'square'
-      },
-      filter: {
-        frequency: 100,
-        type: 'lowpass',
-        rolloff: -48
-      },
-      envelope: {
-        attack: 0.1,
-        decay: 0.1,
-        sustain: 0.9,
-        release: 1
-      },
-      filterEnvelope: {
-        attack: .1,
-        decay: .5,
-        sustain: 1,
-        release: 2,
-        baseFrequency: 100,
-        octaves: 2,
-        exponent: 2
-      }
-    })
-
-    tester.triggerAttackRelease('C4', '2n').toDestination()
-  }
-  
   return (
     <div className="center">
       <Chat />
@@ -215,60 +169,17 @@ export default function Sequencer() {
         <h1 className="title">Sequencer!</h1>
         {/* </div> */}
         <h2 key="drums">Drums</h2>
-        <div key="snare" className="row snare">
-          {snareArray.map((note) => (
-            <div className="parent">
-              <input type="checkbox" text={note.note} onClick={activateSnare} key={note.id + 16} className="box" id={note.id}>
-              </input>
-              <label></label>
-            </div>
-          ))}
-        </div>
-        <div key="kick" className="row snare">
-          {kickArray.map((note) => (
-            <div className="parent">
-              <input type="checkbox" text={note.note} onClick={activateKick} key={note.id + 8} className="box" id={note.id}>
-              </input>
-              <label></label>
-            </div>
-          ))}
-        </div>
+          <HiHat />
+          <OpenHh />
+          <Snare />
+          <Kick />
         <hr></hr>
         {/* <h2>Melody</h2> */}
-        <div key="melody" className="melody">
-          {melodyArray.map((row, i) => (
-            <div key={row + row[i].note} id={row[i].note} className="row">
-              {row.map(subdivision => (
-                <div className='parent'>
-                  <input type="checkbox" text={subdivision.note} onChange={activateNote} key={`${subdivision.row}${subdivision.id}`} row={subdivision.row} className={`box ${subdivision.backgroundColor} `} id={subdivision.id}></input>
-                  <label></label>
-                </div>
-              )
-              )}
-            </div>
-          )
-          )}
-        </div>
+          <Melody />
         <hr></hr>
-        <div key="bass" >
-          {bassArray.map((row, i) => (
-            <div key={row + row[i].note} id={row[i].note} className="row">
-              {row.map(subdivision => (
-                <div className='parent'>
-                  <input type="checkbox" text={subdivision.note} onChange={activateBassNote} key={`${subdivision.row}${subdivision.id}`} row={subdivision.row} className={`box ${subdivision.backgroundColor} `} id={subdivision.id}></input>
-                  <label></label>
-                </div>
-              )
-              )}
-            </div>
-          )
-          )}
-        </div>
+          <Bass />
         <button data-playing={playing} onClick={startSequence}>Test</button>
-        {/* <a key="start" className={"button play"} onClick={startSequence}><p></p></a> */}
         <div>
-          <h1>home</h1>
-          {/* <Grid /> */}
           <input type="range"
             min="40"
             max='200'

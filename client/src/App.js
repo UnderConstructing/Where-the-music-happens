@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import './App.css'
 
 import API from './utils/API'
 import AuthContext from './utils/Context/AuthContext';
 import HeaderSection from './HeaderSection';
 import Footer from './Footer';
-import ExampleModal from './ExampleModal';
+import ExampleModal from './pages/ExampleModal';
 
 import Sequencer from './pages/sequencer';
 import Register from './pages/register';
@@ -31,18 +32,7 @@ export default function App() {
     <AuthContext.Provider value={{ user: auth }}>
       <div>
         <Router>
-          <div>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/dashboard">About</Link>
-              </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-            </ul>
+          <HeaderSection />
             <Switch>
               <Route path={"/dashboard"} component={Sequencer} />
               {(auth) &&
@@ -55,9 +45,6 @@ export default function App() {
               <Route exact path={'/grid'} component={Grid} />
               <Route component={FourOhFour} />
             </Switch>
-
-
-          </div>
         </Router>
       </div>
     </AuthContext.Provider>

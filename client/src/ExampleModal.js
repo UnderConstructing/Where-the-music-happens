@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactModal from 'react-modal';
+import Chat from './Chat'
+
 class ExampleModal extends React.Component {
   constructor () {
     super();

@@ -1,6 +1,6 @@
 const router = require("express").Router()
 const User = require('../models/user')
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 const passport = require('../config/passport')
 
 router.post("/register", (req, res,) => {
@@ -31,7 +31,6 @@ router.post("/login", (req, res, next) => {
         }
         else {
             req.logIn(user, err => {
-                console.log(user)
                 if (err) throw next(err);
                 //  res.redirect(`https://localhost:3000/dashboard/${user.username}`)
                 res.json(user)

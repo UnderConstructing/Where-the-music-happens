@@ -7,6 +7,7 @@ router.get("/", async (req, res) => {
         const messages = await Msg.find({})
 
         res.json(messages)
+        console.log(messages)
     } catch (error) {
         res.sendStatus(500)
     }
@@ -15,8 +16,9 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
     try {
         await Msg.create(req.body)
-
-        res.sendStatus(200)
+        console.log(req.body)
+        // res.sendStatus(200)
+        res.json(req.body)
     } catch (error) {
         res.sendStatus(500)
     }

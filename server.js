@@ -37,138 +37,16 @@ app.use(passport.session())
 
 app.use(require('./routes'))
 
-const server = app.listen(PORT, () => console.log("server listening on port:", PORT))
+const severe = app.listen(PORT, () => console.log("server listening on port:", PORT))
 
-const io = require('socket.io')(server)
+const io = require('socket.io')(severe)
 
 io.on("connection", socket => {
     const { id } = socket.client;
     console.log(`User connected: ${id}`);
 });
 
-// Mongoose Arrays test *****************
-// const newUser = {
-//     username: "newUser",
-//     password: "123",
-//     kickArray: [
-//         {
-//             "id": 1,
-//             "isActive": false,
-//             "type": "kick",
-//             "note": "A3",
-//             "backgroundColor": "white"
-//         },
-//         {
-//             "id": 2,
-//             "isActive": false,
-//             "type": "kick",
-//             "note": "B3",
-//             "backgroundColor": "white"
-//         },
-//         {
-//             "id": 3,
-//             "isActive": false,
-//             "type": "kick",
-//             "note": "C4",
-//             "backgroundColor": "white"
-//         },
-//         {
-//             "id": 4,
-//             "isActive": false,
-//             "type": "snare",
-//             "note": "D4",
-//             "backgroundColor": "white"
-//         },
-//         {
-//             "id": 5,
-//             "isActive": false,
-//             "type": "kick",
-//             "note": "E4",
-//             "backgroundColor": "white"
-//         },
-//         {
-//             "id": 6,
-//             "isActive": false,
-//             "type": "kick",
-//             "note": "F4",
-//             "backgroundColor": "white"
-//         },
-//         {
-//             "id": 7,
-//             "isActive": false,
-//             "type": "kick",
-//             "note": "G4",
-//             "backgroundColor": "white"
-//         },
-//         {
-//             "id": 8,
-//             "isActive": false,
-//             "type": "kick",
-//             "note": "A4",
-//             "backgroundColor": "white"
-//         },
-//         {
-//             "id": 9,
-//             "isActive": false,
-//             "type": "kick",
-//             "note": "A3",
-//             "backgroundColor": "white"
-//         },
-//         {
-//             "id": 10,
-//             "isActive": false,
-//             "type": "kick",
-//             "note": "B3",
-//             "backgroundColor": "white"
-//         },
-//         {
-//             "id": 11,
-//             "isActive": false,
-//             "type": "kick",
-//             "note": "C4",
-//             "backgroundColor": "white"
-//         },
-//         {
-//             "id": 12,
-//             "isActive": false,
-//             "type": "snare",
-//             "note": "D4",
-//             "backgroundColor": "white"
-//         },
-//         {
-//             "id": 13,
-//             "isActive": false,
-//             "type": "kick",
-//             "note": "E4",
-//             "backgroundColor": "white"
-//         },
-//         {
-//             "id": 14,
-//             "isActive": false,
-//             "type": "kick",
-//             "note": "F4",
-//             "backgroundColor": "white"
-//         },
-//         {
-//             "id": 15,
-//             "isActive": false,
-//             "type": "kick",
-//             "note": "G4",
-//             "backgroundColor": "white"
-//         },
-//         {
-//             "id": 16,
-//             "isActive": false,
-//             "type": "kick",
-//             "note": "A4",
-//             "backgroundColor": "white"
-//         }
-//     ],
-//     description: "Here is a new User!"
-// }
 
-// const person = new User(newUser)
-// person.save()
 
 /*
 *******todo for saving:

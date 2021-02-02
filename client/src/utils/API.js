@@ -12,7 +12,7 @@ export default {
     register: data => axios.post("/auth/register", data, {
         withCredentials: true
     }),
-    saveTone: data => axios.post("/api/tone", data, {
+    saveTone: data => axios.post("/api/save", data, {
         withCredentials: true
     })
 }

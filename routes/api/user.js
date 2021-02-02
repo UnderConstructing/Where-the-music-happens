@@ -8,7 +8,6 @@ router.get("/", (req, res) => {
                 _id: req.user._id
             }
         ).then(user => {
-            console.log(user)
             res.json(user)
 
         })
