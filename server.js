@@ -1,133 +1,41 @@
 //IMPORTS
 const express = require('express');
-const mongoose = require('mongoose')
-const https = require('https');
 const app = express();
-const cors = require('cors');
-const passport = require('passport')
-const localStrategy = require('passport-local').Strategy;
-const cookieParser = require('cookie-parser');
-const bcrypt = require('bcrypt')
-const expressSession = require('express-session')
 const PORT = process.env.PORT || 4000
-const bodyParser = require('body-parser');
-const User = require('./user')
-const strategy = require('./passportConfig');
-const user = require('./user');
 
-
+const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27017/User?readPreference=primary&appname=MongoDB%20Compass&ssl=false', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }, () => { console.log('mongoosed') })
 
 //MIDDLEWARE
+const bodyParser = require('body-parser');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+
+const cors = require('cors');
 app.use(cors({
     origin: "http://localhost:3000",
     credentials: true
 }))
+
+const expressSession = require('express-session')
 app.use(expressSession({
     secret: "itsasecret",
     resave: true,
     saveUninitialized: true
 }));
 
-passport.use(
-    new localStrategy((username, password, done) => {
-        User.findOne({ username: username }, (err, user) => {
-            //Database error
-            if (err) throw done(err);
-            if (!user) return done(null, false);
-            bcrypt.compare(password, user.password, (err, res) => {
-                if (err) throw err;
-                if (res === true) {
-                    return done(null, user)
-                }
-                else done(null, false)
-            })
-        })
-    })
-)
-passport.serializeUser((user, callback) => {
-    callback(null, user.id)
-});
-passport.deserializeUser((id, callback) => {
-    User.findOne({ _id: id }, (err, user) => {
-        callback(err, user)
-    })
-})
-
+const cookieParser = require('cookie-parser');
 app.use(cookieParser("itsasecret"))
+
+const passport = require('./config/passport')
 app.use(passport.initialize())
 app.use(passport.session())
 
 
-
-//ROUTES
-app.get('/about/api', (req, res) => {
-    console.log(req)
-    res.send('hi there fella')
-})
-
-app.post("/api/register", (req, res,) => {
-    User.findOne({ username: req.body.username }, async (err, document) => {
-        if (document) res.send("Username is already taken.")
-        if (!document) {
-            const hashedPassword = await bcrypt.hash(req.body.password, 12)
-            const newUser = new User({
-                username: req.body.username,
-                password: hashedPassword
-            });
-            await newUser.save()
-            res.send("User Registration complete")
-        }
-    }).catch(err => console.error(err))
-})
-
-app.post("/api/login", (req, res, next) => {
-    console.log(req.body)
-    passport.authenticate("local", function (err, user, info) {
-        console.log("in auth")
-        if (err) {
-            return next(err)
-        }
-        if (!user) {
-            return res.send("We couldn't authenticate your username or password")
-        }
-        else {
-            req.logIn(user, err => {
-                console.log(user)
-                if (err) throw next(err);
-                //  res.redirect(`https://localhost:3000/dashboard/${user.username}`)
-                res.json(user)
-            })
-        }
-    })(req, res, next);
-})
-
-app.get("/logout", function(req, res) {
-    req.logout();
-    res.redirect("/");
-});
-app.get("/api/getuser", (req, res) => {
-    if (req.user) {
-        User.findOne(
-            {
-                _id: req.user._id
-            }
-        ).then(user => {
-            console.log(user)
-            res.json(user)
-            
-        })
-    }
-})
-
-app.post("/api/save/", (req, res) => {
-
-})
+app.use(require('./routes'))
 
 const server = app.listen(PORT, () => console.log("server listening on port:", PORT))
 
@@ -139,125 +47,125 @@ io.on("connection", socket => {
 });
 
 // Mongoose Arrays test *****************
-const newUser =  {
-    username: "newUser",
-    password: "123",
-    kickArray:[
-        {
-            "id": 1,
-            "isActive": false,
-            "type": "kick",
-            "note": "A3",
-            "backgroundColor": "white"
-        },
-        {
-            "id": 2,
-            "isActive": false,
-            "type": "kick",
-            "note": "B3",
-            "backgroundColor": "white"
-        },
-        {
-            "id": 3,
-            "isActive": false,
-            "type": "kick",
-            "note": "C4",
-            "backgroundColor": "white"
-        },
-        {
-            "id": 4,
-            "isActive": false,
-            "type": "snare",
-            "note": "D4",
-            "backgroundColor": "white"
-        },
-        {
-            "id": 5,
-            "isActive": false,
-            "type": "kick",
-            "note": "E4",
-            "backgroundColor": "white"
-        },
-        {
-            "id": 6,
-            "isActive": false,
-            "type": "kick",
-            "note": "F4",
-            "backgroundColor": "white"
-        },
-        {
-            "id": 7,
-            "isActive": false,
-            "type": "kick",
-            "note": "G4",
-            "backgroundColor": "white"
-        },
-        {
-            "id": 8,
-            "isActive": false,
-            "type": "kick",
-            "note": "A4",
-            "backgroundColor": "white"
-        },
-        {
-            "id": 9,
-            "isActive": false,
-            "type": "kick",
-            "note": "A3",
-            "backgroundColor": "white"
-        },
-        {
-            "id": 10,
-            "isActive": false,
-            "type": "kick",
-            "note": "B3",
-            "backgroundColor": "white"
-        },
-        {
-            "id": 11,
-            "isActive": false,
-            "type": "kick",
-            "note": "C4",
-            "backgroundColor": "white"
-        },
-        {
-            "id": 12,
-            "isActive": false,
-            "type": "snare",
-            "note": "D4",
-            "backgroundColor": "white"
-        },
-        {
-            "id": 13,
-            "isActive": false,
-            "type": "kick",
-            "note": "E4",
-            "backgroundColor": "white"
-        },
-        {
-            "id": 14,
-            "isActive": false,
-            "type": "kick",
-            "note": "F4",
-            "backgroundColor": "white"
-        },
-        {
-            "id": 15,
-            "isActive": false,
-            "type": "kick",
-            "note": "G4",
-            "backgroundColor": "white"
-        },
-        {
-            "id": 16,
-            "isActive": false,
-            "type": "kick",
-            "note": "A4",
-            "backgroundColor": "white"
-        }
-    ],
-    description: "Here is a new User!"
-}
+// const newUser = {
+//     username: "newUser",
+//     password: "123",
+//     kickArray: [
+//         {
+//             "id": 1,
+//             "isActive": false,
+//             "type": "kick",
+//             "note": "A3",
+//             "backgroundColor": "white"
+//         },
+//         {
+//             "id": 2,
+//             "isActive": false,
+//             "type": "kick",
+//             "note": "B3",
+//             "backgroundColor": "white"
+//         },
+//         {
+//             "id": 3,
+//             "isActive": false,
+//             "type": "kick",
+//             "note": "C4",
+//             "backgroundColor": "white"
+//         },
+//         {
+//             "id": 4,
+//             "isActive": false,
+//             "type": "snare",
+//             "note": "D4",
+//             "backgroundColor": "white"
+//         },
+//         {
+//             "id": 5,
+//             "isActive": false,
+//             "type": "kick",
+//             "note": "E4",
+//             "backgroundColor": "white"
+//         },
+//         {
+//             "id": 6,
+//             "isActive": false,
+//             "type": "kick",
+//             "note": "F4",
+//             "backgroundColor": "white"
+//         },
+//         {
+//             "id": 7,
+//             "isActive": false,
+//             "type": "kick",
+//             "note": "G4",
+//             "backgroundColor": "white"
+//         },
+//         {
+//             "id": 8,
+//             "isActive": false,
+//             "type": "kick",
+//             "note": "A4",
+//             "backgroundColor": "white"
+//         },
+//         {
+//             "id": 9,
+//             "isActive": false,
+//             "type": "kick",
+//             "note": "A3",
+//             "backgroundColor": "white"
+//         },
+//         {
+//             "id": 10,
+//             "isActive": false,
+//             "type": "kick",
+//             "note": "B3",
+//             "backgroundColor": "white"
+//         },
+//         {
+//             "id": 11,
+//             "isActive": false,
+//             "type": "kick",
+//             "note": "C4",
+//             "backgroundColor": "white"
+//         },
+//         {
+//             "id": 12,
+//             "isActive": false,
+//             "type": "snare",
+//             "note": "D4",
+//             "backgroundColor": "white"
+//         },
+//         {
+//             "id": 13,
+//             "isActive": false,
+//             "type": "kick",
+//             "note": "E4",
+//             "backgroundColor": "white"
+//         },
+//         {
+//             "id": 14,
+//             "isActive": false,
+//             "type": "kick",
+//             "note": "F4",
+//             "backgroundColor": "white"
+//         },
+//         {
+//             "id": 15,
+//             "isActive": false,
+//             "type": "kick",
+//             "note": "G4",
+//             "backgroundColor": "white"
+//         },
+//         {
+//             "id": 16,
+//             "isActive": false,
+//             "type": "kick",
+//             "note": "A4",
+//             "backgroundColor": "white"
+//         }
+//     ],
+//     description: "Here is a new User!"
+// }
 
 // const person = new User(newUser)
 // person.save()
@@ -304,7 +212,7 @@ I can get subdocuments working, but my experiments with multiple subdocuments ha
 6: When one of the divs is clicked, use that stored set of arrays to render the sequencer (may need
     to make a separate axios call, in which case, the index number should be stored as a prop of each
     div, so that the for loop code on step three just gets the stored req.body number as the index.
-    Then, same process for res. Send the res object including arrays for all instruments, then render 
+    Then, same process for res. Send the res object including arrays for all instruments, then render
     the sequencer using that).
 
 QUESTION: Should we store the create new sequence as a default at index zero of all the arrays, that way it
@@ -333,13 +241,13 @@ I have it?
 
 *******todos for folder organization
 1: Check to see if my components can be divied up further. So much of this is only used once per page,
-    I am hip to separation of concerns but I also struggle to separate when the functionality seems so 
+    I am hip to separation of concerns but I also struggle to separate when the functionality seems so
     tied up together (looking at you, sequencer.js)
 2: Separate out routes from server. I started doing it this way, but the passport.js authentication and
     localStrategy didn't export properly, so I did it all on one page, because that way I could get it
     to work.
-3: Utils, contexts, etc. Context is the hardest one for me, because I feel like I might have done it in 
-    a dumb way. 404 route displays after login, before sequencer component renders (auth context takes a 
+3: Utils, contexts, etc. Context is the hardest one for me, because I feel like I might have done it in
+    a dumb way. 404 route displays after login, before sequencer component renders (auth context takes a
     a second to store, I think). Solutions for that?
 4: Separate out the css files for their respective components. Shouldn't be to bad. I can go label stuff
     in comments ont the app.css file.
