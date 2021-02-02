@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactModal from 'react-modal';
+import Chat from './Chat'
+
 class ExampleModal extends React.Component {
   constructor () {
     super();
@@ -23,6 +25,7 @@ class ExampleModal extends React.Component {
            isOpen={this.state.showModal}
            contentLabel="Minimal Modal Example"
         >
+          <Chat />
           <button onClick={this.handleCloseModal}>Close Modal</button>
         </ReactModal>
       </div>

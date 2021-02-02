@@ -126,7 +126,55 @@ app.get("/api/getuser", (req, res) => {
 })
 
 app.post("/api/save/", (req, res) => {
-
+    let snareArray = req.body.snareArray
+    let kickArray = req.body.kickArray
+    let melodyRowOne = req.body.melodyRowOne
+    let melodyRowTwo = req.body.melodyRowTwo
+    let melodyRowThree = req.body.melodyRowThree
+    let melodyRowFour = req.body.melodyRowFour
+    let melodyRowFive = req.body.melodyRowFive
+    let melodyRowSix = req.body.melodyRowSix
+    let melodyRowSeven = req.body.melodyRowSeven
+    let melodyRowEight = req.body.melodyRowEight
+    let melodyRowNine = req.body.melodyRowNine
+    let bassRowOne = req.body.bassRowOne
+    let bassRowTwo = req.body.bassRowTwo
+    let bassRowThree = req.body.bassRowThree
+    let bassRowFour = req.body.bassRowFour
+    let bassRowFive = req.body.bassRowFive
+    let bassRowSix = req.body.bassRowSix
+    let bassRowSeven = req.body.bassRowSeven
+    let bassRowEight = req.body.bassRowEight
+    let bassRowNine = req.body.bassRowNine
+    User.findOne({username: req.body.username})
+    .then(res => {
+        console.log(res);
+        res.update(
+        { $push:
+            {kickArray: kickArray,
+            snareArray: snareArray,
+            melodyRowOne: melodyRowOne,
+            melodyRowTwo: melodyRowTwo,
+            melodyRowThree: melodyRowThree,
+            melodyRowFour: melodyRowFour,
+            melodyRowFive: melodyRowFive,
+            melodyRowSix: melodyRowSix,    
+            melodyRowSeven: melodyRowSeven,    
+            melodyRowEight: melodyRowEight,
+            melodyRowNine: melodyRowNine,
+            bassRowOne: bassRowOne,
+            bassRowTwo: bassRowTwo,
+            bassRowThree: bassRowThree,
+            bassRowFour: bassRowFour,
+            bassRowFive: bassRowFive,
+            bassRowSix: bassRowSix,    
+            bassRowSeven: bassRowSeven,    
+            bassRowEight: bassRowEight,
+            bassRowNine: bassRowNine
+            }
+        }
+        )
+        })
 })
 
 const server = app.listen(PORT, () => console.log("server listening on port:", PORT))

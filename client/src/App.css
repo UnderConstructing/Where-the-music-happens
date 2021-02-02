@@ -232,3 +232,8 @@ h1, h2, h3 {
   max-inline-size: 40%;
   min-height: 60px
 }
+
+.modal {
+  min-width: 50%;
+  min-width: 50%;
+}

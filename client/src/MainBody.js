@@ -1,3 +1,5 @@
+import ExampleModal from './ExampleModal'
+
 function MainBody() {
     return (
         <div>
@@ -11,6 +13,7 @@ function MainBody() {
           <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white" href="signup.html
         ">Sign up</a>
         </p>
+        <ExampleModal />
         </div>
       
     );

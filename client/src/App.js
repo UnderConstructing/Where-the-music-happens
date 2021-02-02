@@ -30,20 +30,7 @@ export default function App() {
     <AuthContext.Provider value={{ user: auth }}>
       <div>
         <Router>
-
-
-          <div>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/dashboard">About</Link>
-              </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-            </ul>
+          <HeaderSection />
             <Switch>
               <Route exact path="/profile">
                 <Profile />
@@ -69,9 +56,6 @@ export default function App() {
                 <FourOhFour />
               </Route>
             </Switch>
-
-
-          </div>
         </Router>
       </div>
     </AuthContext.Provider>

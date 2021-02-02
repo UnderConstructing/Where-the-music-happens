@@ -35,10 +35,12 @@ export default function Sequencer() {
     new Tone.Synth(),
     new Tone.Synth(),
     new Tone.Synth(),
+    new Tone.Synth(),
     new Tone.Synth()
   ]
 
   const bassSynths = [
+    new Tone.Synth({ oscillator: { type: 'fatsquare' } }),
     new Tone.Synth({ oscillator: { type: 'fatsquare' } }),
     new Tone.Synth({ oscillator: { type: 'fatsquare' } }),
     new Tone.Synth({ oscillator: { type: 'fatsquare' } }),
@@ -86,15 +88,32 @@ export default function Sequencer() {
   }
 
   function saveSequence() {
+    console.log(userInfo.user.username)
     Tone.Transport.stop()
-    let saveArray = []
-    saveArray.push(kickArray, snareArray, melodyArray, bassArray)
-    console.log(saveArray)
     axios({
       method: "POST",
       data: {
-        sequences: saveArray,
-        username: AuthContext.username
+        username: userInfo.user.username,
+        snareArray: snareArray,
+        kickArray: kickArray,
+        melodyRowOne: melodyArray[0],
+        melodyRowTwo: melodyArray[1],
+        melodyRowThree: melodyArray[2],
+        melodyRowFour: melodyArray[3],
+        melodyRowFive: melodyArray[4],
+        melodyRowSix: melodyArray[5],
+        melodyRowSeven: melodyArray[6],
+        melodyRowEight: melodyArray[7],
+        melodyRowNine: melodyArray[8],
+        bassRowOne: bassArray[0],
+        bassRowTwo: bassArray[1],
+        bassRowThree: bassArray[2],
+        bassRowFour: bassArray[3],
+        bassRowFive: bassArray[4],
+        bassRowSix: bassArray[5],
+        bassRowSeven: bassArray[6],
+        bassRowEight: bassArray[7],
+        bassRowNine: bassArray[8]
       },
       withCredentials: true,
       url: 'http://localhost:4000/api/save/'
