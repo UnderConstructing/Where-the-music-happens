@@ -12,7 +12,7 @@ function Header() {
             <header className="class">
             <div className="title-profile">
                 {/* <!-- Select the text in the preview and type in your own --> */}
-                <h1 className="neon" data-text="Re-Note"></h1>
+                <h1 className="text" data-text="Re-Note"></h1>
                 <div className="gradient"></div>
                 <div className="spotlight"></div>
             </div>

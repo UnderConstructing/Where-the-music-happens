@@ -39,7 +39,7 @@ $color2: black;
   filter: contrast(110%) brightness(190%);
 }
 
-.neon {
+.text {
   position: relative;
   
   // Only works on a black background, sorry
@@ -108,8 +108,8 @@ $color2: black;
 /* //=== Pen styling, ignore */
 
 /* // Style text */
-.neon {
-  font: 700 9vh 'Lato', 'sans-serif' ;
+.text {
+  font: 700 9vh 'Play', 'sans-serif' ;
   text-transform: uppercase;
   text-align: center;
   margin: 0;

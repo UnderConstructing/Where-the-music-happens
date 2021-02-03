@@ -7,18 +7,16 @@ import openHhArray from '../templates/openhh.json'
 import bassArray from '../templates/bass.json'
 import * as Tone from 'tone';
 import Chat from '../Chat'
-import Kick from '../Kick'
-import Snare from '../SnareSequence'
-import Melody from '../Melody'
-import Bass from '../Bass'
-import HiHat from '../HiHat'
-import OpenHh from '../OpenHH'
-import '../sequencer.css'
-
+import DrumDiv from '../DrumDiv'
+import BassDiv from '../BassDiv';
+import MelodyDiv from '../MelodyDiv';
+import '../sequencer.scss'
 // import Grid from './Grid'
 
 import AuthContext from '../utils/Context/AuthContext'
 import API from "../utils/API"
+
+
 
 export default function Sequencer() {
   const [playing, setPlaying] = useState(false)
@@ -26,7 +24,10 @@ export default function Sequencer() {
   const userInfo = useContext(AuthContext)
   console.log(userInfo.user)
   function relocate() {
-    window.location.href='/profile'
+    window.location.href = '/profile'
+  }
+  function disappear() {
+
   }
   //INSTRUMENT CONSTRUCTORS!
   const kick = new Tone.MembraneSynth();
@@ -97,7 +98,7 @@ export default function Sequencer() {
     colArray = chunks
     console.log(colArray)
   }
-  
+
   getCols()
   // melodyarr[i]
 
@@ -195,20 +196,13 @@ export default function Sequencer() {
       <div className="main">
         {/* <div className="sub"> */}
         {/* </div> */}
-
-        <div className="grid">
-
-          <HiHat />
-          <OpenHh />
-          <Snare />
-          <Kick />
-        </div>
+        <DrumDiv />
         {/* <h2>Melody</h2> */}
         <div className="grid">
-          <Melody />
+          <MelodyDiv />
         </div>
         <div className="grid">
-          <Bass />
+          <BassDiv />
         </div>
         <button data-playing={playing} onClick={startSequence}>Test</button>
         <div>
