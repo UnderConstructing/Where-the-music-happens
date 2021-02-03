@@ -78,12 +78,31 @@ export default function Sequencer() {
     new Tone.Synth({ oscillator: { type: 'fatsquare' } }),
     new Tone.Synth({ oscillator: { type: 'fatsquare' } })
   ]
+  let colArray = []
+
+  function getCols() {
+    for (let i = 0; i < 32; i++) {
+      let indexedArray = []
+      for (let j = 0; j < melodyArray.length; j++) {
+        colArray.push(melodyArray[j][i])
+      }
+    }
+    var chunks = [], m = 0, n = colArray.length;
+    while (m < n) {
+      chunks.push(colArray.slice(m, m += 9));
+    }
+    colArray = chunks
+    console.log(colArray)
+  }
+  
+  getCols()
+  // melodyarr[i]
 
   useEffect(() => {
     Tone.Transport.scheduleRepeat(repeat, "16n")
     Tone.Transport.bpm.value = [bpm]
   }, [])
-  
+
   //callback for note triggering
   let index = 0;
   function repeat(time) {
@@ -108,6 +127,7 @@ export default function Sequencer() {
       let $synth = synths[i]
       if (row[step].isActive === true) {
         $synth.triggerAttackRelease(note, '16n', time).toDestination()
+
       }
     }
     for (var j = 0; j < bassArray.length; j++) {
@@ -122,39 +142,40 @@ export default function Sequencer() {
     index++
   }
 
+
   function saveSequence() {
     console.log(userInfo.user.username)
     Tone.Transport.stop()
     Tone.Transport.clear()
-    let data = [   
-      {    
-      username: userInfo.user.username,
-      hihatArray: hihatArray,
-      openHhArray: openHhArray,
-      snareArray: snareArray,
-      kickArray: kickArray,
-      melodyRowOne: melodyArray[0],
-      melodyRowTwo: melodyArray[1],
-      melodyRowThree: melodyArray[2],
-      melodyRowFour: melodyArray[3],
-      melodyRowFive: melodyArray[4],
-      melodyRowSix: melodyArray[5],
-      melodyRowSeven: melodyArray[6],
-      melodyRowEight: melodyArray[7],
-      melodyRowNine: melodyArray[8],
-      bassRowOne: bassArray[0],
-      bassRowTwo: bassArray[1],
-      bassRowThree: bassArray[2],
-      bassRowFour: bassArray[3],
-      bassRowFive: bassArray[4],
-      bassRowSix: bassArray[5],
-      bassRowSeven: bassArray[6],
-      bassRowEight: bassArray[7],
-      bassRowNine: bassArray[8]
-    }]
+    let data = [
+      {
+        username: userInfo.user.username,
+        hihatArray: hihatArray,
+        openHhArray: openHhArray,
+        snareArray: snareArray,
+        kickArray: kickArray,
+        melodyRowOne: melodyArray[0],
+        melodyRowTwo: melodyArray[1],
+        melodyRowThree: melodyArray[2],
+        melodyRowFour: melodyArray[3],
+        melodyRowFive: melodyArray[4],
+        melodyRowSix: melodyArray[5],
+        melodyRowSeven: melodyArray[6],
+        melodyRowEight: melodyArray[7],
+        melodyRowNine: melodyArray[8],
+        bassRowOne: bassArray[0],
+        bassRowTwo: bassArray[1],
+        bassRowThree: bassArray[2],
+        bassRowFour: bassArray[3],
+        bassRowFive: bassArray[4],
+        bassRowSix: bassArray[5],
+        bassRowSeven: bassArray[6],
+        bassRowEight: bassArray[7],
+        bassRowNine: bassArray[8]
+      }]
     console.log(data)
     API.saveTone(data).then(res => alert("You have saved the sequence!"))
-    .catch(err => console.error(err))
+      .catch(err => console.error(err))
   }
   async function startSequence(event) {
     event.preventDefault()
@@ -181,10 +202,10 @@ export default function Sequencer() {
         {/* <h2>Melody</h2> */}
         <div className="grid">
           <Melody />
-          </div>
-          <div className="grid">
+        </div>
+        <div className="grid">
           <Bass />
-          </div>
+        </div>
         <button data-playing={playing} onClick={startSequence}>Test</button>
         <div>
           <input type="range"
@@ -195,6 +216,7 @@ export default function Sequencer() {
               setBpm(radius)}></input>
         </div>
         <button className="save-button" onClick={saveSequence}>Save!</button>
+        <button onClick={getCols}>Get Cols</button>
       </div>
     </div>
   )
