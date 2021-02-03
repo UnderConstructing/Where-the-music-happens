@@ -8,12 +8,13 @@ import Login from './Login';
 import Grid from './Grid';
 import axios from 'axios';
 import AuthContext from './utils/Context/AuthContext';
-import Profile from './profilePage';
+import Profile from './ProfilePage';
 import HeaderSection from './HeaderSection';
 import MainBody from './MainBody';
 import Footer from './Footer';
 import ExampleModal from './ExampleModal';
 import FourOhFour from './FourOhFour'
+
 
 
 
@@ -64,7 +65,10 @@ export default function App() {
                 <Grid />
               </Route>
               <Route>
-                <FourOhFour />
+                <Profile />
+              </Route>
+              <Route exact path={"/profilepage"}>
+                <Profile/>
               </Route>
             </Switch>
 
