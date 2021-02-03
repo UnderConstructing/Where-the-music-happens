@@ -3,6 +3,8 @@ import * as Tone from 'tone'
 import '../profilePage.scss'
 import AuthContext from '../utils/Context/AuthContext'
 
+
+//Needs to display saved sequences. Needs chat function, and needs sprucing up/
 export default function Profile(props) {
     const userInfo = useContext(AuthContext)
     console.log(userInfo.user.username)

@@ -2,7 +2,6 @@ import React from 'react'
 import melodyArray from './templates/melody.json'
 
 export default function Melody() {
-    
     let colArray = []
     function activateNote(e) {
         if (melodyArray[e.target.getAttribute("row") - 1][(e.target.id - 1)].isActive === false) {
@@ -21,6 +20,7 @@ export default function Melody() {
               <div className='parent'>
                 <input type="checkbox" text={subdivision.note} onChange={activateNote} key={`Melody${subdivision.row}${subdivision.id}`} row={subdivision.row} className={`box col${subdivision.id} `} id={subdivision.id}></input>
                 <label></label>
+                <span></span>
               </div>
             )
             )}
