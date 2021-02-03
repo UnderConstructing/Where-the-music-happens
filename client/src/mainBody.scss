@@ -1,5 +1,14 @@
 @import 'fonts.css';
 
+.main-container {
+    display: relative;
+    justify-content: center;
+    padding: 4rem
+}
+.whole {
+    display: flex;
+    width: 100vw;
+}
 .main-h1 {
     font-family: Play;
     font-weight: 700;
@@ -21,14 +30,21 @@
     font-size: 24px
 }
 .main-a {
-    font-family: Play;
-    font-weight: 400;
-    color: wheat
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
 }
 .main-a:hover {
+    cursor: pointer;
     color: brown
 }
 .main-p {
+    
     font-family: Play;
     font-weight: 400;
     color: wheat;
