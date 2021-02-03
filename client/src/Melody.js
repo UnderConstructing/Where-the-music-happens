@@ -2,6 +2,8 @@ import React from 'react'
 import melodyArray from './templates/melody.json'
 
 export default function Melody() {
+    
+    let colArray = []
     function activateNote(e) {
         if (melodyArray[e.target.getAttribute("row") - 1][(e.target.id - 1)].isActive === false) {
           melodyArray[e.target.getAttribute("row") - 1][(e.target.id - 1)].isActive = true
@@ -10,6 +12,7 @@ export default function Melody() {
           melodyArray[e.target.getAttribute("row") - 1][(e.target.id - 1)].isActive = false
         }
     }
+
     return (
         <div key="melody" className="melody">
         {melodyArray.map((row, i) => (

@@ -1,0 +1,18 @@
+@import './fonts.css';
+
+.not-found {
+    font-family: Play;
+    font-weight: 700;
+    font-size: 100px;
+    color: wheat
+}
+.for04 {
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  border: 5px solid white;
+  background: radial-gradient(#ADA5A5, #9198E5);
+}

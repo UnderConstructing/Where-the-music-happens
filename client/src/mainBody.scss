@@ -1,0 +1,41 @@
+@import 'fonts.css';
+
+.main-h1 {
+    font-family: Play;
+    font-weight: 700;
+    text-align: center;
+    font-size: 72px;
+    color: wheat
+}
+.main-h2 {
+    font-family: Play;
+    font-weight: 400;
+    color: wheat;
+    font-size: 54px;
+    text-align: center
+}
+.main-h3 {
+    font-family: Play;
+    font-weight: 400;
+    color: wheat;
+    font-size: 24px
+}
+.main-a {
+    font-family: Play;
+    font-weight: 400;
+    color: wheat
+}
+.main-a:hover {
+    color: brown
+}
+.main-p {
+    font-family: Play;
+    font-weight: 400;
+    color: wheat;
+}
+.main-img {
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
