@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-// import './App.css'
-import './mainBody.css'
+import './App.css'
 
 import API from './utils/API'
 import AuthContext from './utils/Context/AuthContext';
@@ -40,7 +39,9 @@ export default function App() {
                 <Route path={"/dashboard"} component={Sequencer} />
               }
               <Route exact path="/" component={MainBody} />
+              {(auth) &&
               <Route exact path="/profile" component={Profile} />
+              }
               <Route exact path="/registeruser" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path={'/grid'} component={Grid} />

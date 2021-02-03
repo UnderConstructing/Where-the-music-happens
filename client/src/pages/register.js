@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import API from "../utils/API"
+import '../register.css'
 export default function Register() {
     const [registerUsername, setRegisterUsername] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
@@ -12,10 +13,10 @@ export default function Register() {
     }
     return (
         <div>
-            <h1>Register</h1>
-            <input placeholder="username" onChange={e => setRegisterUsername(e.target.value)}></input>
-            <input placeholder="password" onChange={e => setRegisterPassword(e.target.value)}></input>
-            <button onClick={register}>Submit</button>
+            <h1 className="register-title">Register</h1>
+            <input className="register-input" placeholder="username" onChange={e => setRegisterUsername(e.target.value)}></input>
+            <input className="register-input" placeholder="password" onChange={e => setRegisterPassword(e.target.value)}></input>
+            <button className="register-button" onClick={register}>Submit</button>
         </div>
     )
 }

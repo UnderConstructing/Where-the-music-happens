@@ -24,7 +24,10 @@ export default function Sequencer() {
   const [playing, setPlaying] = useState(false)
   const [bpm, setBpm] = useState(100)
   const userInfo = useContext(AuthContext)
-
+  console.log(userInfo.user)
+  function relocate() {
+    window.location.href='/profile'
+  }
   //INSTRUMENT CONSTRUCTORS!
   const kick = new Tone.MembraneSynth();
   kick.toDestination()
@@ -187,6 +190,7 @@ export default function Sequencer() {
     <div className="center">
       {/* <Chat /> */}
       <h1 className="title">Sequencer!</h1>
+      <button onClick={relocate}>Profile</button>
       <h2 key="drums">Drums</h2>
       <div className="main">
         {/* <div className="sub"> */}
