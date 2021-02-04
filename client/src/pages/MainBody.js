@@ -2,8 +2,11 @@ import '../mainBody.scss'
 
 function MainBody() {
   return (
-    <div>
-      <h1 class='main-title'>MAKE BEATS WITH YOUR FRIENDS</h1>
+
+    <div className='main-container'>
+      <div className="whole">
+      <h1 className='main-title'>MAKE BEATS WITH YOUR FRIENDS</h1>
+      </div>
       <img className="main-img" src='https://www.pngfind.com/pngs/b/102-1029511_vaporwave-png.png” alt=“FuckJerry' />
       <h2 className="main-h2">How it works</h2>
       <p className="main-p">With our virtual pad controller, you can create music remotely with your friends and bandmates without any hardware other than your computer. We have virtual sounds native to the app including drum kits and synthesizers as well as capabilities to upload your own samples so you can make the next hit record right from your PC!
