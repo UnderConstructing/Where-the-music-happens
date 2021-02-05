@@ -37,15 +37,22 @@ app.use(passport.session())
 
 app.use(require('./routes'))
 
-const severe = app.listen(PORT, () => console.log("server listening on port:", PORT))
 
-const io = require('socket.io')(severe)
+
+
+const http = require("http");
+const server = http.createServer(app);
+const socket = require("socket.io");
+const io = socket(server);
+
+server.listen(PORT, () => console.log("server listening on port:", PORT))
 
 io.on("connection", socket => {
-    const { id } = socket.client;
-    console.log(`User connected: ${id}`);
-});
-
+    socket.emit("your id", socket.id);
+    socket.on("send message", body => {
+        io.emit("message", body)
+    })
+})
 
 
 /*
