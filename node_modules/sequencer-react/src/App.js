@@ -10,7 +10,7 @@ import ExampleModal from './pages/ExampleModal';
 
 import Sequencer from './pages/sequencer';
 import Register from './pages/register';
-import Grid from './pages/Grid';
+import About from './pages/About'
 import Login from './pages/Login';
 import Profile from './pages/profilePage';
 import MainBody from './pages/MainBody';
@@ -45,7 +45,7 @@ export default function App() {
               }
               <Route exact path="/registeruser" component={Register} />
               <Route exact path="/login" component={Login} />
-              <Route exact path={'/grid'} component={Grid} />
+              <Route exact path={'/about'} component={About} />
               {(!auth) &&
               <Route component={FourOhFour} />
             }
