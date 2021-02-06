@@ -14,7 +14,8 @@ import Grid from './pages/Grid';
 import Login from './pages/Login';
 import Profile from './pages/profilePage';
 import MainBody from './pages/MainBody';
-import FourOhFour from './pages/FourOhFour'
+import FourOhFour from './pages/FourOhFour';
+
 
 
 

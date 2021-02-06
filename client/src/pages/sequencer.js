@@ -14,6 +14,7 @@ import Bass from '../Bass'
 import HiHat from '../HiHat'
 import OpenHh from '../OpenHH'
 import '../sequencer.css'
+import Toast from '../toast';
 
 // import Grid from './Grid'
 
@@ -221,6 +222,7 @@ export default function Sequencer() {
         </div>
         <button className="save-button" onClick={saveSequence}>Save!</button>
         <button onClick={getCols}>Get Cols</button>
+        <Toast/>
       </div>
     </div>
   )
