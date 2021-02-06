@@ -33,7 +33,8 @@ const user = new mongoose.Schema({
     bassRowSeven: [[objectArray]],
     bassRowEight: [[objectArray]],
     bassRowNine: [[objectArray]],
-    description: String
+    name: Array,
+    author: Array
 })
 
 
