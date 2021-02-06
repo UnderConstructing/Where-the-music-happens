@@ -1,12 +1,35 @@
 @import './fonts.css';
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@700&family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'font-family: 'Roboto', sans-serif;';
+}
+
+.container-main {
+    display:grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 5em;
+}
+
 .profile-title {
-    font-family: Play;
+    grid-column-start: 1;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-end:3;
+    background-color: blue;
+    font-family: 'Play';
     font-weight: 700;
     font-size: 100px;
     color: wheat
 }
+
+.profile-subtitle {
+    background-color: red;
+}
+
 .profile-button {
-    display: block;
+    background-color: green;
     margin: auto;
     width: 30%;
     margin-top: 20px;
@@ -17,6 +40,13 @@
     border: 2px solid white
 }
 
+.sequence-card {
+    background-color: hotpink;
+    color: wheat;
+}
 
+.button-div {
+    color:wheat;
+}
 
 

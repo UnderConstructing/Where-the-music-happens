@@ -21,7 +21,7 @@ import ChatApp from '../ChatComponent'
 import AuthContext from '../utils/Context/AuthContext'
 import API from "../utils/API"
 import cookieParser from 'cookie-parser';
-import { propTypes } from 'react-bootstrap/esm/Image';
+
 
 
 
@@ -44,7 +44,7 @@ export default function Sequencer() {
   const [bpm, setBpm] = useState(100)
   const userInfo = useContext(AuthContext)
   function relocate() {
-    window.location.href = '/profile'
+    window.location.href = `/profile/${userInfo.user.username}`;
   }
 
   //INSTRUMENT CONSTRUCTORS!

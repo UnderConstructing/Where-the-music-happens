@@ -10,7 +10,7 @@ export default function Login() {
             username: loginUsername,
             password: loginPassword
         }).
-            then(response => window.location.href = `/dashboard/${response.data.username}`)
+            then(response => window.location.href = `/profile/${response.data.username}`)
 
     }
     return (
