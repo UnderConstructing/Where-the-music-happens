@@ -2,7 +2,7 @@
 .h1 {
   font-size: 3.5rem;
   font-family: 'Covered By Your Grace', cursive;
-  grid-column: 3;
+  grid-column: 2;
   margin-top: 0;
   color: red;
   filter: blur(0.02em);
@@ -12,7 +12,7 @@
 }
 .class {
   display: grid;
-  grid-template-columns: 50% auto 30%;
+  grid-template-columns: 80% 20%;
 }
 
 .link-container {
