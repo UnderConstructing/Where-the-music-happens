@@ -16,6 +16,7 @@ import '../sequencer.scss'
 import useInterval from '../useInterval'
 import Grid from './Grid'
 import ChatApp from '../ChatComponent'
+import SequencerContext from '../utils/Context/SequencerContext'
 // import Grid from './Grid'
 
 import AuthContext from '../utils/Context/AuthContext'
@@ -26,13 +27,14 @@ import cookieParser from 'cookie-parser';
 
 
 export default function Sequencer() {
+  const selectedSequence = useContext(SequencerContext.sequenceIndex)
   const [currentCol, setCurrentCol] = useState(1)
   const counter = () => {
     let count = ((currentCol+1))
     let step = count % 32
     setCurrentCol(step)
   }
-  
+  console.log(`SequenceIndex = ${JSON.parse(SequencerContext)}`)
 
   // useInterval(() => {
   //   counter()
@@ -194,6 +196,15 @@ export default function Sequencer() {
         melodyRowSeven: melodyArray[6],
         melodyRowEight: melodyArray[7],
         melodyRowNine: melodyArray[8],
+        melody2RowOne: melodyArrayTwo[0],
+        melody2RowTwo: melodyArrayTwo[1],
+        melody2RowThree: melodyArrayTwo[2],
+        melody2RowFour: melodyArrayTwo[3],
+        melody2RowFive: melodyArrayTwo[4],
+        melody2RowSix: melodyArrayTwo[5],
+        melody2RowSeven: melodyArrayTwo[6],
+        melody2RowEight: melodyArrayTwo[7],
+        melody2RowNine: melodyArrayTwo[8],
         bassRowOne: bassArray[0],
         bassRowTwo: bassArray[1],
         bassRowThree: bassArray[2],

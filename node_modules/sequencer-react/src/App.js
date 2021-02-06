@@ -28,7 +28,7 @@ export default function App() {
         setAuth(res.data);
         console.log(auth)
       })
-  }, [value])
+  }, [])
 
   return (
     <AuthContext.Provider value={{ user: auth }}>
@@ -42,7 +42,6 @@ export default function App() {
               {(auth) &&
                 <Route path={`/dashboard/${auth.username}/${SequencerContext.sequencerIndex}`} component={Sequencer} />
               }
-
               <Route exact path="/" component={MainBody} />
               {(auth) &&
               <Route exact path={`/profile/${auth.username}`} component={Profile} />
@@ -53,6 +52,7 @@ export default function App() {
               {(!auth) &&
               <Route component={FourOhFour} />
             }
+              <Route exact path= '/tutorial'></Route>
             </Switch>
         </Router>
       </div>

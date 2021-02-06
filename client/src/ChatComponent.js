@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import styled from "styled-components";
 import io from "socket.io-client";
+import AuthContext from './utils/Context/AuthContext'
 
 
 const ChatContainer = styled.div`
@@ -86,6 +87,7 @@ const OtherMessage = styled.div`
 `;
 
 const ChatApp = () => {
+    const userInfo = useContext(AuthContext)
     const [yourID, setYourID] = useState();
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
@@ -112,7 +114,7 @@ const ChatApp = () => {
     function sendMessage(e) {
         e.preventDefault();
         const messageObject = {
-            body: message,
+            body: `${userInfo.user.username}: ${message}`,
             id: yourID,
         };
         setMessage("");

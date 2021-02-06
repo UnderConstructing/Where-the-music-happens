@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import * as Tone from 'tone'
 import '../profilePage.scss'
@@ -11,7 +11,10 @@ import AuthContext from '../utils/Context/AuthContext'
 export default function Profile(props) {
     const userInfo = useContext(AuthContext)
     const sequences = userInfo.user.melodyRowOne
-
+    useEffect(() => {
+        console.log(userInfo)
+    },[])
+    console.log(userInfo)
     return (
         <div className='container-main'>
             <div className='profile-title'>
