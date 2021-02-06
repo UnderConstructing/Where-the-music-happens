@@ -15,7 +15,6 @@ import Login from './pages/Login';
 import Profile from './pages/profilePage';
 import MainBody from './pages/MainBody';
 import FourOhFour from './pages/FourOhFour'
-import SequencerContext from './utils/Context/SequencerContext';
 
 
 
@@ -28,7 +27,7 @@ export default function App() {
         setAuth(res.data);
         console.log(auth)
       })
-  }, [])
+  }, [value])
 
   return (
     <AuthContext.Provider value={{ user: auth }}>
@@ -40,8 +39,9 @@ export default function App() {
                 <Route path={`/dashboard/${auth.username}/new`} component={Sequencer} />
               }
               {(auth) &&
-                <Route path={`/dashboard/${auth.username}/${SequencerContext.sequencerIndex}`} component={Sequencer} />
+                <Route path={`/dashboard/${auth.username}/new`} component={Sequencer} />
               }
+
               <Route exact path="/" component={MainBody} />
               {(auth) &&
               <Route exact path={`/profile/${auth.username}`} component={Profile} />
@@ -51,8 +51,7 @@ export default function App() {
               <Route exact path={'/about'} component={About} />
               {(!auth) &&
               <Route component={FourOhFour} />
-            }
-              <Route exact path= '/tutorial'></Route>
+              }
             </Switch>
         </Router>
       </div>

@@ -16,7 +16,6 @@ import '../sequencer.scss'
 import useInterval from '../useInterval'
 import Grid from './Grid'
 import ChatApp from '../ChatComponent'
-import SequencerContext from '../utils/Context/SequencerContext'
 // import Grid from './Grid'
 
 import AuthContext from '../utils/Context/AuthContext'
@@ -27,14 +26,13 @@ import cookieParser from 'cookie-parser';
 
 
 export default function Sequencer() {
-  const selectedSequence = useContext(SequencerContext.sequenceIndex)
   const [currentCol, setCurrentCol] = useState(1)
   const counter = () => {
     let count = ((currentCol+1))
     let step = count % 32
     setCurrentCol(step)
   }
-  console.log(`SequenceIndex = ${JSON.parse(SequencerContext)}`)
+  
 
   // useInterval(() => {
   //   counter()
