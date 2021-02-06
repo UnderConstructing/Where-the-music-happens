@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function Toast() {
 
   const showToast = () => {
-    toast("I am Tostify!")
+    toast("Sequence Saved!")
   };
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import API from "../utils/API"
 import '../register.css'
-import Chat from '../Chat'
+
 export default function Register() {
     const [registerUsername, setRegisterUsername] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
@@ -18,7 +18,7 @@ export default function Register() {
             <input className="register-input" placeholder="username" onChange={e => setRegisterUsername(e.target.value)}></input>
             <input className="register-input" placeholder="password" onChange={e => setRegisterPassword(e.target.value)}></input>
             <button className="register-button" onClick={register}>Submit</button>
-            <Chat />
+
             
             </div>
     )

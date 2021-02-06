@@ -16,6 +16,8 @@ import '../sequencer.scss'
 import useInterval from '../useInterval'
 import Grid from './Grid'
 import ChatApp from '../ChatComponent'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import Grid from './Grid'
 
 import AuthContext from '../utils/Context/AuthContext'
@@ -205,8 +207,10 @@ export default function Sequencer() {
         bassRowNine: bassArray[8]
       }]
     console.log(data)
-    API.saveTone(data).then(res => alert("You have saved the sequence!"))
-      .catch(err => console.error(err))
+    API.saveTone(data).then(res => toast("You have saved the sequence!"))
+      .catch(err => {
+        toast("Your sequence did not save sucessfully")
+        console.error(err)})
   }
   async function startSequence(event) {
     event.preventDefault()
@@ -248,7 +252,9 @@ export default function Sequencer() {
         </div>
         <button className="save-button" onClick={saveSequence}>Save!</button>
         <Grid />
+        <ToastContainer/>
         <ChatApp />
+
       </div>
     </div>
   )
