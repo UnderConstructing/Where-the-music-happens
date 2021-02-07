@@ -17,21 +17,24 @@ export default function ProfileSequences({sequences}) {
     //useEffect api call to get indexes of sequences from user.
     console.log(sequences[0][0].id)
     return (
-        <div className='sequence-card red'>
+        <div className='red'>
             {/* <h1>TIME</h1> */}
-            <Link>
+            {/* <Link>
             <button sequence={0} onClick={setIndex}>Get Context</button>
-            </Link>
+            </Link> */}
             {/* {will map little divs with img inside to represent the different sequences in user db.
             When we actually click the div, setContext from the 'index' prop, and then route to sequencer.
             On actual sequencer page, we need to make an api call using the context as a part of the req.body
             then if it returns null, we will use the json templates to map} */}
 
-            {sequences.map((sequence) => {
-                {console.log(`test ${sequence}`)}
-                <div key={`sequence${sequence[0].id}`}sequence={sequence[0].id}>
-                    Sequencer
-                </div>
+            {sequences.map((sequence, i) => {
+                return(
+            <Link to={`dashboard/${userInfo.username}/${i}`}>
+            <button sequence={i}className="sequence-card ">
+                <p className='music-notes'>&#9835;</p>
+            </button>
+            </Link>
+                )
             })} 
         </div>
     )

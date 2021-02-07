@@ -11,13 +11,16 @@ import bassArray from '../templates/bass.json'
 import AuthContext from '../utils/Context/AuthContext'
 
 
-export default function Register() {
+export default function Register(props) {
     const [registerUsername, setRegisterUsername] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
     const register = () => {
         API.register({
             username: registerUsername,
-            password: registerPassword,
+            password: registerPassword}).then(response => 
+                {
+            API.saveTone({
+            username: registerUsername,
             hihatArray: hihatArray,
             openHhArray: openHhArray,
             snareArray: snareArray,
@@ -51,12 +54,13 @@ export default function Register() {
             bassRowNine: bassArray[8]
         }).then(response => {
             console.log(response)
-            AuthContext.user = response.data
+            AuthContext = response.data
             console.log(AuthContext.user)
-            window.location.href = `/profile/${AuthContext.user.username}`
+            // window.location.href = `/tutorial`
         }
         )
     }
+)};
     return (
         <div>
             <h1 className="register-title">Register</h1>

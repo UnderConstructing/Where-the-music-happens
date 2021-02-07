@@ -15,7 +15,7 @@ import Login from './pages/Login';
 import Profile from './pages/profilePage';
 import MainBody from './pages/MainBody';
 import FourOhFour from './pages/FourOhFour'
-
+import Tutorial from './pages/Tutorial'
 
 
 export default function App() {
@@ -41,7 +41,6 @@ export default function App() {
               {(auth) &&
                 <Route path={`/dashboard/${auth.username}/new`} component={Sequencer} />
               }
-
               <Route exact path="/" component={MainBody} />
               {(auth) &&
               <Route exact path={`/profile/${auth.username}`} component={Profile} />
@@ -49,9 +48,10 @@ export default function App() {
               <Route exact path="/registeruser" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path={'/about'} component={About} />
-              {(!auth) &&
+              {/* {(!auth) &&
               <Route component={FourOhFour} />
-              }
+              } */}
+              <Route exact path='/tutorial' component={Tutorial} />
             </Switch>
         </Router>
       </div>
