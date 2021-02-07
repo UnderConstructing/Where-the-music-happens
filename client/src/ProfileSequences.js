@@ -26,7 +26,6 @@ export default function ProfileSequences({sequences}) {
             When we actually click the div, setContext from the 'index' prop, and then route to sequencer.
             On actual sequencer page, we need to make an api call using the context as a part of the req.body
             then if it returns null, we will use the json templates to map} */}
-
             {sequences.map((sequence, i) => {
                 return(
             <Link to={`dashboard/${userInfo.username}/${i}`}>

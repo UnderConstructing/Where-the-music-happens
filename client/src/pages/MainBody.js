@@ -1,4 +1,5 @@
 import '../mainBody.scss'
+import Toast from '../toast'
 
 function MainBody() {
   return (
@@ -28,6 +29,7 @@ function MainBody() {
         <a onClick={() => window.location.href = '/registeruser'} className="main-a">Sign up</a>
       </p>
       {/* <ExampleModal /> */}
+      <Toast/>
       </div>
   );
 }

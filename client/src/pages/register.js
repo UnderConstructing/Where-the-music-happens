@@ -12,6 +12,7 @@ import AuthContext from '../utils/Context/AuthContext'
 
 
 export default function Register(props) {
+
     const [registerUsername, setRegisterUsername] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
     const register = () => {
