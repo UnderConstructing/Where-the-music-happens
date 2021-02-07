@@ -99,6 +99,7 @@ export default function Sequencer() {
     new Tone.Synth({oscillator: {type: 'sine'}}),
     new Tone.Synth({oscillator: {type: 'sine'}}),
     new Tone.Synth({oscillator: {type: 'sine'}}),
+    new Tone.Synth({oscillator: {type: 'sine'}}),
     new Tone.Synth({oscillator: {type: 'sine'}})
   ]
 
@@ -175,7 +176,7 @@ export default function Sequencer() {
     index++
   }
 
-
+console.log(melodyArrayTwo[8][0].note)
   function saveSequence() {
     console.log(userInfo.user.username)
     Tone.Transport.stop()
@@ -196,6 +197,15 @@ export default function Sequencer() {
         melodyRowSeven: melodyArray[6],
         melodyRowEight: melodyArray[7],
         melodyRowNine: melodyArray[8],
+        melody2RowOne: melodyArrayTwo[0],
+        melody2RowTwo: melodyArrayTwo[1],
+        melody2RowThree: melodyArrayTwo[2],
+        melody2RowFour: melodyArrayTwo[3],
+        melody2RowFive: melodyArrayTwo[4],
+        melody2RowSix: melodyArrayTwo[5],
+        melody2RowSeven: melodyArrayTwo[6],
+        melody2RowEight: melodyArrayTwo[7],
+        melody2RowNine: melodyArrayTwo[8],
         bassRowOne: bassArray[0],
         bassRowTwo: bassArray[1],
         bassRowThree: bassArray[2],
@@ -206,6 +216,7 @@ export default function Sequencer() {
         bassRowEight: bassArray[7],
         bassRowNine: bassArray[8]
       }]
+
     console.log(data)
     API.saveTone(data).then(res => toast("You have saved the sequence!"))
       .catch(err => {

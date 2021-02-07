@@ -25,7 +25,7 @@ function MainBody() {
       <h2 className="main-h3">Step 3</h2>
       </div>
       <p className="main-p">
-        <a onClick={() => window.location.href = '/register'} className="main-a">Sign up</a>
+        <a onClick={() => window.location.href = '/registeruser'} className="main-a">Sign up</a>
       </p>
       {/* <ExampleModal /> */}
       </div>
