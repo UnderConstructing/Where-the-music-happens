@@ -20,14 +20,13 @@ import Tutorial from './pages/Tutorial'
 
 export default function App() {
   const [auth, setAuth] = useState(null)
-  const [value, setValue] = useState(1)
   useEffect(() => {
     API.getUsers()
       .then(res => {
         setAuth(res.data);
         console.log(auth)
       })
-  }, [value])
+  }, [])
 
   return (
     <AuthContext.Provider value={{ user: auth }}>
@@ -39,7 +38,7 @@ export default function App() {
                 <Route path={`/dashboard/${auth.username}/new`} component={Sequencer} />
               }
               {(auth) &&
-                <Route path={`/dashboard/${auth.username}/new`} component={Sequencer} />
+                <Route path={`/dashboard/${auth.username}/:sequencerindex`} component={Sequencer} />
               }
               <Route exact path="/" component={MainBody} />
               {(auth) &&
@@ -51,7 +50,7 @@ export default function App() {
               {/* {(!auth) &&
               <Route component={FourOhFour} />
               } */}
-              <Route exact path='/tutorial' component={Tutorial} />
+              <Route exact path={`/tutorial`} component={Tutorial} />
             </Switch>
         </Router>
       </div>
