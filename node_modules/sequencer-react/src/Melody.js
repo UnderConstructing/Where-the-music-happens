@@ -4,7 +4,7 @@ import melodyArray from './templates/melody.json'
 import useInterval from './useInterval'
 
 export default function Melody(props) {
-
+  
 
     function activateNote(e) {
         if (melodyArray[e.target.getAttribute("row") - 1][(e.target.id - 1)].isActive === false) {

@@ -20,7 +20,7 @@ const ChatContainer = styled.div`
 
 const TextArea = styled.textarea`
   width: 98%;
-  height: 100px;
+  height: 6vh;
   border-radius: 10px;
   margin-top: 10px;
   padding-left: 10px;
@@ -29,11 +29,11 @@ const TextArea = styled.textarea`
   background-color: white;
   border: 1px solid lightgray;
   outline: none;
-  color: lightgray;
+  color: black;
   letter-spacing: 1px;
   line-height: 20px;
   ::placeholder {
-    color: Black;
+    color: grey;
 
   }
 `;

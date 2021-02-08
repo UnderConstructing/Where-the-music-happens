@@ -1,9 +1,0 @@
-****Things I know
-I have ids, and a sorter function for ids
-I need to set classes for id === [step]
-I have the classname package, which allows for conditional classes.
-I have a transport set interval function that I can use to iterate through the ids
-
-****Things I need to know
-I need to know how to use props or state to make true or false the condition for adding classes
-I need to know how to do that with exported functional components
