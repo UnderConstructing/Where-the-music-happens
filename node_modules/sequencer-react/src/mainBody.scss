@@ -35,17 +35,8 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     color: wheat;
-    font-size: 24px
-}
-.main-a {
-        background-color: #4CAF50; /* Green */
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
+    font-size: 20px
+
 }
 .main-a:hover {
     cursor: pointer;
@@ -57,6 +48,8 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     color: wheat;
+    font-size: 25px;
+    text-align: center;
 }
 .main-img {
     display: flex;
@@ -70,20 +63,25 @@ $color2: black;
 
 .title-profile {
   overflow: hidden;
-  position: flex;
-  justify-content: center;
-  margin: auto;
   height: 20vh;
   width: 100%;
+ align-items: center;
+justify-content: center;
+display: grid;
+
+
 
   
   filter: contrast(110%) brightness(190%);
 }
 
 .text {
-  position: flex; 
+  display: grid;
   background: black;
   color: transparent;
+  justify-content: center;
+ 
+
   
   &::before,
   &::after {
@@ -135,8 +133,25 @@ $color2: black;
 .text {
   font: 700 16vh 'Covered by your grace', 'sans-serif' ;
   text-transform: uppercase;
-  margin: 0;
+  // margin: 0 auto;
+  // display: grid;
+ 
   
   &:focus { outline: none; border: 1px dotted white; }
 }
-
+.mainpage-signup{
+  display: block;
+    margin: auto;
+    width: 30%;
+    margin-top: 20px;
+    border-radius: 25px;
+    font-family: Play;
+    font-weight: 400;
+    background-color: wheat;
+    border: 2px solid white
+}
+.container1{
+  background-color: rgb(53, 18, 18);
+  margin-left: 300px;
+  margin-right: 300px;
+}

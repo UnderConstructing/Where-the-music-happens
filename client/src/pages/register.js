@@ -63,7 +63,7 @@ export default function Register(props) {
     }
 )};
     return (
-        <div>
+        <div className="register-style">
             <h1 className="register-title">Register</h1>
             <input className="register-input" placeholder="username" onChange={e => setRegisterUsername(e.target.value)}></input>
             <input className="register-input" placeholder="password" onChange={e => setRegisterPassword(e.target.value)}></input>
