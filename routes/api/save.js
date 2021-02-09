@@ -5,7 +5,13 @@ const passport = require('../../config/passport')
 
 
 router.post("/", (req, res) => {
-    console.log(req.body.hihatArray)
+    if(req.isAuthenticated()) {
+        console.log(req.user)
+    } else {
+        console.log("not logged in")
+    }
+    
+    // console.log(req.body.hihatArray)
     User.findOneAndUpdate({ username: req.body.username },
         {
             $push: {

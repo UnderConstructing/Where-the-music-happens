@@ -242,7 +242,8 @@ export default function Sequencer() {
     console.log(userInfo.user.username)
     Tone.Transport.stop()
     Tone.Transport.clear()
-    let data = [
+    Tone.Transport.dispose()
+    let data = 
       {
         username: userInfo.user.username,
         hihatArray: hihatArray,
@@ -276,7 +277,7 @@ export default function Sequencer() {
         bassRowSeven: bassArray[6],
         bassRowEight: bassArray[7],
         bassRowNine: bassArray[8]
-      }]
+      }
 
     console.log(data)
     API.saveTone(data).then(res => toast("You have saved the sequence!"))

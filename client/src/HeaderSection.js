@@ -9,19 +9,19 @@ function Header() {
         return (
             <div className="class">
                 <input id="toggle" type="checkbox"></input>
-                <label class="toggle-container" for="toggle">
-                    <span class="button button-toggle"></span>
+                <label className="toggle-container" htmlFor="toggle">
+                    <span className="button button-toggle"></span>
                 </label>
 
-                <nav class="nav">
-                    <Link to='/'>
-                        <a class="nav-item" href="">Home</a>
+                <nav className="nav">
+                    <Link className="nav-item" to='/'>
+                        Home
                     </Link>
-                    <Link to='/about'>
-                        <a class="nav-item" href="">About</a>
+                    <Link className="nav-item" to='/about'>
+                        About
                     </Link >
-                    <Link to='/login'>
-                        <a class="nav-item" href="">Login or Sign up!</a>
+                    <Link className="nav-item" to='/login'>
+                        Login or Sign up!
                     </Link>
                 </nav>
                 <Link to='/'>

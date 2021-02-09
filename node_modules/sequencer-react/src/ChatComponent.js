@@ -105,7 +105,7 @@ const ChatApp = () => {
             console.log("here");
             receivedMessage(message);
         })
-    }, []);
+    }, [socketRef]);
 
     function receivedMessage(message) {
         setMessages(oldMsgs => [...oldMsgs, message]);

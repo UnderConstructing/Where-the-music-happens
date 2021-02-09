@@ -10,7 +10,6 @@
     background: radial-gradient(#ADA5A5, #9198E5);
 }
 .register-button {
-    display: block;
     margin: auto;
     width: 30%;
     margin-top: 20px;
@@ -21,10 +20,6 @@
     border: 2px solid white
 }
 .register-div {
-    display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  min-height: 100vh;
+    display: grid;
+    align-items: center;
 }
