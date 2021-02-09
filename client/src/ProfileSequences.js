@@ -10,6 +10,7 @@ export default function ProfileSequences({sequences}) {
     const userInfo = useContext(AuthContext)
     const [sequencerIndex, setSequencerIndex] = useState(0)
     const setIndex = (e) => {
+        e.preventDefault()
         setSequencerIndex(e.target.id)
         SequencerContext.sequencerIndex = sequencerIndex
     }
@@ -17,7 +18,7 @@ export default function ProfileSequences({sequences}) {
     //useEffect api call to get indexes of sequences from user.
     console.log(sequences[0][0].id)
     return (
-        <div className='red'>
+        <div className='sequence-container'>
             {/* <h1>TIME</h1> */}
             {/* <Link>
             <button sequence={0} onClick={setIndex}>Get Context</button>
@@ -28,8 +29,8 @@ export default function ProfileSequences({sequences}) {
             then if it returns null, we will use the json templates to map} */}
             {sequences.map((sequence, i) => {
                 return(
-            <Link to={`dashboard/${userInfo.username}/${i}`}>
-            <button sequence={i}className="sequence-card ">
+            <Link to={`/dashboard/${userInfo.user.username}/${i}`}>
+            <button sequences={i} className="sequence-card ">
                 <p className='music-notes'>&#9835;</p>
             </button>
             </Link>

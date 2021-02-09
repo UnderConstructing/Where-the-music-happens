@@ -17,17 +17,22 @@ body {
 .profile-title {
     grid-column-start: 1;
     grid-row-start: 1;
-    grid-row-end: 3;
+    grid-row-end: 2;
     grid-column-end:3;
-    background-color: blue;
+    display:grid;
+    background-image: radial-gradient( #EC7263, rgb(105, 98, 98));
+    border-radius: 15px;
     font-family: 'Play';
     font-weight: 700;
     font-size: 100px;
-    color: wheat
+    color: wheat;
+    justify-items: center;
+    align-items: center;
 }
 
 .profile-subtitle {
-    background-color: red;
+    background-color: #EC7263;
+    border-radius: 30px;
 }
 
 .profile-button {
@@ -48,19 +53,31 @@ body {
     color:wheat;
 }
 
-.red {
+.sequence-container {
     position: fixed;
     bottom: 0;
     width: 100%;
     display: flex;
     background-color: grey;
 }
+.sequence-container::before {
+    content: 'Your sequences';
+    position: fixed;
+    bottom: 0;
+    padding: 1rem;
+    border: black inset 2px 0 0 0;
+    border-radius: 20% 20% 0 0;
+    height: 17vh;
+    display: flex;
+    background-color: grey;
+    z-index: -100;
+}
 
 .sequence-card {
     box-sizing: border-box;
     display: flex;
-    height: 10vw;
-    width: 10vw;
+    height: 7vw;
+    width: 7vw;
     margin: 5px;
     border-radius: 30px;
     border-color:#EC7263;
@@ -79,3 +96,4 @@ body {
     font-size: 8vh;
     color: black;
 }
+

@@ -1,11 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react'
-import kickArray from '../templates/kick.json';
-import snareArray from '../templates/snare.json';
-import melodyArray from '../templates/melody.json';
-import melodyArrayTwo from '../templates/melodytwo.json'
-import hihatArray from '../templates/hihat.json'
-import openHhArray from '../templates/openhh.json'
-import bassArray from '../templates/bass.json'
+import React, { useContext, useEffect, useState } from 'react'
+import './sequencer.scss'
 import * as Tone from 'tone';
 import Chat from '../Chat'
 import DrumDiv from '../DrumDiv'
@@ -16,24 +10,35 @@ import '../sequencer.scss'
 import useInterval from '../useInterval'
 import Grid from './Grid'
 import ChatApp from '../ChatComponent'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 // import Grid from './Grid'
 
 import AuthContext from '../utils/Context/AuthContext'
 import API from "../utils/API"
 import cookieParser from 'cookie-parser';
+import { propTypes } from 'react-bootstrap/esm/Image';
+import SequencerContext from '../utils/Context/SequencerContext';
+import { response } from 'express';
 
 
 
+export default function SavedSequencer() {
+    const sequenceIndex = useContext(SequencerContext)
 
-export default function Sequencer() {
   const [currentCol, setCurrentCol] = useState(1)
   const counter = () => {
     let count = ((currentCol+1))
     let step = count % 32
     setCurrentCol(step)
   }
+
+  useEffect(() => {
+      API.getUsers().then(response => {
+          console.log(response)
+      })
+
+      
+  })
+  
 
   // useInterval(() => {
   //   counter()
@@ -44,9 +49,6 @@ export default function Sequencer() {
   const [playing, setPlaying] = useState(false)
   const [bpm, setBpm] = useState(100)
   const userInfo = useContext(AuthContext)
-  function relocate() {
-    window.location.href = `/profile/${userInfo.user.username}`;
-  }
 
   //INSTRUMENT CONSTRUCTORS!
   const kick = new Tone.MembraneSynth();
@@ -91,7 +93,6 @@ export default function Sequencer() {
   ]
 
   const trebleSynths = [
-    new Tone.Synth({oscillator: {type: 'sine'}}),
     new Tone.Synth({oscillator: {type: 'sine'}}),
     new Tone.Synth({oscillator: {type: 'sine'}}),
     new Tone.Synth({oscillator: {type: 'sine'}}),
@@ -175,7 +176,7 @@ export default function Sequencer() {
     index++
   }
 
-console.log(melodyArrayTwo[8][0].note)
+
   function saveSequence() {
     console.log(userInfo.user.username)
     Tone.Transport.stop()
@@ -196,15 +197,6 @@ console.log(melodyArrayTwo[8][0].note)
         melodyRowSeven: melodyArray[6],
         melodyRowEight: melodyArray[7],
         melodyRowNine: melodyArray[8],
-        melody2RowOne: melodyArrayTwo[0],
-        melody2RowTwo: melodyArrayTwo[1],
-        melody2RowThree: melodyArrayTwo[2],
-        melody2RowFour: melodyArrayTwo[3],
-        melody2RowFive: melodyArrayTwo[4],
-        melody2RowSix: melodyArrayTwo[5],
-        melody2RowSeven: melodyArrayTwo[6],
-        melody2RowEight: melodyArrayTwo[7],
-        melody2RowNine: melodyArrayTwo[8],
         bassRowOne: bassArray[0],
         bassRowTwo: bassArray[1],
         bassRowThree: bassArray[2],
@@ -215,12 +207,9 @@ console.log(melodyArrayTwo[8][0].note)
         bassRowEight: bassArray[7],
         bassRowNine: bassArray[8]
       }]
-
     console.log(data)
-    API.saveTone(data).then(res => toast("You have saved the sequence!"))
-      .catch(err => {
-        toast("Your sequence did not save sucessfully")
-        console.error(err)})
+    API.saveTone(data).then(res => alert("You have saved the sequence!"))
+      .catch(err => console.error(err))
   }
   async function startSequence(event) {
     event.preventDefault()
@@ -235,7 +224,7 @@ console.log(melodyArrayTwo[8][0].note)
     <div className="center">
       {/* <Chat /> */}
       <h1 className="title">Sequencer!</h1>
-      <button  onClick={relocate}>Profile</button>
+      <button onClick={relocate}>Profile</button>
       <h2 key="drums">Drums</h2>
       <div className="main">
         {/* <div className="sub"> */}
@@ -262,9 +251,7 @@ console.log(melodyArrayTwo[8][0].note)
         </div>
         <button className="save-button" onClick={saveSequence}>Save!</button>
         <Grid />
-        <ToastContainer/>
         <ChatApp />
-
       </div>
     </div>
   )

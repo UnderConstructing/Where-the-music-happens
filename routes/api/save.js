@@ -5,34 +5,35 @@ const passport = require('../../config/passport')
 
 
 router.post("/", (req, res) => {
-    User.findOneAndUpdate({ username: req.body[0].username },
+    console.log(req.body.hihatArray)
+    User.findOneAndUpdate({ username: req.body.username },
         {
             $push: {
-                hihatArray: req.body[0].hihatArray,
-                openHhArray: req.body[0].openHhArray,
-                kickArray: req.body[0].kickArray,
-                snareArray: req.body[0].snareArrayArray,
-                melodyRowOne: req.body[0].melodyRowOne,
-                melodyRowTwo: req.body[0].melodyRowTwo,
-                melodyRowThree: req.body[0].melodyRowThree,
-                melodyRowFour: req.body[0].melodyRowFour,
-                melodyRowFive: req.body[0].melodyRowFive,
-                melodyRowSix: req.body[0].melodyRowSix,
-                melodyRowSeven: req.body[0].melodyRowSeven,
-                melodyRowEight: req.body[0].melodyRowEight,
-                melodyRowNine: req.body[0].melodyRowNine,
-                bassRowOne: req.body[0].bassRowOne,
-                bassRowTwo: req.body[0].bassRowTwo,
-                bassRowThree: req.body[0].bassRowThree,
-                bassRowFour: req.body[0].bassRowFour,
-                bassRowFive: req.body[0].bassRowFive,
-                bassRowSix: req.body[0].bassRowSix,
-                bassRowSeven: req.body[0].bassRowSeven,
-                bassRowEight: req.body[0].bassRowEight,
-                bassRowNine: req.body[0].bassRowNine,
+                hihatArray: req.body.hihatArray,
+                openHhArray: req.body.openHhArray,
+                kickArray: req.body.kickArray,
+                snareArray: req.body.snareArrayArray,
+                melodyRowOne: req.body.melodyRowOne,
+                melodyRowTwo: req.body.melodyRowTwo,
+                melodyRowThree: req.body.melodyRowThree,
+                melodyRowFour: req.body.melodyRowFour,
+                melodyRowFive: req.body.melodyRowFive,
+                melodyRowSix: req.body.melodyRowSix,
+                melodyRowSeven: req.body.melodyRowSeven,
+                melodyRowEight: req.body.melodyRowEight,
+                melodyRowNine: req.body.melodyRowNine,
+                bassRowOne: req.body.bassRowOne,
+                bassRowTwo: req.body.bassRowTwo,
+                bassRowThree: req.body.bassRowThree,
+                bassRowFour: req.body.bassRowFour,
+                bassRowFive: req.body.bassRowFive,
+                bassRowSix: req.body.bassRowSix,
+                bassRowSeven: req.body.bassRowSeven,
+                bassRowEight: req.body.bassRowEight,
+                bassRowNine: req.body.bassRowNine   
             }
         })
-        .then(response => console.log(response))
+        .then(response => res.json(response))
 })
 
 
