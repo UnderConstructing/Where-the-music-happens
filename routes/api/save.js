@@ -12,7 +12,7 @@ router.post("/", (req, res) => {
                 hihatArray: req.body.hihatArray,
                 openHhArray: req.body.openHhArray,
                 kickArray: req.body.kickArray,
-                snareArray: req.body.snareArrayArray,
+                snareArray: req.body.snareArray,
                 melodyRowOne: req.body.melodyRowOne,
                 melodyRowTwo: req.body.melodyRowTwo,
                 melodyRowThree: req.body.melodyRowThree,

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, useRef } from 'react'
 import kickArray from '../templates/kick.json';
 import snareArray from '../templates/snare.json';
 import melodyArray from '../templates/melody.json';
@@ -11,13 +11,14 @@ import Chat from '../Chat'
 import DrumDiv from '../DrumDiv'
 import BassDiv from '../BassDiv';
 import MelodyDiv from '../MelodyDiv';
-import MelodyDivTwo from   '../MelodyDivTwo'
+import MelodyDivTwo from '../MelodyDivTwo'
 import '../sequencer.scss'
 import useInterval from '../useInterval'
 import Grid from './Grid'
 import ChatApp from '../ChatComponent'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import * as synth from '../synthSource'
 // import Grid from './Grid'
 
 import AuthContext from '../utils/Context/AuthContext'
@@ -30,14 +31,75 @@ import cookieParser from 'cookie-parser';
 export default function Sequencer() {
   const [currentCol, setCurrentCol] = useState(1)
   const counter = () => {
-    let count = ((currentCol+1))
+    let count = ((currentCol + 1))
     let step = count % 32
     setCurrentCol(step)
   }
+  function useKey(key, cb) {
+    const callbackRef = useRef(cb)
 
-  // useInterval(() => {
-  //   counter()
-  // }, 600)
+    useEffect(() => {
+      callbackRef.current = cb;
+    })
+
+    function handle(event) {
+      if (event.code === key) {
+        callbackRef.current(event)
+      }
+    }
+    useEffect(() => {
+      document.addEventListener("keypress", handle)
+      return () => document.removeEventListener("keypress", handle)
+    }, [key])
+  }
+
+  function handleGsharp() {
+    synth.playGsharp3()
+  }
+  function handleA() {
+    synth.playA()
+    synth.playDetA()
+  }
+  function handleS() {
+    synth.playB()
+  }
+  function handleD() {
+    synth.playC()
+  }
+  function handleF() {
+    synth.playD()
+  }
+  function handleG() {
+    synth.playE()
+  }
+  function handleH() {
+    synth.playF()
+  }
+  function handleJ() {
+    synth.playFsharp()
+  }
+  function handleK() {
+    synth.playG()
+  }
+  function handleL() {
+    synth.playGsharp()
+  }
+  function handleCol() {
+    synth.playAA()
+  }
+
+  useKey("KeyQ", handleGsharp)
+  useKey("KeyA", handleA)
+  useKey("KeyS", handleS)
+  useKey("KeyD", handleD)
+  useKey("KeyF", handleF)
+  useKey("KeyG", handleG)
+  useKey("KeyH", handleH)
+  useKey("KeyJ", handleJ)
+  useKey("KeyK", handleK)
+  useKey("KeyL", handleL)
+  useKey("Semicolon", handleCol)
+
 
 
   const [visibility, setVisibility] = useState(false)
@@ -91,15 +153,15 @@ export default function Sequencer() {
   ]
 
   const trebleSynths = [
-    new Tone.Synth({oscillator: {type: 'sine'}}),
-    new Tone.Synth({oscillator: {type: 'sine'}}),
-    new Tone.Synth({oscillator: {type: 'sine'}}),
-    new Tone.Synth({oscillator: {type: 'sine'}}),
-    new Tone.Synth({oscillator: {type: 'sine'}}),
-    new Tone.Synth({oscillator: {type: 'sine'}}),
-    new Tone.Synth({oscillator: {type: 'sine'}}),
-    new Tone.Synth({oscillator: {type: 'sine'}}),
-    new Tone.Synth({oscillator: {type: 'sine'}})
+    new Tone.Synth({ oscillator: { type: 'sine' } }),
+    new Tone.Synth({ oscillator: { type: 'sine' } }),
+    new Tone.Synth({ oscillator: { type: 'sine' } }),
+    new Tone.Synth({ oscillator: { type: 'sine' } }),
+    new Tone.Synth({ oscillator: { type: 'sine' } }),
+    new Tone.Synth({ oscillator: { type: 'sine' } }),
+    new Tone.Synth({ oscillator: { type: 'sine' } }),
+    new Tone.Synth({ oscillator: { type: 'sine' } }),
+    new Tone.Synth({ oscillator: { type: 'sine' } })
   ]
 
   const bassSynths = [
@@ -115,9 +177,9 @@ export default function Sequencer() {
   ]
   let colArray = []
   let drumsArray = []
-  let indexedArray =[]
-  
-  
+  let indexedArray = []
+
+
   // melodyarr[i]
 
   useEffect(() => {
@@ -175,7 +237,7 @@ export default function Sequencer() {
     index++
   }
 
-console.log(melodyArrayTwo[8][0].note)
+  console.log(melodyArrayTwo[8][0].note)
   function saveSequence() {
     console.log(userInfo.user.username)
     Tone.Transport.stop()
@@ -220,7 +282,8 @@ console.log(melodyArrayTwo[8][0].note)
     API.saveTone(data).then(res => toast("You have saved the sequence!"))
       .catch(err => {
         toast("Your sequence did not save sucessfully")
-        console.error(err)})
+        console.error(err)
+      })
   }
   async function startSequence(event) {
     event.preventDefault()
@@ -235,7 +298,7 @@ console.log(melodyArrayTwo[8][0].note)
     <div className="center">
       {/* <Chat /> */}
       <h1 className="title">Sequencer!</h1>
-      <button  onClick={relocate}>Profile</button>
+      <button onClick={relocate}>Profile</button>
       <h2 key="drums">Drums</h2>
       <div className="main">
         {/* <div className="sub"> */}
@@ -243,10 +306,10 @@ console.log(melodyArrayTwo[8][0].note)
         <DrumDiv />
         {/* <h2>Melody</h2> */}
         <div className="grid">
-          <MelodyDiv visibility={visibility}columnIndex={currentCol}/>
+          <MelodyDiv visibility={visibility} columnIndex={currentCol} />
         </div>
         <div className="grid">
-          <MelodyDivTwo visibility={visibility} columnIndex={currentCol}/>
+          <MelodyDivTwo visibility={visibility} columnIndex={currentCol} />
         </div>
         <div className="grid">
           <BassDiv />
@@ -262,7 +325,7 @@ console.log(melodyArrayTwo[8][0].note)
         </div>
         <button className="save-button" onClick={saveSequence}>Save!</button>
         <Grid />
-        <ToastContainer/>
+        <ToastContainer />
         <ChatApp />
 
       </div>
