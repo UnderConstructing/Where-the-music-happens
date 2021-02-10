@@ -8,6 +8,7 @@ import HeaderSection from './HeaderSection';
 import Footer from './Footer';
 import ExampleModal from './pages/ExampleModal';
 
+
 import Sequencer from './pages/sequencer';
 import Register from './pages/register';
 import About from './pages/About'
