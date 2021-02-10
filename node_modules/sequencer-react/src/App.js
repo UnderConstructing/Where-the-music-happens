@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css'
-
 import API from './utils/API'
 import AuthContext from './utils/Context/AuthContext';
 import HeaderSection from './HeaderSection';
-import Footer from './Footer';
-import ExampleModal from './pages/ExampleModal';
 import SavedSequencer from './pages/SavedSequence'
 import Sequencer from './pages/sequencer';
 import Register from './pages/register';
@@ -38,7 +35,7 @@ export default function App() {
           <HeaderSection />
             <Switch>
               {(auth) &&
-                <Route path={`/dashboard/${auth.username}/received/:sequencerIndex`} component={SavedSequencer} />
+                <Route path={`/dashboard/${auth.username}/received/:sequencerindex`} component={SavedSequencer} />
               }
               {(auth) &&
                 <Route path={`/dashboard/${auth.username}/:sequencerindex`} component={Sequencer} />
@@ -50,9 +47,9 @@ export default function App() {
               <Route exact path="/registeruser" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path={'/about'} component={About} />
-              {/* {(!auth) &&
+              {(!auth) &&
               <Route component={FourOhFour} />
-              } */}
+              }
               <Route exact path={`/tutorial`} component={Tutorial} />
             </Switch>
         </Router>

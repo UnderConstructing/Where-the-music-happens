@@ -26,16 +26,16 @@ import { SequencerContextProvider, useSequencerContext } from '../utils/Context/
 
 
 
-export default function SavedSequence() {
+export default function Sequencer() {
   // const [sequencerIndex, setSequencerIndex] = useState(  useParams({sequencerIndex}))
   const {sequencerindex} = useParams()
   const userInfo = useContext(AuthContext)
   console.log(userInfo)
 
   const hihatArray = userInfo.user.receivedhihatArray[sequencerindex]
-  const snareArray = userInfo.user.receivedsnareArray[sequencerindex]
-  const kickArray = userInfo.user.receivedkickArray[sequencerindex]
-  const openHhArray = userInfo.user.receivedopenHhArray[sequencerindex]
+  const snareArray = userInfo.user.snareArray[sequencerindex]
+  const kickArray = userInfo.user.kickArray[sequencerindex]
+  const openHhArray = userInfo.user.openHhArray[sequencerindex]
   const melodyArray = []
   melodyArray.push(
     userInfo.user.receivedmelodyRowOne[sequencerindex],
@@ -152,6 +152,7 @@ export default function SavedSequence() {
   const [visibility, setVisibility] = useState(false)
   const [playing, setPlaying] = useState(false)
   const [bpm, setBpm] = useState(100)
+  const [isPlaying, setIsPlaying] = useState
   function relocate() {
     window.location.href = `/profile/${userInfo.user.username}`;
   }
@@ -229,6 +230,7 @@ export default function SavedSequence() {
   // melodyarr[i]
 
   useEffect(() => {
+    Tone.Context = new AudioContext()
     Tone.Transport.scheduleRepeat(repeat, "16n")
     Tone.Transport.bpm.value = [bpm]
     console.log('effect used')
@@ -281,6 +283,10 @@ export default function SavedSequence() {
     }
 
     index++
+  }
+
+  function close() {
+    Tone.context.close()
   }
   
   function sendSequence() {
@@ -366,6 +372,7 @@ export default function SavedSequence() {
           <BassDiv />
         </div>
         <button data-playing={playing} onClick={startSequence}>Test</button>
+        <button onClick={close}>close</button>
         <div>
           <input type="range"
             min="40"

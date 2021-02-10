@@ -20,12 +20,14 @@ export default function DrumDiv(props) {
     }
     return (
         <>
-            <button onClick={toggler}>{`${word} Drum Sequence`}</button>
+            <button className="hide-button" onClick={toggler}>{`${word} Drum Sequence`}</button>
+            <div>
             <div className={`grid ${visible}`}>
                 <HiHat />
                 <OpenHh />
                 <Snare />
                 <Kick />
+            </div>
             </div>
         </>
     )

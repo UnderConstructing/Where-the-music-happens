@@ -1,37 +1,26 @@
 import React, { useState, useContext, useEffect, useRef } from 'react'
-// import hihatArray from '../templates/hihat.json'
-// import bassArray from '../templates/bass.json'
 import * as Tone from 'tone';
-import Chat from '../Chat'
 import DrumDiv from '../DrumDiv'
 import BassDiv from '../BassDiv';
 import MelodyDiv from '../MelodyDiv';
 import MelodyDivTwo from '../MelodyDivTwo'
 import '../sequencer.scss'
-
 import Grid from './Grid'
 import ChatApp from '../ChatComponent'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as synth from '../synthSource'
-import BrowserRouter, { Link, useParams, match} from 'react-router-dom'
-import SendSequenceComponent from '../SendSequence'
-// import Grid from './Grid'
-
+import { Link, useParams } from 'react-router-dom'
 import AuthContext from '../utils/Context/AuthContext'
 import API from "../utils/API"
-import { SequencerContextProvider, useSequencerContext } from '../utils/Context/SequencerContext'
-
-
-
 
 
 export default function Sequencer() {
   // const [sequencerIndex, setSequencerIndex] = useState(  useParams({sequencerIndex}))
-  const {sequencerindex} = useParams()
+  const { sequencerindex } = useParams()
   const userInfo = useContext(AuthContext)
   const [user, setUser] = useState('')
-  
+  const [isPlaying, setIsPlaying] = useState(false)
   function handleSetUser(e) {
     setUser(e.target.value)
   }
@@ -52,21 +41,21 @@ export default function Sequencer() {
     userInfo.user.melodyRowSeven[sequencerindex],
     userInfo.user.melodyRowEight[sequencerindex],
     userInfo.user.melodyRowNine[sequencerindex]
-    )
-    const melodyArrayTwo = []
-    melodyArrayTwo.push(
-      userInfo.user.melody2RowOne[sequencerindex],
-      userInfo.user.melody2RowTwo[sequencerindex],
-      userInfo.user.melody2RowThree[sequencerindex],
-      userInfo.user.melody2RowFour[sequencerindex],
-      userInfo.user.melody2RowFive[sequencerindex],
-      userInfo.user.melody2RowSix[sequencerindex],
-      userInfo.user.melody2RowSeven[sequencerindex],
-      userInfo.user.melody2RowEight[sequencerindex],
-      userInfo.user.melody2RowNine[sequencerindex]
-    )
-    const bassArray = []
-  bassArray.push (
+  )
+  const melodyArrayTwo = []
+  melodyArrayTwo.push(
+    userInfo.user.melody2RowOne[sequencerindex],
+    userInfo.user.melody2RowTwo[sequencerindex],
+    userInfo.user.melody2RowThree[sequencerindex],
+    userInfo.user.melody2RowFour[sequencerindex],
+    userInfo.user.melody2RowFive[sequencerindex],
+    userInfo.user.melody2RowSix[sequencerindex],
+    userInfo.user.melody2RowSeven[sequencerindex],
+    userInfo.user.melody2RowEight[sequencerindex],
+    userInfo.user.melody2RowNine[sequencerindex]
+  )
+  const bassArray = []
+  bassArray.push(
     userInfo.user.bassRowOne[sequencerindex],
     userInfo.user.bassRowTwo[sequencerindex],
     userInfo.user.bassRowThree[sequencerindex],
@@ -76,7 +65,7 @@ export default function Sequencer() {
     userInfo.user.bassRowSeven[sequencerindex],
     userInfo.user.bassRowEight[sequencerindex],
     userInfo.user.bassRowNine[sequencerindex]
-    )
+  )
 
 
   const [currentCol, setCurrentCol] = useState(1)
@@ -85,7 +74,7 @@ export default function Sequencer() {
     let step = count % 32
     setCurrentCol(step)
   }
-  
+
 
   function useKey(key, cb) {
     const callbackRef = useRef(cb)
@@ -157,9 +146,6 @@ export default function Sequencer() {
   const [visibility, setVisibility] = useState(false)
   const [playing, setPlaying] = useState(false)
   const [bpm, setBpm] = useState(100)
-  function relocate() {
-    window.location.href = `/profile/${userInfo.user.username}`;
-  }
 
   //INSTRUMENT CONSTRUCTORS!
   const kick = new Tone.MembraneSynth();
@@ -231,7 +217,7 @@ export default function Sequencer() {
     Tone.Transport.scheduleRepeat(repeat, "16n")
     Tone.Transport.bpm.value = [bpm]
     console.log('effect used')
-  }, [])
+  }, [bpm])
 
   //callback for note triggering
   let index = 0;
@@ -286,41 +272,41 @@ export default function Sequencer() {
     Tone.Transport.stop()
     Tone.Transport.clear()
     Tone.Transport.dispose()
-    let data = 
-      {
-        username: userInfo.user.username,
-        hihatArray: hihatArray,
-        openHhArray: openHhArray,
-        snareArray: snareArray,
-        kickArray: kickArray,
-        melodyRowOne: melodyArray[0],
-        melodyRowTwo: melodyArray[1],
-        melodyRowThree: melodyArray[2],
-        melodyRowFour: melodyArray[3],
-        melodyRowFive: melodyArray[4],
-        melodyRowSix: melodyArray[5],
-        melodyRowSeven: melodyArray[6],
-        melodyRowEight: melodyArray[7],
-        melodyRowNine: melodyArray[8],
-        melody2RowOne: melodyArrayTwo[0],
-        melody2RowTwo: melodyArrayTwo[1],
-        melody2RowThree: melodyArrayTwo[2],
-        melody2RowFour: melodyArrayTwo[3],
-        melody2RowFive: melodyArrayTwo[4],
-        melody2RowSix: melodyArrayTwo[5],
-        melody2RowSeven: melodyArrayTwo[6],
-        melody2RowEight: melodyArrayTwo[7],
-        melody2RowNine: melodyArrayTwo[8],
-        bassRowOne: bassArray[0],
-        bassRowTwo: bassArray[1],
-        bassRowThree: bassArray[2],
-        bassRowFour: bassArray[3],
-        bassRowFive: bassArray[4],
-        bassRowSix: bassArray[5],
-        bassRowSeven: bassArray[6],
-        bassRowEight: bassArray[7],
-        bassRowNine: bassArray[8]
-      }
+    let data =
+    {
+      username: userInfo.user.username,
+      hihatArray: hihatArray,
+      openHhArray: openHhArray,
+      snareArray: snareArray,
+      kickArray: kickArray,
+      melodyRowOne: melodyArray[0],
+      melodyRowTwo: melodyArray[1],
+      melodyRowThree: melodyArray[2],
+      melodyRowFour: melodyArray[3],
+      melodyRowFive: melodyArray[4],
+      melodyRowSix: melodyArray[5],
+      melodyRowSeven: melodyArray[6],
+      melodyRowEight: melodyArray[7],
+      melodyRowNine: melodyArray[8],
+      melody2RowOne: melodyArrayTwo[0],
+      melody2RowTwo: melodyArrayTwo[1],
+      melody2RowThree: melodyArrayTwo[2],
+      melody2RowFour: melodyArrayTwo[3],
+      melody2RowFive: melodyArrayTwo[4],
+      melody2RowSix: melodyArrayTwo[5],
+      melody2RowSeven: melodyArrayTwo[6],
+      melody2RowEight: melodyArrayTwo[7],
+      melody2RowNine: melodyArrayTwo[8],
+      bassRowOne: bassArray[0],
+      bassRowTwo: bassArray[1],
+      bassRowThree: bassArray[2],
+      bassRowFour: bassArray[3],
+      bassRowFive: bassArray[4],
+      bassRowSix: bassArray[5],
+      bassRowSeven: bassArray[6],
+      bassRowEight: bassArray[7],
+      bassRowNine: bassArray[8]
+    }
     console.log(data)
     API.saveTone(data).then(res => toast("You have saved the sequence!"))
       .catch(err => {
@@ -329,44 +315,44 @@ export default function Sequencer() {
       })
   }
 
-  function sendSequence(){
+  function sendSequence() {
     let data = {
-    username: user,
-    author: userInfo.user.author,
-    hihatArray: hihatArray,
-    openHhArray: openHhArray,
-    snareArray: snareArray,
-    kickArray: kickArray,
-    melodyRowOne: melodyArray[0],
-    melodyRowTwo: melodyArray[1],
-    melodyRowThree: melodyArray[2],
-    melodyRowFour: melodyArray[3],
-    melodyRowFive: melodyArray[4],
-    melodyRowSix: melodyArray[5],
-    melodyRowSeven: melodyArray[6],
-    melodyRowEight: melodyArray[7],
-    melodyRowNine: melodyArray[8],
-    melody2RowOne: melodyArrayTwo[0],
-    melody2RowTwo: melodyArrayTwo[1],
-    melody2RowThree: melodyArrayTwo[2],
-    melody2RowFour: melodyArrayTwo[3],
-    melody2RowFive: melodyArrayTwo[4],
-    melody2RowSix: melodyArrayTwo[5],
-    melody2RowSeven: melodyArrayTwo[6],
-    melody2RowEight: melodyArrayTwo[7],
-    melody2RowNine: melodyArrayTwo[8],
-    bassRowOne: bassArray[0],
-    bassRowTwo: bassArray[1],
-    bassRowThree: bassArray[2],
-    bassRowFour: bassArray[3],
-    bassRowFive: bassArray[4],
-    bassRowSix: bassArray[5],
-    bassRowSeven: bassArray[6],
-    bassRowEight: bassArray[7],
-    bassRowNine: bassArray[8]
+      username: user,
+      author: userInfo.user.username,
+      hihatArray: hihatArray,
+      openHhArray: openHhArray,
+      snareArray: snareArray,
+      kickArray: kickArray,
+      melodyRowOne: melodyArray[0],
+      melodyRowTwo: melodyArray[1],
+      melodyRowThree: melodyArray[2],
+      melodyRowFour: melodyArray[3],
+      melodyRowFive: melodyArray[4],
+      melodyRowSix: melodyArray[5],
+      melodyRowSeven: melodyArray[6],
+      melodyRowEight: melodyArray[7],
+      melodyRowNine: melodyArray[8],
+      melody2RowOne: melodyArrayTwo[0],
+      melody2RowTwo: melodyArrayTwo[1],
+      melody2RowThree: melodyArrayTwo[2],
+      melody2RowFour: melodyArrayTwo[3],
+      melody2RowFive: melodyArrayTwo[4],
+      melody2RowSix: melodyArrayTwo[5],
+      melody2RowSeven: melodyArrayTwo[6],
+      melody2RowEight: melodyArrayTwo[7],
+      melody2RowNine: melodyArrayTwo[8],
+      bassRowOne: bassArray[0],
+      bassRowTwo: bassArray[1],
+      bassRowThree: bassArray[2],
+      bassRowFour: bassArray[3],
+      bassRowFive: bassArray[4],
+      bassRowSix: bassArray[5],
+      bassRowSeven: bassArray[6],
+      bassRowEight: bassArray[7],
+      bassRowNine: bassArray[8]
+    }
+    API.sendTone(data)
   }
-API.sendTone(data)
-}
 
 
   async function startSequence(event) {
@@ -378,6 +364,9 @@ API.sendTone(data)
 
   return (
     <div>
+      <div style={{position: 'fixed', right: "0", zIndex: "100"}}>
+        <ChatApp />
+      </div>
       {/* <Chat /> */}
       <h1 className="title">Sequencer!</h1>
       <Link to={`/profile/${userInfo.user.username}`}>
@@ -398,7 +387,7 @@ API.sendTone(data)
         <div className="grid">
           <BassDiv />
         </div>
-        <button data-playing={playing} onClick={startSequence}>Test</button>
+        <button data-playing={playing} onClick={startSequence}>startPlaying</button>
         <div>
           <input type="range"
             min="40"
@@ -407,18 +396,17 @@ API.sendTone(data)
             onChange={({ target: { value: radius } }) =>
               setBpm(radius)}></input>
         </div>
-        <div>
-        <button className="save-button" onClick={saveSequence}>Save!</button>
-        <Grid />
-        <ToastContainer />
-        <ChatApp />
+        <div className="controls-container">
+          <button className="save-button" onClick={saveSequence}>Save!</button>
+          <Grid />
+          <ToastContainer />
         </div>
-        <div >
-            <h3>Send the sequence to whom?</h3>
-        <form onSubmit={sendSequence}>
+        <div>
+          <h3>Send the sequence to somebody?</h3>
+          <form onSubmit={sendSequence}>
             <input value={user} onChange={handleSetUser}></input>
             <button>Send the sequence</button>
-        </form>
+          </form>
         </div>
       </div>
     </div>

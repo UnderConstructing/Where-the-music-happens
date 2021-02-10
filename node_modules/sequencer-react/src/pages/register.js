@@ -8,8 +8,7 @@ import melodyArrayTwo from '../templates/melodytwo.json'
 import hihatArray from '../templates/hihat.json'
 import openHhArray from '../templates/openhh.json'
 import bassArray from '../templates/bass.json'
-import AuthContext from '../utils/Context/AuthContext'
-import BrowserRouter, {Link, Route} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 
 export default function Register(props) {

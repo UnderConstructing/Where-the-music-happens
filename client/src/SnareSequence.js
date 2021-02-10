@@ -1,8 +1,6 @@
-import React, { useEffect, useContext } from 'react'
-import snareArray from './templates/snare.json'
+import React, { useContext } from 'react'
 import AuthContext from './utils/Context/AuthContext'
-import BrowserRouter, {Link, useParams} from 'react-router-dom'
-import { useSequencerContext, useSequencerContextUpdate } from './utils/Context/SequencerContext'
+import {useParams} from 'react-router-dom'
 
 export default function Snare() {
   const userInfo = useContext(AuthContext)

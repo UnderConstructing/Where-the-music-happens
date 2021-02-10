@@ -1,76 +1,8 @@
-.chat-container {
-    display: flex;
-    flex-direction: column;
-    height: 500px;
-    max-height: 500px;
-    overflow: auto;
-    width: 400px;
-    border: 1px solid lightgray;
-    border-radius: 10px;
-    padding-bottom: 10px;
-    margin-top: 25px;
-    background-color: white;
+.chat-main {
+    background-color: transparent;
 }
 
-.text-area {
-    width: 10rem;
-    height: 100px;
-    border-radius: 10px;
-    margin-top: 10px;
-    padding-left: 10px;
-    padding-top: 10px;
-    font-size: 17px;
-    background-color: white;
-    border: 1px solid lightgray;
-    outline: none;
-    color: lightgray;
-    letter-spacing: 1px;
-    line-height: 20px;
+.invisible {
+    opacity: 0;;
 }
 
-.button {
-    background-color: pink;
-    width: 100%;
-    border: none;
-    height: 50px;
-    border-radius: 10px;
-    color: #46516e;
-    font-size: 17px;
-}
-.my-row {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
-}
-
-.my-message {
-    width: 45%;
-    background-color: pink;
-    color: #EC7263;
-    padding: 10px;
-    margin-right: 5px;
-    text-align: center;
-    border-top-right-radius: 10%;
-    border-bottom-right-radius: 10%;
-}
-
-.other-row {
-    justify-content: flex-start;
-}
-
-.other-message {
-    width: 45%;
-    background-color: lightgrey;
-    color: #EC7263;
-    border: 1px solid lightgray;
-    padding: 10px;
-    margin-left: 5px;
-    text-align: center;
-    border-top-left-radius: 10%;
-    border-bottom-left-radius: 10%;
-}
-
-.form {
-    width: 400px;
-}

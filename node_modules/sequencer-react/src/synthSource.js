@@ -8,64 +8,64 @@ export function playDetA() {
   detA.triggerAttackRelease("A3", "16n")
 }
 
-export const a = new Synth().toMaster()
+export const a = new Synth().toDestination()
 export function playA() {
-  a.triggerAttackRelease("A3", "16n")
+  a.triggerAttackRelease("C3", "16n")
 }
 
-export const asharp = new Synth().toMaster()
+export const asharp = new Synth().toDestination()
 export function playAsharp() {
-  asharp.triggerAttackRelease("A#3", "16n")
+  asharp.triggerAttackRelease("D3", "16n")
 }
-export const b = new Synth().toMaster()
+export const b = new Synth().toDestination()
 export function playB() {
-  b.triggerAttackRelease("B3", "16n")
+  b.triggerAttackRelease("E3", "16n")
 }
-export const c = new Synth().toMaster()
+export const c = new Synth().toDestination()
 export function playC() {
-  c.triggerAttackRelease("C4", "16n")
+  c.triggerAttackRelease("F3", "16n")
 }
-export const csharp = new Synth().toMaster()
+export const csharp = new Synth().toDestination()
 export function playCsharp() {
-  csharp.triggerAttackRelease("C#4", "16n")
+  csharp.triggerAttackRelease("G3", "16n")
 }
-export const d = new Synth().toMaster()
+export const d = new Synth().toDestination()
 export function playD() {
-  d.triggerAttackRelease("D4", "16n")
+  d.triggerAttackRelease("A3", "16n")
 }
-export const dsharp = new Synth().toMaster()
+export const dsharp = new Synth().toDestination()
 export function playDsharp() {
-  dsharp.triggerAttackRelease("D#4", "16n")
+  dsharp.triggerAttackRelease("A#3", "16n")
 }
-export const e = new Synth().toMaster()
+export const e = new Synth().toDestination()
 export function playE() {
-  e.triggerAttackRelease("E4", "16n")
+  e.triggerAttackRelease("B3", "16n")
 }
-export const f = new Synth().toMaster()
+export const f = new Synth().toDestination()
 export function playF() {
-  f.triggerAttackRelease("F4", "16n")
+  f.triggerAttackRelease("C4", "16n")
 }
-export const fsharp = new Synth().toMaster()
+export const fsharp = new Synth().toDestination()
 export function playFsharp() {
-  fsharp.triggerAttackRelease("F#4", "16n")
+  fsharp.triggerAttackRelease("D4", "16n")
 }
-export const g = new Synth().toMaster()
+export const g = new Synth().toDestination()
 export function playG() {
-  g.triggerAttackRelease("G4", "16n")
+  g.triggerAttackRelease("E4", "16n")
 }
 
-export const gsharp = new Synth().toMaster()
+export const gsharp = new Synth().toDestination()
 export function playGsharp() {
-  gsharp.triggerAttackRelease("G#4", "16n")
+  gsharp.triggerAttackRelease("F4", "16n")
 }
 
-export const A = new Synth().toMaster()
+export const A = new Synth().toDestination()
 export function playAA() {
-  A.triggerAttackRelease("A4", "16n")
+  A.triggerAttackRelease("G4", "16n")
 }
 
-export const lowGsharp = new Synth().toMaster()
+export const lowGsharp = new Synth().toDestination()
 export function playGsharp3() {
-  lowGsharp.triggerAttackRelease("G#3", "16n")
+  lowGsharp.triggerAttackRelease("A4", "16n")
 }
 

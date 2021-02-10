@@ -1,7 +1,5 @@
-import { useContext } from 'react'
-import AuthContext from './utils/Context/AuthContext'
-import { BrowserRouter as Router, Link } from "react-router-dom";
-import authContext from './utils/Context/AuthContext'
+
+import {  Link } from "react-router-dom";
 import './headerSection.scss'
 
 

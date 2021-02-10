@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import styled from "styled-components";
+import './Chat.css'
 import io from "socket.io-client";
 import AuthContext from './utils/Context/AuthContext'
 
@@ -16,6 +17,7 @@ const ChatContainer = styled.div`
   padding-bottom: 10px;
   margin-top: 25px;
   background-color: white;
+  z-index: 100;
 `;
 
 const TextArea = styled.textarea`
@@ -32,6 +34,7 @@ const TextArea = styled.textarea`
   color: black;
   letter-spacing: 1px;
   line-height: 20px;
+  z-index: 100;
   ::placeholder {
     color: grey;
 
@@ -39,13 +42,14 @@ const TextArea = styled.textarea`
 `;
 
 const Button = styled.button`
-  background-color: pink;
+  background-color: #EC7263;
   width: 100%;
   border: none;
   height: 50px;
   border-radius: 10px;
-  color: #46516e;
+  color: wheat;
   font-size: 17px;
+  z-index: 100;
 `;
 
 const Form = styled.form`
@@ -91,6 +95,18 @@ const ChatApp = () => {
     const [yourID, setYourID] = useState();
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
+    const [visible, setVisible] = useState("invisible")
+    const [word, setWord] = useState("Show")
+    const toggler = () => {
+        if (visible === "visible") {
+            setVisible("invisible")
+            setWord("Show")
+        }
+        else {
+            setVisible("visible")
+            setWord("Hide")
+        }
+    }
 
     const socketRef = useRef();
 
@@ -126,8 +142,10 @@ const ChatApp = () => {
     }
 
     return (
-        <div>
-            <ChatContainer>
+        <>
+        <button className='hide-chat' onClick={toggler}>{word} Chat</button>
+        <div className={`chat-main ${visible}`}>
+            <ChatContainer className="scrollbar">
                 {messages.map((message, index) => {
                     if (message.id === yourID) {
                         return (
@@ -152,6 +170,7 @@ const ChatApp = () => {
                 <Button>Send</Button>
             </Form>
         </div>
+    </>    
     );
 };
 

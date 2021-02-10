@@ -6,13 +6,7 @@ import AuthContext  from '../utils/Context/AuthContext'
 
 export default function Tutorial() {
     const userInfo = useContext(AuthContext)
-    console.log(userInfo)
-    // useEffect(() => {
-    //     API.login({
-    //         username: userInfo
-    //     })
-
-    // },[])
+    
     return (
         <div>
             <ReactPlayer url="https://www.youtube.com/watch?v=7sDY4m8KNLc">

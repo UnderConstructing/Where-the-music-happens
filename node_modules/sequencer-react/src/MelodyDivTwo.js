@@ -16,10 +16,11 @@ export default function MelodyDivTwo(props) {
     }
     return (
         <>
-            <button onClick={toggler}>{`${word} Melody Sequence`}</button>
-            <hr></hr>
+            <button className="hide-button" onClick={toggler}>{`${word} Melody Sequence`}</button>
+            <div>
             <div className={`grid ${visible}`}>
                 <MelodyTwo visibility={props.visibility} columnIndex={props.columnIndex}/>
+            </div>
             </div>
         </>
     )
