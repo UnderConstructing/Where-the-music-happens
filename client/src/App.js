@@ -19,6 +19,7 @@ import Tutorial from './pages/Tutorial'
 import { SequencerContextProvider } from './utils/Context/SequencerContext';
 
 
+
 export default function App() {
   const [auth, setAuth] = useState(null)
   useEffect(() => {

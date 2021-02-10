@@ -14,7 +14,10 @@
   },
   "devDependencies": {
     "concurrently": "^4.1.2",
+<<<<<<< HEAD
+=======
     "if-env": "^1.0.4",
+>>>>>>> 89a5895e8ee78af9d369c53d8b2560e04deec6d6
     "nodemon": "^1.18.7"
   },
   "repository": {
