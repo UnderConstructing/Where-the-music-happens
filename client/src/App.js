@@ -7,7 +7,7 @@ import AuthContext from './utils/Context/AuthContext';
 import HeaderSection from './HeaderSection';
 import Footer from './Footer';
 import ExampleModal from './pages/ExampleModal';
-
+import SavedSequencer from './pages/SavedSequence'
 import Sequencer from './pages/sequencer';
 import Register from './pages/register';
 import About from './pages/About'
@@ -16,6 +16,7 @@ import Profile from './pages/profilePage';
 import MainBody from './pages/MainBody';
 import FourOhFour from './pages/FourOhFour'
 import Tutorial from './pages/Tutorial'
+import { SequencerContextProvider } from './utils/Context/SequencerContext';
 
 
 export default function App() {
@@ -26,16 +27,18 @@ export default function App() {
         setAuth(res.data);
         console.log(auth)
       })
-  }, [])
+  },[])
 
   return (
+    <SequencerContextProvider>
     <AuthContext.Provider value={{ user: auth }}>
       <div>
+        
         <Router>
           <HeaderSection />
             <Switch>
               {(auth) &&
-                <Route path={`/dashboard/${auth.username}/new`} component={Sequencer} />
+                <Route path={`/dashboard/${auth.username}/received/:sequencerIndex`} component={SavedSequencer} />
               }
               {(auth) &&
                 <Route path={`/dashboard/${auth.username}/:sequencerindex`} component={Sequencer} />
@@ -55,5 +58,6 @@ export default function App() {
         </Router>
       </div>
     </AuthContext.Provider>
+    </SequencerContextProvider>
   )
 }

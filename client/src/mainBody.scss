@@ -84,6 +84,7 @@ $color2: black;
   position: flex; 
   background: black;
   color: transparent;
+  justify-content: center;
   
   &::before,
   &::after {
@@ -91,7 +92,7 @@ $color2: black;
     color: white;
     filter: blur(0.02em);
     position: absolute;
-    
+    left: 9vw;
     pointer-events: none;
   }
 

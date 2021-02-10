@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import API from "../utils/API"
+import '../Login.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

@@ -1,11 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from 'react'
-import kickArray from '../templates/kick.json';
-import snareArray from '../templates/snare.json';
-import melodyArray from '../templates/melody.json';
-import melodyArrayTwo from '../templates/melodytwo.json'
-import hihatArray from '../templates/hihat.json'
-import openHhArray from '../templates/openhh.json'
-import bassArray from '../templates/bass.json'
+// import hihatArray from '../templates/hihat.json'
+// import bassArray from '../templates/bass.json'
 import * as Tone from 'tone';
 import Chat from '../Chat'
 import DrumDiv from '../DrumDiv'
@@ -13,28 +8,85 @@ import BassDiv from '../BassDiv';
 import MelodyDiv from '../MelodyDiv';
 import MelodyDivTwo from '../MelodyDivTwo'
 import '../sequencer.scss'
-import useInterval from '../useInterval'
+
 import Grid from './Grid'
 import ChatApp from '../ChatComponent'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as synth from '../synthSource'
+import BrowserRouter, { Link, useParams, match} from 'react-router-dom'
+import SendSequenceComponent from '../SendSequence'
 // import Grid from './Grid'
 
 import AuthContext from '../utils/Context/AuthContext'
 import API from "../utils/API"
-import cookieParser from 'cookie-parser';
+import { SequencerContextProvider, useSequencerContext } from '../utils/Context/SequencerContext'
+
 
 
 
 
 export default function Sequencer() {
+  // const [sequencerIndex, setSequencerIndex] = useState(  useParams({sequencerIndex}))
+  const {sequencerindex} = useParams()
+  const userInfo = useContext(AuthContext)
+  const [user, setUser] = useState('')
+  
+  function handleSetUser(e) {
+    setUser(e.target.value)
+  }
+
+
+  const hihatArray = userInfo.user.hihatArray[sequencerindex]
+  const snareArray = userInfo.user.snareArray[sequencerindex]
+  const kickArray = userInfo.user.kickArray[sequencerindex]
+  const openHhArray = userInfo.user.openHhArray[sequencerindex]
+  const melodyArray = []
+  melodyArray.push(
+    userInfo.user.melodyRowOne[sequencerindex],
+    userInfo.user.melodyRowTwo[sequencerindex],
+    userInfo.user.melodyRowThree[sequencerindex],
+    userInfo.user.melodyRowFour[sequencerindex],
+    userInfo.user.melodyRowFive[sequencerindex],
+    userInfo.user.melodyRowSix[sequencerindex],
+    userInfo.user.melodyRowSeven[sequencerindex],
+    userInfo.user.melodyRowEight[sequencerindex],
+    userInfo.user.melodyRowNine[sequencerindex]
+    )
+    const melodyArrayTwo = []
+    melodyArrayTwo.push(
+      userInfo.user.melody2RowOne[sequencerindex],
+      userInfo.user.melody2RowTwo[sequencerindex],
+      userInfo.user.melody2RowThree[sequencerindex],
+      userInfo.user.melody2RowFour[sequencerindex],
+      userInfo.user.melody2RowFive[sequencerindex],
+      userInfo.user.melody2RowSix[sequencerindex],
+      userInfo.user.melody2RowSeven[sequencerindex],
+      userInfo.user.melody2RowEight[sequencerindex],
+      userInfo.user.melody2RowNine[sequencerindex]
+    )
+    const bassArray = []
+  bassArray.push (
+    userInfo.user.bassRowOne[sequencerindex],
+    userInfo.user.bassRowTwo[sequencerindex],
+    userInfo.user.bassRowThree[sequencerindex],
+    userInfo.user.bassRowFour[sequencerindex],
+    userInfo.user.bassRowFive[sequencerindex],
+    userInfo.user.bassRowSix[sequencerindex],
+    userInfo.user.bassRowSeven[sequencerindex],
+    userInfo.user.bassRowEight[sequencerindex],
+    userInfo.user.bassRowNine[sequencerindex]
+    )
+
+
   const [currentCol, setCurrentCol] = useState(1)
   const counter = () => {
     let count = ((currentCol + 1))
     let step = count % 32
     setCurrentCol(step)
   }
+  
+
   function useKey(key, cb) {
     const callbackRef = useRef(cb)
 
@@ -105,7 +157,6 @@ export default function Sequencer() {
   const [visibility, setVisibility] = useState(false)
   const [playing, setPlaying] = useState(false)
   const [bpm, setBpm] = useState(100)
-  const userInfo = useContext(AuthContext)
   function relocate() {
     window.location.href = `/profile/${userInfo.user.username}`;
   }
@@ -175,12 +226,6 @@ export default function Sequencer() {
     new Tone.Synth({ oscillator: { type: 'fatsquare' } }),
     new Tone.Synth({ oscillator: { type: 'fatsquare' } })
   ]
-  let colArray = []
-  let drumsArray = []
-  let indexedArray = []
-
-
-  // melodyarr[i]
 
   useEffect(() => {
     Tone.Transport.scheduleRepeat(repeat, "16n")
@@ -212,7 +257,6 @@ export default function Sequencer() {
       let $synth = synths[i]
       if (row[step].isActive === true) {
         $synth.triggerAttackRelease(note, '16n', time).toDestination()
-
       }
     }
     for (var i = 0; i < melodyArrayTwo.length; i++) {
@@ -237,7 +281,6 @@ export default function Sequencer() {
     index++
   }
 
-  console.log(melodyArrayTwo[8][0].note)
   function saveSequence() {
     console.log(userInfo.user.username)
     Tone.Transport.stop()
@@ -278,7 +321,6 @@ export default function Sequencer() {
         bassRowEight: bassArray[7],
         bassRowNine: bassArray[8]
       }
-
     console.log(data)
     API.saveTone(data).then(res => toast("You have saved the sequence!"))
       .catch(err => {
@@ -286,20 +328,61 @@ export default function Sequencer() {
         console.error(err)
       })
   }
+
+  function sendSequence(){
+    let data = {
+    username: user,
+    author: userInfo.user.author,
+    hihatArray: hihatArray,
+    openHhArray: openHhArray,
+    snareArray: snareArray,
+    kickArray: kickArray,
+    melodyRowOne: melodyArray[0],
+    melodyRowTwo: melodyArray[1],
+    melodyRowThree: melodyArray[2],
+    melodyRowFour: melodyArray[3],
+    melodyRowFive: melodyArray[4],
+    melodyRowSix: melodyArray[5],
+    melodyRowSeven: melodyArray[6],
+    melodyRowEight: melodyArray[7],
+    melodyRowNine: melodyArray[8],
+    melody2RowOne: melodyArrayTwo[0],
+    melody2RowTwo: melodyArrayTwo[1],
+    melody2RowThree: melodyArrayTwo[2],
+    melody2RowFour: melodyArrayTwo[3],
+    melody2RowFive: melodyArrayTwo[4],
+    melody2RowSix: melodyArrayTwo[5],
+    melody2RowSeven: melodyArrayTwo[6],
+    melody2RowEight: melodyArrayTwo[7],
+    melody2RowNine: melodyArrayTwo[8],
+    bassRowOne: bassArray[0],
+    bassRowTwo: bassArray[1],
+    bassRowThree: bassArray[2],
+    bassRowFour: bassArray[3],
+    bassRowFive: bassArray[4],
+    bassRowSix: bassArray[5],
+    bassRowSeven: bassArray[6],
+    bassRowEight: bassArray[7],
+    bassRowNine: bassArray[8]
+  }
+API.sendTone(data)
+}
+
+
   async function startSequence(event) {
     event.preventDefault()
     Tone.start()
     Tone.Transport.start()
-    // setVisibility(true)
-    // setCurrentCol(1)
 
   };
 
   return (
-    <div className="center">
+    <div>
       {/* <Chat /> */}
       <h1 className="title">Sequencer!</h1>
-      <button onClick={relocate}>Profile</button>
+      <Link to={`/profile/${userInfo.user.username}`}>
+        <button>Back to Profile</button>
+      </Link>
       <h2 key="drums">Drums</h2>
       <div className="main">
         {/* <div className="sub"> */}
@@ -324,11 +407,19 @@ export default function Sequencer() {
             onChange={({ target: { value: radius } }) =>
               setBpm(radius)}></input>
         </div>
+        <div>
         <button className="save-button" onClick={saveSequence}>Save!</button>
         <Grid />
         <ToastContainer />
         <ChatApp />
-
+        </div>
+        <div >
+            <h3>Send the sequence to whom?</h3>
+        <form onSubmit={sendSequence}>
+            <input value={user} onChange={handleSetUser}></input>
+            <button>Send the sequence</button>
+        </form>
+        </div>
       </div>
     </div>
   )
