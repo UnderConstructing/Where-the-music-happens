@@ -1,0 +1,99 @@
+@import './fonts.css';
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@700&family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'font-family: 'Roboto', sans-serif;';
+}
+
+.container-main {
+    display:grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 3em;
+    position: flex;
+    justify-content: center;
+}
+
+.profile-title {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-end:3;
+    display:grid;
+    background-image: radial-gradient( #EC7263, rgb(105, 98, 98));
+    border-radius: 15px;
+    font-family: 'Play';
+    font-weight: 700;
+    font-size: 100px;
+    color: wheat;
+    justify-items: center;
+    align-items: center;
+}
+
+.profile-subtitle {
+    background-color: #EC7263;
+    border-radius: 30px;
+}
+
+.profile-button {
+    background-color: green;
+    margin: auto;
+    width: 30%;
+    margin-top: 20px;
+    border-radius: 25px;
+    font-family: Play;
+    font-weight: 400;
+    background-color: wheat;
+    border: 2px solid white
+}
+
+
+
+.button-div {
+    color:wheat;
+}
+
+.sequence-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    background-color: grey;
+}
+.sequence-container::before {
+    content: 'Your sequences';
+    position: fixed;
+    bottom: 0;
+    padding: 1rem;
+    border: black inset 2px 0 0 0;
+    border-radius: 20% 20% 0 0;
+    height: 17vh;
+    display: flex;
+    background-color: grey;
+    z-index: -100;
+}
+
+.sequence-card {
+    box-sizing: border-box;
+    display: flex;
+    height: 7vw;
+    width: 7vw;
+    margin: 5px;
+    border-radius: 30px;
+    border-color:#EC7263;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 40px 40px #EC7263 inset, 0 0 0 0#EC7263;
+    transition: all 150ms ease-in-out;
+    
+    &:hover {
+      box-shadow: 0 0 10px 0 #EC7263 inset, 0 0 10px 4px #EC7263;
+    }
+  }
+
+.music-notes {
+    margin: 0;
+    font-size: 8vh;
+    color: black;
+}
+

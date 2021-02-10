@@ -1,0 +1,30 @@
+@import './fonts.css';
+
+.not-found {
+    font-family: Play;
+    font-weight: 700;
+    font-size: 100px;
+    color: wheat
+}
+
+
+@keyframes for04 {
+  0% {opacity: 0;}
+  25% {opacity: 0;}
+  50% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.for04 {
+  opacity: 1;
+  display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+min-height: 100vh;
+border: 5px solid white;
+background: radial-gradient(#ADA5A5, #9198E5);
+animation-name: for04;
+animation-duration: 5s ;
+}
