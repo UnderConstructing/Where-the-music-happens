@@ -1,0 +1,160 @@
+@import 'fonts.css';
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@700&family=Roboto:wght@400;700&display=swap');
+.main-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem
+}
+.whole {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+}
+.main-h1 {
+    margin-left: 10vw;
+    margin-right: 10vw;
+    font-family: 'font-family: 'Roboto', sans-serif;';
+    font-weight: 700;
+    text-align: center;
+    font-size: 72px;
+    color: wheat
+}
+.main-h2 {
+    margin-left: 10vw;
+    margin-right: 10vw;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: wheat;
+    font-size: 54px;
+    text-align: center
+}
+.main-h3 {
+    margin-left: 10vw;
+    margin-right: 10vw;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: wheat;
+    font-size: 24px
+}
+.main-a {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+}
+.main-a:hover {
+    cursor: pointer;
+    color: brown
+}
+.main-p {
+    margin-left: 10vw;
+    margin-right: 10vw;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: wheat;
+}
+.main-img {
+    display: flex;
+    justify-content: center;
+    margin-left: 30vw;
+    width: 50vw;
+}
+
+$color1: rgb(14, 6, 6);
+$color2: black;
+
+.title-profile {
+  overflow: hidden;
+  position: flex;
+  justify-content: center;
+  margin: auto;
+  height: 20vh;
+  width: 100%;
+
+  
+  filter: contrast(110%) brightness(190%);
+}
+
+.text {
+  position: flex; 
+  background: black;
+  color: transparent;
+  justify-content: center;
+  
+  &::before,
+  &::after {
+    content: attr(data-text);
+    color: white;
+    filter: blur(0.02em);
+    position: absolute;
+    left: 9vw;
+    pointer-events: none;
+  }
+
+  &::after {
+    mix-blend-mode: difference;
+  }
+}
+
+.gradient,
+.spotlight {
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  bottom: 0; 
+  right: 0;
+  pointer-events: none;
+  z-index: 10;  
+}
+
+.gradient {
+  background: linear-gradient(20deg, $color1, $color2);
+  mix-blend-mode: difference;
+}
+
+.spotlight {
+  animation: light 5s infinite linear;  
+  background: 
+    radial-gradient(circle, rgb(212, 208, 208), transparent 25%) 0 0 / 25% 25%, 
+    radial-gradient(circle, rgb(231, 217, 217), black 25%) 50% 50% / 12.5% 12.5%;
+  top: -100%; left: -100%;
+  
+  mix-blend-mode: color-dodge;
+}
+
+@keyframes light {
+  100% {
+    transform: translate3d(50%, 50%, 0);
+  }
+}
+
+.text {
+  font: 700 16vh 'Covered by your grace', 'sans-serif' ;
+  text-transform: uppercase;
+  margin: 0;
+  
+  &:focus { outline: none; border: 1px dotted white; }
+}
+
+.mainpage-signup{
+  display: block;
+    margin: auto;
+    width: 30%;
+    margin-top: 20px;
+    border-radius: 25px;
+    font-family: Play;
+    font-weight: 400;
+    background-color: wheat;
+    border: 2px solid white
+}
+
+.container1{
+  background-color: rgb(53, 18, 18);
+  margin-left: 300px;
+  margin-right: 300px;
+}

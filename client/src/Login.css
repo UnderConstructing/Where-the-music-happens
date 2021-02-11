@@ -1,0 +1,36 @@
+@import 'fonts.css';
+h1 {
+    font-family: Play;
+    font-weight: 700;
+    color: wheat;
+    text-align: center
+}
+.center {
+    margin: auto;
+    width: 50%;   
+    padding: 20px;
+    border: 20 px, solid, blue
+}
+.boxes {
+    border-radius: 25px;
+  padding: 20px;
+  width: 200px;
+  height: 50px;
+  margin-left: 60px;
+  background: radial-gradient(#ADA5A5, #9198E5);
+}
+.login-button {
+    display: block;
+    margin: auto;
+    width: 30%;
+    margin-top: 20px;
+    border-radius: 25px;
+    font-family: Play;
+    font-weight: 400;
+    background-color: wheat
+   }
+   .login-style{
+    display:grid;
+    justify-items: center;
+    align-items: center;
+   }

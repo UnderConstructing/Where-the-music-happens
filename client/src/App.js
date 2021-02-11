@@ -1,76 +1,61 @@
 import React, { useEffect, useState } from 'react';
-
-import './App.css';
-import Sequencer from './sequencer';
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-import Register from './register';
-import Login from './Login';
-import Grid from './Grid';
-import axios from 'axios';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import './App.css'
+import API from './utils/API'
 import AuthContext from './utils/Context/AuthContext';
-import Profile from './profilePage';
 import HeaderSection from './HeaderSection';
-import MainBody from './MainBody';
-import Footer from './Footer';
-import FourOhFour from './FourOhFour'
+import SavedSequencer from './pages/SavedSequence'
+import Sequencer from './pages/sequencer';
+import Register from './pages/register';
+import About from './pages/About'
+import Login from './pages/Login';
+import Profile from './pages/profilePage';
+import MainBody from './pages/MainBody';
+import FourOhFour from './pages/FourOhFour'
+import Tutorial from './pages/Tutorial'
+import { SequencerContextProvider } from './utils/Context/SequencerContext';
+
 
 
 export default function App() {
   const [auth, setAuth] = useState(null)
   useEffect(() => {
-    axios.get('/api/getuser')
+    API.getUsers()
       .then(res => {
         setAuth(res.data);
-        console.log(auth)})
-  }, [])
+        console.log(auth)
+      })
+  },[])
 
   return (
+    <SequencerContextProvider>
     <AuthContext.Provider value={{ user: auth }}>
       <div>
+        
         <Router>
-          <div>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/dashboard">About</Link>
-              </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-            </ul>
+          <HeaderSection />
             <Switch>
-              <Route exact path="/profile">
-                <Profile />
-              </Route>
-              <Route exact path="/">
-                <MainBody />
-              </Route>
-              <Route exact path="/registeruser">
-                <Register />
-              </Route>
-              <Route exact path="/login">
-                <Login />
-              </Route>
               {(auth) &&
-                <Route exact path={"/dashboard/:user"}
-                  component={Sequencer}>
-                </Route>
+                <Route path={`/dashboard/${auth.username}/received/:sequencerindex`} component={SavedSequencer} />
               }
-              <Route exact path={'/grid'}>
-                <Grid />
-              </Route>
-              <Route>
-                <FourOhFour />
-              </Route>
+              {(auth) &&
+                <Route path={`/dashboard/${auth.username}/:sequencerindex`} component={Sequencer} />
+              }
+              <Route exact path="/" component={MainBody} />
+              {(auth) &&
+              <Route exact path={`/profile/${auth.username}`} component={Profile} />
+              }
+              <Route exact path="/registeruser" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path={'/about'} component={About} />
+              {(!auth) &&
+              <Route component={FourOhFour} />
+              }
+              <Route exact path={`/tutorial`} component={Tutorial} />
             </Switch>
-
-
-          </div>
         </Router>
-
       </div>
     </AuthContext.Provider>
+    </SequencerContextProvider>
   )
 }

@@ -1,0 +1,40 @@
+@import './fonts.css';
+
+.register-title {
+    font-family: Play;
+    font-weight: 700;
+    font-size: 72px;
+    color: wheat
+}
+.register-input {
+    background: radial-gradient(#ADA5A5, #9198E5);
+    border-radius: 20px;
+    padding: 1em;
+    height: 6vh;
+    width: 31vw;
+    font-size: larger;
+}
+.register-button {
+    display: block;
+    margin: auto;
+    width: 30vw;
+    margin-top: 20px;
+    border-radius: 25px;
+    font-family: Play;
+    font-weight: 400;
+    background-color: wheat;
+    border: 2px solid white
+}
+.register-div {
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+.register-style{
+    display:grid;
+    justify-items: center;
+    align-items: center;
+}

@@ -1,8 +1,9 @@
 import React from 'react'
+import API from "./utils/API"
 import { socket } from './utils/socket'
 
 const Chat = props => {
-    const [state, setState] = React.useState({
+    const [theState, setTheState] = React.useState({
         message: "",
         messages: []
     })
@@ -10,37 +11,52 @@ const Chat = props => {
     React.useEffect(() => {
         const getData = async () => {
             try {
-                const res = await fetch("/api")
-                const messages = await res.json()
-                setState(state => ({ ...state, messages }))
+                var chatArray = []
+                await API.getMessages().then(res => {
+                    console.log(res)
+                    for(let i = 0; i < res.data.length; i++) {
+                        console.log(res.data[i])
+                        chatArray.push(res.data[i].message)
+                    }
+                    setTheState({
+                        messages: chatArray
+                    })
+                }).then(res => console.log("ran get!"))
+
             } catch (error) {
                 console.log(error)
             }
         }
         getData()
-        socket.on("reload", getData)
+        socket.on("message", getData)
     }, [])
 
-    const submitMessage = () => {
-        socket.emit("message", state.message)
-
-        setState({
-            ...state,
-            message: "",
-            messages: [...state.messages, state.message]
-        })
+    const submitMessage = async () => {
+        try {
+            await API.postMessage({ message: theState.message })
+            socket.emit("message", theState.message)
+            setTheState({
+                message: "",
+                messages: [...theState.messages, theState.message]
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
-    <div className="chat">
-        <div className="chat-area">
+        <div className="chat">
+            Chat
+            <div className="chat-area">
                 {
-            state.messages.map((x, i) => <div key={i + '-msg'}>{x}</div>)
-        }
+                    theState.messages.map((x, i) => 
+                    (<div key={i + '-msg'}>{x}</div>
+                    ))
+                }
+            </div>
+            <input className="chat-input" type="text" value={theState.message} onChange={e => setTheState({ ...theState, message: e.target.value })} />
+            <button className="chat-submit" onClick={submitMessage}>Send</button>
         </div>
-        <input className="chat-input" type="text" value={state.message} onChange={e => setState({ ...state, message: e.target.value })} />
-        <button className="chat-submit" onClick={submitMessage}>Send</button>
-    </div>
     )
 }
 
