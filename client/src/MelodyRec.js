@@ -9,15 +9,15 @@ export default function Melody(props) {
   // console.log(`sequencer: ${sequencerindex}`)
   const melodyArray = []
   melodyArray.push (
-    userInfo.user.melodyRowOne[sequencerindex],
-    userInfo.user.melodyRowTwo[sequencerindex],
-    userInfo.user.melodyRowThree[sequencerindex],
-    userInfo.user.melodyRowFour[sequencerindex],
-    userInfo.user.melodyRowFive[sequencerindex],
-    userInfo.user.melodyRowSix[sequencerindex],
-    userInfo.user.melodyRowSeven[sequencerindex],
-    userInfo.user.melodyRowEight[sequencerindex],
-    userInfo.user.melodyRowNine[sequencerindex]
+    userInfo.user.receivedmelodyRowOne[sequencerindex],
+    userInfo.user.receivedmelodyRowTwo[sequencerindex],
+    userInfo.user.receivedmelodyRowThree[sequencerindex],
+    userInfo.user.receivedmelodyRowFour[sequencerindex],
+    userInfo.user.receivedmelodyRowFive[sequencerindex],
+    userInfo.user.receivedmelodyRowSix[sequencerindex],
+    userInfo.user.receivedmelodyRowSeven[sequencerindex],
+    userInfo.user.receivedmelodyRowEight[sequencerindex],
+    userInfo.user.receivedmelodyRowNine[sequencerindex]
     )
     console.log(melodyArray)
 

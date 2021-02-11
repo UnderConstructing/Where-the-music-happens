@@ -84,6 +84,7 @@ $color2: black;
   position: flex; 
   background: black;
   color: transparent;
+  justify-content: center;
   
   &::before,
   &::after {
@@ -91,7 +92,7 @@ $color2: black;
     color: white;
     filter: blur(0.02em);
     position: absolute;
-    
+    left: 9vw;
     pointer-events: none;
   }
 
@@ -140,3 +141,20 @@ $color2: black;
   &:focus { outline: none; border: 1px dotted white; }
 }
 
+.mainpage-signup{
+  display: block;
+    margin: auto;
+    width: 30%;
+    margin-top: 20px;
+    border-radius: 25px;
+    font-family: Play;
+    font-weight: 400;
+    background-color: wheat;
+    border: 2px solid white
+}
+
+.container1{
+  background-color: rgb(53, 18, 18);
+  margin-left: 300px;
+  margin-right: 300px;
+}

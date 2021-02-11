@@ -1,22 +1,27 @@
-import React from 'react'
-import kickArray from './templates/kick.json'
+import React, { useEffect, useContext } from 'react'
+import snareArray from './templates/snare.json'
+import AuthContext from './utils/Context/AuthContext'
+import BrowserRouter, {Link, useParams} from 'react-router-dom'
+import { useSequencerContext, useSequencerContextUpdate } from './utils/Context/SequencerContext'
 
 export default function Kick() {
+  const userInfo = useContext(AuthContext)
+  const {sequencerindex} = useParams()
+  const kickArray = userInfo.user.kickArray[sequencerindex]
+
     function activateKick(event) {
-        console.log(event.target)
         if (kickArray[event.target.id - 1].isActive === false) {
           kickArray[event.target.id - 1].isActive = true
         }
         else {
           kickArray[event.target.id - 1].isActive = false
         }
-        console.log(event.target)
       }
     return (
         <div key="kick" className="row kick">
         {kickArray.map((note) => (
           <div className="parent">
-            <input type="checkbox" text={note.note} onClick={activateKick} key={"kick" + note.id} className={`box col${note.id} `} id={note.id}>
+            <input type="checkbox" defaultChecked={note.isActive} text={note.note} onClick={activateKick} key={"kick" + note.id} className={`box col${note.id} `} id={note.id}>
             </input>
             <label></label>
           </div>
