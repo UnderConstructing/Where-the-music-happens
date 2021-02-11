@@ -20,16 +20,14 @@ function MainBody() {
       <p className="main-p">With our virtual pad controller, you can create music remotely with your friends and bandmates without any hardware other than your computer. We have virtual sounds native to the app including drum kits and synthesizers as well as capabilities to upload your own samples so you can make the next hit record right from your PC!
       Let’s make some music!
           </p>
-      <div>
-      <h2 className="main-h3">Step 1</h2>
-      <h2 className="main-h3">Step 2</h2>
-      <h2 className="main-h3">Step 3</h2>
+      <div className='container1'>
+      <h3 className="main-h3">Step 1: Click the sign up button and make an account with a username unique to you!</h3>
+      <h3 className="main-h3">Step 2: Go to the sequencer page and make some beautiful music by clicking the buttons. Chat with your friends to collab on music together.</h3>
+      <h4 className="main-h3">Step 3: Once you are done with the sequence, save it! If you want to come back to it just log back in and open the saved sequence. Voila MUSIC!</h4>
       </div>
-      <p className="main-p">
-        <a onClick={() => window.location.href = '/registeruser'} className="main-a">Sign up</a>
-      </p>
-      {/* <ExampleModal /> */}
-      <Toast/>
+      <div>
+        <button className="mainpage-signup" onClick={() => window.location.href = '/registeruser'}>Sign up</button>
+        </div>
       </div>
   );
 }

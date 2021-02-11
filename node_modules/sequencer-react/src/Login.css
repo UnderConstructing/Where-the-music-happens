@@ -23,7 +23,7 @@ h1 {
   background: radial-gradient(#ada5a5, #9198e5);
 }
 
-button {
+.login-button {
     display: block;
     margin: auto;
     width: 30%;
@@ -32,4 +32,9 @@ button {
     font-family: Play;
     font-weight: 400;
     background-color: wheat
+   }
+   .login-style{
+    display:grid;
+    justify-items: center;
+    align-items: center;
    }
