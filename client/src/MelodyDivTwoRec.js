@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import MelodyTwo from './MelodyTwo'
+import MelodyTwoRec from './MelodyTwo'
 
-export default function MelodyDivTwoRec(props) {
+export default function MelodyDivTwo(props) {
     const [visible, setVisible] = useState("visible")
     const [word, setWord] = useState("Hide")
     const toggler = () => {

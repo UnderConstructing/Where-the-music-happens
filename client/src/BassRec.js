@@ -10,15 +10,15 @@ export default function BassRec(props) {
   // console.log(`sequencer: ${sequencerindex}`)
   const bassArray = []
   bassArray.push (
-    userInfo.user.bassRowOne[sequencerindex],
-    userInfo.user.bassRowTwo[sequencerindex],
-    userInfo.user.bassRowThree[sequencerindex],
-    userInfo.user.bassRowFour[sequencerindex],
-    userInfo.user.bassRowFive[sequencerindex],
-    userInfo.user.bassRowSix[sequencerindex],
-    userInfo.user.bassRowSeven[sequencerindex],
-    userInfo.user.bassRowEight[sequencerindex],
-    userInfo.user.bassRowNine[sequencerindex]
+    userInfo.user.receivedbassRowOne[sequencerindex],
+    userInfo.user.receivedbassRowTwo[sequencerindex],
+    userInfo.user.receivedbassRowThree[sequencerindex],
+    userInfo.user.receivedbassRowFour[sequencerindex],
+    userInfo.user.receivedbassRowFive[sequencerindex],
+    userInfo.user.receivedbassRowSix[sequencerindex],
+    userInfo.user.receivedbassRowSeven[sequencerindex],
+    userInfo.user.receivedbassRowEight[sequencerindex],
+    userInfo.user.receivedbassRowNine[sequencerindex]
     )
     function activateBassNote(e) {
         if (bassArray[e.target.getAttribute("row") - 1][(e.target.id - 1)].isActive === false) {
