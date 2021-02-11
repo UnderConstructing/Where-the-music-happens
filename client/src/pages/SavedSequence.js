@@ -6,7 +6,7 @@ import * as Tone from 'tone';
 import Chat from '../Chat'
 import DrumDiv from '../DrumDiv'
 import BassDiv from '../BassDiv';
-import MelodyDiv from '../MelodyDiv';
+import MelodyDivRec from '../MelodyDivRec';
 import MelodyDivTwo from '../MelodyDivTwo'
 import '../sequencer.scss'
 import useInterval from '../useInterval'
@@ -33,9 +33,9 @@ export default function Sequencer() {
   console.log(userInfo)
 
   const hihatArray = userInfo.user.receivedhihatArray[sequencerindex]
-  const snareArray = userInfo.user.snareArray[sequencerindex]
-  const kickArray = userInfo.user.kickArray[sequencerindex]
-  const openHhArray = userInfo.user.openHhArray[sequencerindex]
+  const snareArray = userInfo.user.receivedsnareArray[sequencerindex]
+  const kickArray = userInfo.user.receivedkickArray[sequencerindex]
+  const openHhArray = userInfo.user.receivedopenHhArray[sequencerindex]
   const melodyArray = []
   melodyArray.push(
     userInfo.user.receivedmelodyRowOne[sequencerindex],
@@ -152,7 +152,7 @@ export default function Sequencer() {
   const [visibility, setVisibility] = useState(false)
   const [playing, setPlaying] = useState(false)
   const [bpm, setBpm] = useState(100)
-  const [isPlaying, setIsPlaying] = useState
+  const [isPlaying, setIsPlaying] = useState(true)
   function relocate() {
     window.location.href = `/profile/${userInfo.user.username}`;
   }
@@ -230,7 +230,6 @@ export default function Sequencer() {
   // melodyarr[i]
 
   useEffect(() => {
-    Tone.Context = new AudioContext()
     Tone.Transport.scheduleRepeat(repeat, "16n")
     Tone.Transport.bpm.value = [bpm]
     console.log('effect used')
@@ -363,7 +362,7 @@ export default function Sequencer() {
         <DrumDiv />
         {/* <h2>Melody</h2> */}
         <div className="grid">
-          <MelodyDiv visibility={visibility} columnIndex={currentCol} />
+          <MelodyDivRec visibility={visibility} columnIndex={currentCol} />
         </div>
         <div className="grid">
           <MelodyDivTwo visibility={visibility} columnIndex={currentCol} />
