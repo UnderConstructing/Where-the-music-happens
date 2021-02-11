@@ -86,6 +86,7 @@ const OtherMessage = styled.div`
   border-bottom-left-radius: 10%;
 `;
 
+
 const ChatApp = () => {
     const userInfo = useContext(AuthContext)
     const [yourID, setYourID] = useState();
