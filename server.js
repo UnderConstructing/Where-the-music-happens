@@ -36,6 +36,10 @@ app.use(passport.session())
 
 
 app.use(require('./routes'))
+app.get("/", function(req, res) {
+    res.json(path.join(__dirname, "public/index.html"));
+  });
+
 
 
 
