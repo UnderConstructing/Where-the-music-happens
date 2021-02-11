@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import AuthContext from './utils/Context/AuthContext'
 import {useParams} from 'react-router-dom'
 
-export default function Melody(props) {
+export default function MelodyRec(props) {
   const userInfo = useContext(AuthContext)
   console.log(userInfo)
   const {sequencerindex} = useParams()

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Bass from './Bass'
+import BassRec from './BassRec'
 
 export default function BassDiv(props) {
     const [visible, setVisible] = useState("visible")
@@ -19,7 +19,7 @@ export default function BassDiv(props) {
         <>
             <button className="hide-button" onClick={toggler}>{`${word} Bass Sequence`}</button>
             <div className={`grid ${visible}`}>
-                <Bass />
+                <BassRec />
             </div>
         </>
     )
