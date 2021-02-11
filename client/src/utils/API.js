@@ -14,5 +14,7 @@ export default {
     }),
     saveTone: data => axios.post("/api/save", data, {
         withCredentials: true
+    }),
+    sendTone: data => axios.post("/api/send", data, {
     })
 }

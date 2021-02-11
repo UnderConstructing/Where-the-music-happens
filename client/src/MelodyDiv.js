@@ -17,7 +17,6 @@ export default function MelodyDiv(props) {
     return (
         <>
             <button className="hide-button" onClick={toggler}>{`${word} Melody Sequence`}</button>
-            <hr></hr>
             <div className={`grid ${visible}`}>
                 <Melody visibility={props.visibility} columnIndex={props.columnIndex}/>
             </div>

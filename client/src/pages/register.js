@@ -8,8 +8,7 @@ import melodyArrayTwo from '../templates/melodytwo.json'
 import hihatArray from '../templates/hihat.json'
 import openHhArray from '../templates/openhh.json'
 import bassArray from '../templates/bass.json'
-import AuthContext from '../utils/Context/AuthContext'
-import BrowserRouter, {Link, Route} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 
 export default function Register(props) {
@@ -66,7 +65,7 @@ export default function Register(props) {
 
     return (
 
-        <div>
+        <div className="register-style">
             <h1 className="register-title">Register</h1>
             <input className="register-input" placeholder="username" onChange={e => setRegisterUsername(e.target.value)}></input>
             <input className="register-input" placeholder="password" onChange={e => setRegisterPassword(e.target.value)}></input>
