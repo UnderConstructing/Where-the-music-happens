@@ -367,14 +367,14 @@ export default function Sequencer() {
 
   return (
     <div>
+      <div style={{position: 'absolute', left:"0", zIndex: "100"}} >
+        <Link to={`/${userInfo.user.username}/profile`}>
+      <button className='back-button'>Profile</button>
+        </Link>
+      </div>
       <div style={{position: 'absolute', right: "0", zIndex: "100"}}>
         <ChatApp />
       </div>
-      {/* <Chat /> */}
-      <h1 className="title">Sequencer!</h1>
-      <Link to={`/profile/${userInfo.user.username}`}>
-        <button>Back to Profile</button>
-      </Link>
       <h2 key="drums">Drums</h2>
       <div className="main">
         {/* <div className="sub"> */}

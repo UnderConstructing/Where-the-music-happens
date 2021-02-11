@@ -7,11 +7,10 @@
     color: wheat
 }
 .register-input {
-    background: radial-gradient(#ADA5A5, #9198E5);
     border-radius: 20px;
     padding: 1em;
-    height: 6vh;
-    width: 31vw;
+    height: 4vh;
+    width: 25vw;
     font-size: larger;
 }
 .register-button {

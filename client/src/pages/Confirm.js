@@ -3,8 +3,9 @@ import API from "../utils/API"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../Login.css';
+import LoginToast, {showToast} from '../LoginToast'
 
-export default function Login() {
+export default function Confirm() {
     const [loginUsername, setLoginUsername] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     const login = (e) => {
@@ -13,21 +14,24 @@ export default function Login() {
             username: loginUsername,
             password: loginPassword
         })
-        .then(response => window.location.href = `/profile/${response.data.username}`)
-        .catch(err => toast("Login not successful. Sorry SUCKAAAAAAA"))
+        .then(response => {
+            console.log(response)
+            if (!response.data.username) {
+                toast("Login or password doesn't match, please try again.")}
+            else {
+                window.location.href = `/profile/${response.data.username}`
+            }
+        })
+        .catch(err => toast("Hmm... something went wrong. Try again later."))
     }
     return (
         <div className="login-container">
         <div className="login-style">
-            <h1>Login</h1>
+            <p>Please Confirm your username and password</p>
             <input className="login-input" placeholder="username" onChange={e => setLoginUsername(e.target.value)}></input>
             <input className="login-input" type="password" placeholder="password" onChange={e => setLoginPassword(e.target.value)}></input>
-            <button className="login-button" onClick={login}>Submit</button>
-            <ToastContainer />
-            <h3 className="login-p">Don't have an account? Sign up here</h3>
-            <p className="main-p">
-        <button onClick={() => window.location.href = '/registeruser'} className="main-a">Sign up</button>
-      </p>
+            <button className="login-button" onClick={login}>Finish Registration!</button>
+            <LoginToast />
         </div>
         </div>
     )

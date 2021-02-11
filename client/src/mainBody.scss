@@ -1,5 +1,6 @@
 @import 'fonts.css';
 @import url('https://fonts.googleapis.com/css2?family=Play:wght@700&family=Roboto:wght@400;700&display=swap');
+
 .main-container {
     display: grid;
     justify-content: center;
@@ -35,10 +36,13 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     color: wheat;
+    // background: url('/public/images/seqimg.JPG') no-repeat;
+    // -webkit-background-clip: text;
+    // -webkit-text-fill-color: transparent;
     font-size: 24px
 }
 .main-a {
-        background-color: #4CAF50; /* Green */
+        background-color: #EC7263; /* Green */
         border: none;
         color: white;
         padding: 15px 32px;
@@ -141,7 +145,7 @@ $color2: black;
   &:focus { outline: none; border: 1px dotted white; }
 }
 
-.mainpage-signup{
+.mainpage-signup {
   display: block;
     margin: auto;
     width: 30%;
@@ -153,8 +157,15 @@ $color2: black;
     border: 2px solid white
 }
 
-.container1{
-  background-color: rgb(53, 18, 18);
+.container1 {
   margin-left: 300px;
   margin-right: 300px;
+}
+
+.login-input {
+  border-radius: 20px;
+  padding: 1em;
+  height: 4vh;
+  width: 25vw;
+  font-size: larger;
 }

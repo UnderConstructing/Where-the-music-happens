@@ -69,7 +69,7 @@ export default function Register(props) {
             <h1 className="register-title">Register</h1>
             <input className="register-input" placeholder="username" onChange={e => setRegisterUsername(e.target.value)}></input>
             <input className="register-input" placeholder="password" onChange={e => setRegisterPassword(e.target.value)}></input>
-            <Link to={`/profile/${loggedIn}`}>
+            <Link to={`/confirmation`}>
             <button className="register-button" onClick={register}>Submit</button>
             </Link>
         </div>

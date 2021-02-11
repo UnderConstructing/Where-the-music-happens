@@ -13,6 +13,7 @@ import Profile from './pages/profilePage';
 import MainBody from './pages/MainBody';
 import FourOhFour from './pages/FourOhFour'
 import Tutorial from './pages/Tutorial'
+import Confirm from  './pages/Confirm'
 import { SequencerContextProvider } from './utils/Context/SequencerContext';
 
 
@@ -46,6 +47,7 @@ export default function App() {
               <Route exact path={`/profile/${auth.username}`} component={Profile} />
               }
               <Route exact path="/registeruser" component={Register} />
+              <Route exact path="/confirmation" component={Confirm} />
               <Route exact path="/login" component={Login} />
               <Route exact path={'/about'} component={About} />
               {(!auth) &&

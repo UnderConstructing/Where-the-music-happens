@@ -139,9 +139,20 @@
 
   
 .hide-button {
-    margin-left: 45vw;
     height: 3rem;
     width: 6rem;
+}
+
+.back-button {
+    position: absolute;
+    left: 0;
+    top: 4em;
+    background-color: #EC7263;
+    border: none;
+    height: 6vh;
+    width: 10vw;
+    border-radius: 0;
+    color: wheat;
 }
 
 .hide-chat {
@@ -161,4 +172,13 @@
 
 .controls-container {
     display: flex;
+}
+
+.play-button {
+    font-size:4vh;
+}
+
+.stop-button {
+    font-size: 4vh;
+    padding-bottom: .4vh;
 }

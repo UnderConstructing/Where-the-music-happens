@@ -4,27 +4,21 @@ import kickArray from '../templates/kick.json';
 import bassArray from '../templates/bass.json'
 import * as Tone from 'tone';
 import Chat from '../Chat'
-import DrumDiv from '../DrumDiv'
-import BassDiv from '../BassDiv';
+import DrumDivRec from '../DrumDivRec'
+import BassDivRec from '../BassDivRec';
 import MelodyDivRec from '../MelodyDivRec';
-import MelodyDivTwo from '../MelodyDivTwo'
+import MelodyDivTwoRec from '../MelodyDivTwoRec'
 import '../sequencer.scss'
-import useInterval from '../useInterval'
 import Grid from './Grid'
 import ChatApp from '../ChatComponent'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as synth from '../synthSource'
-import BrowserRouter, { Link, useParams, match} from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 // import Grid from './Grid'
 
 import AuthContext from '../utils/Context/AuthContext'
 import API from "../utils/API"
-import { SequencerContextProvider, useSequencerContext } from '../utils/Context/SequencerContext'
-
-
-
-
 
 export default function Sequencer() {
   // const [sequencerIndex, setSequencerIndex] = useState(  useParams({sequencerIndex}))
@@ -283,13 +277,11 @@ export default function Sequencer() {
 
     index++
   }
-
-  function close() {
-    Tone.context.close()
-  }
   
-  function sendSequence() {
-    
+  function stopSequence() {
+    Tone.Transport.stop()
+    Tone.Transport.clear()
+    Tone.Transport.dispose()
   }
 
 
@@ -352,41 +344,35 @@ export default function Sequencer() {
 
   return (
     <div>
-      {/* <Chat /> */}
+      <div style={{position: 'absolute', height:"5vh", width: "10vw", left:"0"}} >
+        <Link to={`/${userInfo.user.username}/profile`}>
+      <button className='back-button'>Profile</button>
+        </Link>
+      </div>
+      <div style={{position: 'absolute', right: "0", zIndex: "100"}}>
+        <ChatApp />
+      </div>
       <h1 className="title">Sequencer!</h1>
-      <button onClick={relocate}>Profile</button>
+
       <h2 key="drums">Drums</h2>
       <div className="main">
-        {/* <div className="sub"> */}
-        {/* </div> */}
-        <DrumDiv />
-        {/* <h2>Melody</h2> */}
+        <DrumDivRec />
         <div className="grid">
           <MelodyDivRec visibility={visibility} columnIndex={currentCol} />
         </div>
         <div className="grid">
-          <MelodyDivTwo visibility={visibility} columnIndex={currentCol} />
+          <MelodyDivTwoRec visibility={visibility} columnIndex={currentCol} />
         </div>
         <div className="grid">
-          <BassDiv />
+          <BassDivRec />
         </div>
-        <button data-playing={playing} onClick={startSequence}>Test</button>
-        <button onClick={close}>close</button>
-        <div>
-          <input type="range"
-            min="40"
-            max='200'
-            value={bpm}
-            onChange={({ target: { value: radius } }) =>
-              setBpm(radius)}></input>
-        </div>
+        <button className='play-button' onClick={startSequence}>&#9654;</button>
+        <button className='stop-button' onClick={stopSequence}>&#9632;</button>
         <div>
         <button className="save-button" onClick={saveSequence}>Save!</button>
-        <Grid />
+        <Grid style={{position: 'fixed', left: "0", zIndex: "100"}} />
         <ToastContainer />
-        <ChatApp />
         </div>
-
       </div>
     </div>
   )

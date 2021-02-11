@@ -17,7 +17,7 @@ const ChatContainer = styled.div`
   padding-bottom: 10px;
   margin-top: 25px;
   background-color: white;
-  z-index: 100;
+  z-index: 5;
 `;
 
 const TextArea = styled.textarea`
