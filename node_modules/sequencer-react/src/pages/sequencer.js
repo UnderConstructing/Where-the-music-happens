@@ -214,10 +214,16 @@ export default function Sequencer() {
   ]
 
   useEffect(() => {
-    Tone.Transport.scheduleRepeat(repeat, "16n")
-    Tone.Transport.bpm.value = [bpm]
-    console.log('effect used')
+    Tone.Transport.bpm.value = bpm
+    console.log(bpm)
   }, [bpm])
+  
+  useEffect(() => {
+    Tone.Transport.scheduleRepeat(repeat, "16n")
+    console.log('effect used')
+  }, [])
+
+
 
   //callback for note triggering
   let index = 0;
@@ -270,8 +276,6 @@ export default function Sequencer() {
   function saveSequence() {
     console.log(userInfo.user.username)
     Tone.Transport.stop()
-    Tone.Transport.clear()
-    Tone.Transport.dispose()
     let data =
     {
       username: userInfo.user.username,
@@ -359,12 +363,11 @@ export default function Sequencer() {
     event.preventDefault()
     Tone.start()
     Tone.Transport.start()
-
   };
 
   return (
     <div>
-      <div style={{position: 'fixed', right: "0", zIndex: "100"}}>
+      <div style={{position: 'absolute', right: "0", zIndex: "100"}}>
         <ChatApp />
       </div>
       {/* <Chat /> */}
@@ -391,10 +394,10 @@ export default function Sequencer() {
         <div>
           <input type="range"
             min="40"
-            max='200'
+            max='160'
             value={bpm}
             onChange={({ target: { value: radius } }) =>
-              setBpm(radius)}></input>
+              setBpm(parseInt(radius))}></input>
         </div>
         <div className="controls-container">
           <button className="save-button" onClick={saveSequence}>Save!</button>
