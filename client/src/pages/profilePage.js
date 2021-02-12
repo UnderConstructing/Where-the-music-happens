@@ -23,7 +23,7 @@ export default function Profile(props) {
                     <h1 className='inbox-title'>INBOX</h1>
                     <div className='inbox'>
 
-                        { userInfo &&
+                        {/* { userInfo &&
                         userInfo.receivedsnareArray.map((sequence, i) => {
                             return (
                                 <Link to={`/dashboard/${userInfo.username}/received/${i}`}>
@@ -33,7 +33,7 @@ export default function Profile(props) {
                                     </div>
                                 </Link>
                             )
-                        })}
+                        })} */}
                     </div>
                 </div>
             </div>
