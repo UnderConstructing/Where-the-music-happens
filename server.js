@@ -6,7 +6,8 @@ const PORT = process.env.PORT || 4000
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27017/User?readPreference=primary&appname=MongoDB%20Compass&ssl=false', {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+
 }, () => { console.log('mongoosed') })
 
 //MIDDLEWARE
@@ -15,10 +16,10 @@ app.use(bodyParser.json({limit: '50mb'}))
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }))
 
 const cors = require('cors');
-app.use(cors({
-    origin: "http://localhost:3000",
-    credentials: true
-}))
+// app.use(cors({
+//     origin: "http://localhost:3000",
+//     credentials: true
+// }))
 
 const expressSession = require('express-session')
 app.use(expressSession({
