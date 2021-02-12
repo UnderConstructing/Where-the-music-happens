@@ -6,7 +6,7 @@ import { SequencerContextProvider, useSequencerContext, useSequencerContextUpdat
 import AuthContext from './utils/Context/AuthContext'
 
 export default function ProfileSequences({ sequences }) {
-    const userInfo = useContext(AuthContext) || localStorage.getItem(JSON.parse('user'))
+    const userInfo =  localStorage.getItem(JSON.parse('user'))
     console.log(`profile Sequences ${userInfo}`)
     const sequencerIndex = useSequencerContext()
     const changeIndex = useSequencerContextUpdate()
@@ -18,7 +18,7 @@ export default function ProfileSequences({ sequences }) {
     //useEffect api call to get indexes of sequences from user.
     return (
             <div className='sequence-container'>
-                {userInfo.user.snareArray.map((sequence, i) => {
+                {/* {userInfo.user.snareArray.map((sequence, i) => {
                     return (
                         <Link to={`/dashboard/${userInfo.user.username}/${i}`}>
                             <button key={i} id={i} onClick={changeIndex} className="sequence-card ">
@@ -26,7 +26,7 @@ export default function ProfileSequences({ sequences }) {
                             </button>
                         </Link>
                     )
-                })}
+                })} */}
             </div>
     )
 }

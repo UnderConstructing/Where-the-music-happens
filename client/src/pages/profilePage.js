@@ -9,7 +9,7 @@ import AuthContext from '../utils/Context/AuthContext'
 //Needs to display saved sequences. Needs chat function, and needs sprucing up/
 export default function Profile(props) {
     console.log("problems")
-    const userInfo = useContext(AuthContext) || JSON.parse(localStorage.getItem('user'))
+    const userInfo = useContext(AuthContext) 
     useEffect(() => {
         console.log(userInfo)
     }, [])
