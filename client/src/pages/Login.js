@@ -10,6 +10,7 @@ export default function Login() {
     const [loginUsername, setLoginUsername] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     const login = (e) => {
+        const [loggedIn, setLoggedIn] = useState(false)
         e.preventDefault()
         API.login({
             username: loginUsername,
@@ -20,7 +21,7 @@ export default function Login() {
             if (!response.data.username) {
                 toast("Login or password doesn't match, please try again.")}
             else {
-                setUserInfo(response.data)
+                setLoggedIn(true)
             }
         })
         .catch(err => toast("Login not successful. Try again later."))
@@ -31,9 +32,11 @@ export default function Login() {
             <h1>Login</h1>
             <input className="login-input" placeholder="username" onChange={e => setLoginUsername(e.target.value)}></input>
             <input className="login-input" type="password" placeholder="password" onChange={e => setLoginPassword(e.target.value)}></input>
+            {loggedIn && 
             <Link to={`/profile/${userInfo.user.username}`}>
                 <button className="login-button" onClick={login}>Submit</button>
             </Link>
+            }
             <ToastContainer />
             <h3 className="login-p">Don't have an account? Sign up here</h3>
             <p className="main-p">
