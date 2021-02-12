@@ -6,13 +6,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../Login.css';
 
 export default function Login() {
+    
     const [loggedIn, setLoggedIn] = useState(false)
     const [userInfo, setUserInfo] = useState(null)
     const [loginUsername, setLoginUsername] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     const login = (e) => {
         e.preventDefault()
-        await API.login({
+        let userInfo = await API.login({
             username: loginUsername,
             password: loginPassword
         })
@@ -21,6 +22,7 @@ export default function Login() {
             if (!response.data.username) {
                 toast("Login or password doesn't match, please try again.")}
             else {
+                setUserInfo(userInfo)
                 window.location.href = "/profile/data/username"
             }
         })
