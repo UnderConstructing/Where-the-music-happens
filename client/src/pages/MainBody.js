@@ -28,6 +28,7 @@ function MainBody() {
       <div>
         <button className="mainpage-signup" onClick={() => window.location.href = '/registeruser'}>Sign up</button>
         </div>
+
       </div>
   );
 }
