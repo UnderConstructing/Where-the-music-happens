@@ -10,7 +10,7 @@
     "client": "cd client && npm run start",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION= cd client && npm install && npm run build"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=true cd client && npm install && npm run build"
   },
   "devDependencies": {
     "concurrently": "^4.1.2",
