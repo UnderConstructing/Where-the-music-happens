@@ -23,6 +23,7 @@ export default function App() {
     API.getUsers()
       .then(res => {
         setAuth(res.data);
+        localStorage.removeItem('user')
         localStorage.setItem('user', JSON.stringify(res.data))
       })
   }, [])
