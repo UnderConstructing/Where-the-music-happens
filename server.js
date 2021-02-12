@@ -2,23 +2,24 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 4000
+const path = require('path')
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/User?readPreference=primary&appname=MongoDB%20Compass&ssl=false', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}, () => { console.log('mongoosed') })
+mongoose.connect(
+    process.env.MONGODB_URI || 'mongodb://localhost:27017/reactcms?readPreference=primary&appname=MongoDB%20Compass&ssl=false',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false
+    }
+  );
 
 //MIDDLEWARE
 const bodyParser = require('body-parser');
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-
-const cors = require('cors');
-app.use(cors({
-    origin: "http://localhost:3000",
-    credentials: true
-}))
+app.use(bodyParser.json({limit: '50mb'}))
+app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }))
+  
 
 const expressSession = require('express-session')
 app.use(expressSession({
@@ -36,8 +37,13 @@ app.use(passport.session())
 
 
 app.use(require('./routes'))
+if(process.env.NODE_ENV === 'production') {
+app.use(express.static('client/build'))
 
-
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+  });
+}
 
 
 const http = require("http");

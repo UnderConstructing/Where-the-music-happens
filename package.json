@@ -10,14 +10,10 @@
     "client": "cd client && npm run start",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "devDependencies": {
     "concurrently": "^4.1.2",
-<<<<<<< HEAD
-=======
-    "if-env": "^1.0.4",
->>>>>>> 89a5895e8ee78af9d369c53d8b2560e04deec6d6
     "nodemon": "^1.18.7"
   },
   "repository": {
@@ -36,10 +32,12 @@
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.6.0",
+    "concurrently": "^4.1.2",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "if-env": "^1.0.4",
     "mongoose": "^5.11.13",
     "node-sass": "^4.14.1",
     "passport": "^0.4.1",
@@ -49,8 +47,8 @@
     "react-player": "^2.8.2",
     "react-router-dom": "^5.2.0",
     "react-toastify": "^7.0.3",
-    "socket.io": "^3.1.0",
     "sequencer-react": "file:client",
+    "socket.io": "^3.1.1",
     "socket.io-client": "^3.1.1"
   }
 }

@@ -4,10 +4,10 @@ import AuthContext from './utils/Context/AuthContext'
 import BrowserRouter, {Link, useParams} from 'react-router-dom'
 import { useSequencerContext, useSequencerContextUpdate } from './utils/Context/SequencerContext'
 
-export default function OpenHh() {
+export default function OpenHhRec() {
   const userInfo = useContext(AuthContext)
   const {sequencerindex} = useParams()
-  const openHhArray = userInfo.user.openHhArray[sequencerindex]
+  const openHhArray = userInfo.user.receivedopenHhArray[sequencerindex]
 
     function activateOpenhh(event) {
         if (openHhArray[event.target.id - 1].isActive === false) {

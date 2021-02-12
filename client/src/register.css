@@ -7,29 +7,59 @@
     color: wheat
 }
 .register-input {
-    background: radial-gradient(#ADA5A5, #9198E5);
+    border-radius: 20px;
+    padding: 1em;
+    height: 4vh;
+    width: 25vw;
+    font-size: larger;
 }
 .register-button {
     display: block;
     margin: auto;
-    width: 30%;
+    width: 13vw;
     margin-top: 20px;
     border-radius: 25px;
     font-family: Play;
     font-weight: 400;
-    background-color: wheat;
-    border: 2px solid white
+    background-color: wheat
 }
 .register-div {
-    display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  min-height: 100vh;
-}
-.register-style{
-    display:grid;
+    margin-top: 15vh;
+    min-height: 48vh;
+    width: 34vw;
+    display:flex;
+    flex-direction: column;
     justify-items: center;
     align-items: center;
+    border-width: 3px;
+    border-radius: 20px;
+    border-style: inset;
+    border-color: wheat;
+}
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% {opacity: 1}
+}
+
+.register-style {
+    opacity: 0;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1.5s ease-in 1s 1;
+    animation-fill-mode: forwards;
+}
+
+.main-a {
+display: block;
+margin: auto;
+width: 30%;
+margin-top: 20px;
+margin-bottom: 10px;
+font-family: Play;
+font-weight: 400;
+background-color: wheat;
+border: 2px solid white
 }

@@ -1,5 +1,6 @@
 @import 'fonts.css';
 @import url('https://fonts.googleapis.com/css2?family=Play:wght@700&family=Roboto:wght@400;700&display=swap');
+
 .main-container {
     display: grid;
     justify-content: center;
@@ -35,8 +36,20 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     color: wheat;
-    font-size: 20px
-
+    // background: url('/public/images/seqimg.JPG') no-repeat;
+    // -webkit-background-clip: text;
+    // -webkit-text-fill-color: transparent;
+    font-size: 24px
+}
+.main-a {
+        background-color: #EC7263; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
 }
 .main-a:hover {
     cursor: pointer;
@@ -80,8 +93,6 @@ display: grid;
   background: black;
   color: transparent;
   justify-content: center;
- 
-
   
   &::before,
   &::after {
@@ -89,7 +100,7 @@ display: grid;
     color: white;
     filter: blur(0.02em);
     position: absolute;
-    
+    left: 9vw;
     pointer-events: none;
   }
 
@@ -139,7 +150,8 @@ display: grid;
   
   &:focus { outline: none; border: 1px dotted white; }
 }
-.mainpage-signup{
+
+.mainpage-signup {
   display: block;
     margin: auto;
     width: 30%;
@@ -150,8 +162,17 @@ display: grid;
     background-color: wheat;
     border: 2px solid white
 }
-.container1{
-  background-color: rgb(53, 18, 18);
+
+.container1 {
   margin-left: 300px;
   margin-right: 300px;
+  background-color: rgb(53, 18, 18);
+}
+
+.login-input {
+  border-radius: 20px;
+  padding: 1em;
+  height: 4vh;
+  width: 25vw;
+  font-size: larger;
 }

@@ -5,14 +5,20 @@ const passport = require('../../config/passport')
 
 
 router.post("/", (req, res) => {
-    console.log(req.body.hihatArray)
+    if(req.isAuthenticated()) {
+        console.log(req.user)
+    } else {
+        console.log("not logged in")
+    }
+    
+    // console.log(req.body.hihatArray)
     User.findOneAndUpdate({ username: req.body.username },
         {
             $push: {
                 hihatArray: req.body.hihatArray,
                 openHhArray: req.body.openHhArray,
                 kickArray: req.body.kickArray,
-                snareArray: req.body.snareArrayArray,
+                snareArray: req.body.snareArray,
                 melodyRowOne: req.body.melodyRowOne,
                 melodyRowTwo: req.body.melodyRowTwo,
                 melodyRowThree: req.body.melodyRowThree,
@@ -22,6 +28,15 @@ router.post("/", (req, res) => {
                 melodyRowSeven: req.body.melodyRowSeven,
                 melodyRowEight: req.body.melodyRowEight,
                 melodyRowNine: req.body.melodyRowNine,
+                melody2RowOne: req.body.melody2RowOne,
+                melody2RowTwo: req.body.melody2RowTwo,
+                melody2RowThree: req.body.melody2RowThree,
+                melody2RowFour: req.body.melody2RowFour,
+                melody2RowFive: req.body.melody2RowFive,
+                melody2RowSix: req.body.melody2RowSix,
+                melody2RowSeven: req.body.melody2RowSeven,
+                melody2RowEight: req.body.melody2RowEight,
+                melody2RowNine: req.body.melody2RowNine,
                 bassRowOne: req.body.bassRowOne,
                 bassRowTwo: req.body.bassRowTwo,
                 bassRowThree: req.body.bassRowThree,

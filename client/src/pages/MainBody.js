@@ -1,9 +1,7 @@
 import '../mainBody.scss'
-import Toast from '../toast'
 
 function MainBody() {
   return (
-
     <div className='main-container'>
       <div className="whole">
       <h1 className='main-title'>MAKE BEATS WITH YOUR FRIENDS</h1>
@@ -28,7 +26,6 @@ function MainBody() {
       <div>
         <button className="mainpage-signup" onClick={() => window.location.href = '/registeruser'}>Sign up</button>
         </div>
-
       </div>
   );
 }

@@ -2,12 +2,12 @@ import React, { useContext } from 'react'
 import AuthContext from './utils/Context/AuthContext'
 import {useParams} from 'react-router-dom'
 
-export default function Snare() {
+export default function SnareRec() {
   const userInfo = useContext(AuthContext)
   console.log(userInfo)
   const {sequencerindex} = useParams()
   // console.log(`sequencer: ${sequencerindex}`)
-  const snaresArray = userInfo.user.snareArray[sequencerindex]
+  const snaresArray = userInfo.user.receivedsnareArray[sequencerindex]
   console.log(snaresArray)
 
   

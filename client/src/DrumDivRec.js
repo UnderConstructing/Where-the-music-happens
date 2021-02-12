@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
-import Melody from './Melody'
+import KickRec from './KickRec'
+import SnareRec from './SnareSequenceRec'
+import HiHatRec from './HiHatRec'
+import OpenHhRec from './OpenHHRec'
 
-export default function MelodyDiv(props) {
+export default function DrumDivRec(props) {
     const [visible, setVisible] = useState("visible")
     const [word, setWord] = useState("Hide")
+
     const toggler = () => {
         if (visible === "visible") {
             setVisible("invisible")
@@ -16,9 +20,14 @@ export default function MelodyDiv(props) {
     }
     return (
         <>
-            <button className="hide-button" onClick={toggler}>{`${word} Melody Sequence`}</button>
+            <button className="hide-button" onClick={toggler}>{`${word} Drum Sequence`}</button>
+            <div>
             <div className={`grid ${visible}`}>
-                <Melody visibility={props.visibility} columnIndex={props.columnIndex}/>
+                <HiHatRec />
+                <OpenHhRec />
+                <SnareRec />
+                <KickRec />
+            </div>
             </div>
         </>
     )

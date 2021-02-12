@@ -61,10 +61,12 @@ router.post("/login", (req, res, next) => {
             return res.send("We couldn't authenticate your username or password")
         }
         else {
+
             req.logIn(user, err => {
                 if (err) throw next(err);
                 //  res.redirect(`https://localhost:3000/dashboard/${user.username}`)
                 res.json(user)
+                console.log('made it')
             })
         }
     })(req, res, next);

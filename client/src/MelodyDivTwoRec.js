@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import Melody from './Melody'
+import MelodyTwoRec from './MelodyTwoRec'
 
-export default function MelodyDiv(props) {
+export default function MelodyDivTwoRec(props) {
     const [visible, setVisible] = useState("visible")
     const [word, setWord] = useState("Hide")
     const toggler = () => {
@@ -17,8 +17,10 @@ export default function MelodyDiv(props) {
     return (
         <>
             <button className="hide-button" onClick={toggler}>{`${word} Melody Sequence`}</button>
+            <div>
             <div className={`grid ${visible}`}>
-                <Melody visibility={props.visibility} columnIndex={props.columnIndex}/>
+                <MelodyTwoRec visibility={props.visibility} columnIndex={props.columnIndex}/>
+            </div>
             </div>
         </>
     )

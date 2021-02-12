@@ -2,22 +2,22 @@ import React, { useContext } from 'react'
 import AuthContext from './utils/Context/AuthContext'
 import {useParams} from 'react-router-dom'
 
-export default function Melody(props) {
+export default function MelodyRec(props) {
   const userInfo = useContext(AuthContext)
   console.log(userInfo)
   const {sequencerindex} = useParams()
   // console.log(`sequencer: ${sequencerindex}`)
   const melodyArray = []
   melodyArray.push (
-    userInfo.user.melodyRowOne[sequencerindex],
-    userInfo.user.melodyRowTwo[sequencerindex],
-    userInfo.user.melodyRowThree[sequencerindex],
-    userInfo.user.melodyRowFour[sequencerindex],
-    userInfo.user.melodyRowFive[sequencerindex],
-    userInfo.user.melodyRowSix[sequencerindex],
-    userInfo.user.melodyRowSeven[sequencerindex],
-    userInfo.user.melodyRowEight[sequencerindex],
-    userInfo.user.melodyRowNine[sequencerindex]
+    userInfo.user.receivedmelodyRowOne[sequencerindex],
+    userInfo.user.receivedmelodyRowTwo[sequencerindex],
+    userInfo.user.receivedmelodyRowThree[sequencerindex],
+    userInfo.user.receivedmelodyRowFour[sequencerindex],
+    userInfo.user.receivedmelodyRowFive[sequencerindex],
+    userInfo.user.receivedmelodyRowSix[sequencerindex],
+    userInfo.user.receivedmelodyRowSeven[sequencerindex],
+    userInfo.user.receivedmelodyRowEight[sequencerindex],
+    userInfo.user.receivedmelodyRowNine[sequencerindex]
     )
     console.log(melodyArray)
 

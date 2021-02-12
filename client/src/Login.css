@@ -1,40 +1,72 @@
 @import 'fonts.css';
-
 h1 {
     font-family: Play;
     font-weight: 700;
     color: wheat;
     text-align: center
 }
-
 .center {
+    opacity: 1;
     margin: auto;
     width: 50%;   
     padding: 20px;
     border: 20 px, solid, blue
 }
-
 .boxes {
     border-radius: 25px;
   padding: 20px;
   width: 200px;
   height: 50px;
   margin-left: 60px;
-  background: radial-gradient(#ada5a5, #9198e5);
+  background: radial-gradient(#ADA5A5, #9198E5);
 }
-
 .login-button {
     display: block;
     margin: auto;
-    width: 30%;
+    width: 12vw;
+    height: 6vh;
     margin-top: 20px;
     border-radius: 25px;
     font-family: Play;
     font-weight: 400;
     background-color: wheat
    }
-   .login-style{
-    display:grid;
+.login-style{
+    margin-top: 12vh;
+    min-height: 40vh;
+    width: 30vw;
+    display:flex;
+    flex-direction: column;
     justify-items: center;
     align-items: center;
+    border-width: 3px;
+    border-radius: 20px;
+    border-style: inset;
+    border-color: wheat;
    }
+
+   @keyframes fadeIn {
+       0% { opacity: 0; }
+       100% {opacity: 1}
+   }
+
+   .login-container {
+       opacity: 0;
+       width: 100vw;
+       display: flex;
+       justify-content: center;
+       animation: fadeIn 1.5s ease-in 1s 1;
+       animation-fill-mode: forwards;
+   }
+
+.main-a {
+        display: block;
+        margin: auto;
+        width: 12vw;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-family: Play;
+        font-weight: 400;
+        background-color: wheat;
+        border: 2px solid white
+}

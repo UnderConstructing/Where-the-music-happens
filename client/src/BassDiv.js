@@ -17,8 +17,7 @@ export default function BassDiv(props) {
     }
     return (
         <>
-            <button onClick={toggler}>{`${word} Bass Sequence`}</button>
-            <hr></hr>
+            <button className="hide-button" onClick={toggler}>{`${word} Bass Sequence`}</button>
             <div className={`grid ${visible}`}>
                 <Bass />
             </div>
