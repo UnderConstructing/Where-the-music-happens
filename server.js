@@ -18,10 +18,6 @@ mongoose.connect(
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({limit: '50mb'}))
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }))
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
-  });
   
 
 const expressSession = require('express-session')
@@ -41,7 +37,10 @@ app.use(passport.session())
 
 app.use(require('./routes'))
 
-
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+  });
+  
 
 
 const http = require("http");
