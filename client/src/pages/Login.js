@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import API from "../utils/API"
 import { ToastContainer, toast } from 'react-toastify';
-import {Redirect} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
 import '../Login.css';
 
