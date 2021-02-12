@@ -23,7 +23,7 @@ export default function Login() {
                 toast("Login or password doesn't match, please try again.")}
             else {
                 setUserInfo(userInfo)
-                window.location.href = "/profile/data/username"
+                window.location.href = `/profile/${response.data.username}`
             }
         })
         .catch(err => toast("Login not successful. Try again later."))
