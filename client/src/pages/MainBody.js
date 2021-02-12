@@ -1,5 +1,4 @@
 import '../mainBody.scss'
-import Toast from '../toast'
 
 function MainBody() {
   return (

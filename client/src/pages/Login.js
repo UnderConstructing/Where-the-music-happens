@@ -14,7 +14,7 @@ export default function Login() {
             password: loginPassword
         })
         .then(response => window.location.href = `/profile/${response.data.username}`)
-        .catch(err => toast("Login not successful. Sorry SUCKAAAAAAA"))
+        .catch(err => toast("Login not successful. Try again later."))
     }
     return (
         <div className="login-container">
