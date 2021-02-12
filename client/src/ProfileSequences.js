@@ -6,7 +6,7 @@ import { SequencerContextProvider, useSequencerContext, useSequencerContextUpdat
 import AuthContext from './utils/Context/AuthContext'
 
 export default function ProfileSequences({ sequences }) {
-    const userInfo = useContext(AuthContext)
+    const userInfo = useContext(AuthContext) || localStorage.getItem(JSON.parse('user'))
     console.log(`profile Sequences ${userInfo}`)
     const sequencerIndex = useSequencerContext()
     const changeIndex = useSequencerContextUpdate()
