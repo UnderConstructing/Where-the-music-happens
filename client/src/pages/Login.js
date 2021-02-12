@@ -4,9 +4,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import {Redirect} from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
 import '../Login.css';
+import AuthContext from '../utils/Context/AuthContext';
 
 export default function Login() {
-    const userInfo = useContext(null)
+    const userInfo = useContext(AuthContext)
     const [loginUsername, setLoginUsername] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     const login = (e) => {
@@ -15,14 +16,13 @@ export default function Login() {
             username: loginUsername,
             password: loginPassword
         })
-        .then(response => setState(response.data))
+        .then(response =>    { if (userInfo !== null) {
+            return(
+                <Redirect to={`/profile/${response.data.username}`} />
+            )}
+        })
         .catch(err => toast("Login not successful. Try again later."))
-    }
-    if (userInfo !== null) {
-        return(
-            <Redirect to={`/profile/${response.data.username}`} />
-        )
-    }
+    
     return (
         <div className="login-container">
         <div className="login-style">
