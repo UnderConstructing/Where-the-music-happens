@@ -14,6 +14,7 @@ export default function Profile(props) {
         console.log(userInfo)
     }, [])
     console.log(userInfo)
+    if(!userInfo) return <h1>Loading...</h1>
     return (
         <div className='container-main'>
             <div className='profile-title'>
