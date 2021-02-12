@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 4000
+const path = require('path')
 
 const mongoose = require('mongoose')
 mongoose.connect(
@@ -36,11 +37,13 @@ app.use(passport.session())
 
 
 app.use(require('./routes'))
+if(process.env.NODE_ENV === 'production') {
+app.use(express.static('client/build'))
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
   });
-  
+}
 
 
 const http = require("http");
