@@ -61,6 +61,8 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     color: wheat;
+    font-size: 25px;
+    text-align: center;
 }
 .main-img {
     display: flex;
@@ -74,18 +76,20 @@ $color2: black;
 
 .title-profile {
   overflow: hidden;
-  position: flex;
-  justify-content: center;
-  margin: auto;
   height: 20vh;
   width: 100%;
+ align-items: center;
+justify-content: center;
+display: grid;
+
+
 
   
   filter: contrast(110%) brightness(190%);
 }
 
 .text {
-  position: flex; 
+  display: grid;
   background: black;
   color: transparent;
   justify-content: center;
@@ -140,7 +144,9 @@ $color2: black;
 .text {
   font: 700 16vh 'Covered by your grace', 'sans-serif' ;
   text-transform: uppercase;
-  margin: 0;
+  // margin: 0 auto;
+  // display: grid;
+ 
   
   &:focus { outline: none; border: 1px dotted white; }
 }
@@ -160,6 +166,7 @@ $color2: black;
 .container1 {
   margin-left: 300px;
   margin-right: 300px;
+  background-color: rgb(53, 18, 18);
 }
 
 .login-input {

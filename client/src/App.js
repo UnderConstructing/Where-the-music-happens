@@ -16,7 +16,6 @@ import Tutorial from './pages/Tutorial'
 import Confirm from  './pages/Confirm'
 
 
-
 export default function App() {
   const [auth, setAuth] = useState(null)
   useEffect(() => {

@@ -6,6 +6,7 @@ h1 {
     text-align: center
 }
 .center {
+    opacity: 1;
     margin: auto;
     width: 50%;   
     padding: 20px;
@@ -22,7 +23,8 @@ h1 {
 .login-button {
     display: block;
     margin: auto;
-    width: 30%;
+    width: 12vw;
+    height: 6vh;
     margin-top: 20px;
     border-radius: 25px;
     font-family: Play;
@@ -30,6 +32,7 @@ h1 {
     background-color: wheat
    }
 .login-style{
+    margin-top: 12vh;
     min-height: 40vh;
     width: 30vw;
     display:flex;
@@ -42,8 +45,28 @@ h1 {
     border-color: wheat;
    }
 
+   @keyframes fadeIn {
+       0% { opacity: 0; }
+       100% {opacity: 1}
+   }
+
    .login-container {
+       opacity: 0;
        width: 100vw;
        display: flex;
        justify-content: center;
+       animation: fadeIn 1.5s ease-in 1s 1;
+       animation-fill-mode: forwards;
    }
+
+.main-a {
+        display: block;
+        margin: auto;
+        width: 12vw;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-family: Play;
+        font-weight: 400;
+        background-color: wheat;
+        border: 2px solid white
+}

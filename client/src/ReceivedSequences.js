@@ -1,6 +1,6 @@
- import React, {useContext} from 'react'
- import { Link } from 'react-router-dom'
- import AuthContext from './utils/Context/AuthContext'
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import AuthContext from './utils/Context/AuthContext'
 
 export default function ReceivedSequences() {
     const userInfo = useContext(AuthContext)
@@ -21,3 +21,4 @@ export default function ReceivedSequences() {
                             )
                         })} */}
 }
+
