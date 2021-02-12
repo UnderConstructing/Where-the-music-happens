@@ -2,12 +2,16 @@ import React, { useContext } from 'react'
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
 import './profilePage.scss'
+import { SequencerContextProvider, useSequencerContext, useSequencerContextUpdate } from './utils/Context/SequencerContext'
 import AuthContext from './utils/Context/AuthContext'
 
 export default function ProfileSequences({ sequences }) {
     const userInfo =  useContext(AuthContext)
     console.log(`profile Sequences ${userInfo}`)
-
+    const sequencerIndex = useSequencerContext()
+    const changeIndex = useSequencerContextUpdate()
+    useSequencerContextUpdate()
+    console.log(sequencerIndex)
 
     
 
