@@ -400,7 +400,10 @@ export default function Sequencer() {
               setBpm(parseInt(radius))}></input>
         </div>
         <div className="controls-container">
-          <button className="save-button" onClick={saveSequence}>Save!</button>
+        <button className='play-button' onClick={startSequence}>&#9654;</button>
+        <button className='stop-button' onClick={stopSequence}>&#9632;</button>
+        <div>
+        <button className="save-button" onClick={saveSequence}>Save!</button>
           <Grid />
           <ToastContainer />
         </div>
@@ -413,5 +416,6 @@ export default function Sequencer() {
         </div>
       </div>
     </div>
+  </div>
   )
 }
