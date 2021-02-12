@@ -12,7 +12,7 @@ export default function Login() {
     const [loginPassword, setLoginPassword] = useState("");
     const login = (e) => {
         e.preventDefault()
-        API.login({
+        await API.login({
             username: loginUsername,
             password: loginPassword
         })
@@ -21,11 +21,12 @@ export default function Login() {
             if (!response.data.username) {
                 toast("Login or password doesn't match, please try again.")}
             else {
-                setLoggedIn(true)
+                window.location.href = "/profile/data/username"
             }
         })
         .catch(err => toast("Login not successful. Try again later."))
     }
+
     return (
         <div className="login-container">
         <div className="login-style">

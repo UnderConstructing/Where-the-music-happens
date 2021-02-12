@@ -23,7 +23,8 @@ h1 {
 .login-button {
     display: block;
     margin: auto;
-    width: 30%;
+    width: 12vw;
+    height: 6vh;
     margin-top: 20px;
     border-radius: 25px;
     font-family: Play;
