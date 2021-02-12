@@ -11,7 +11,6 @@ export default function ProfileSequences({ sequences }) {
     const sequencerIndex = useSequencerContext()
     const changeIndex = useSequencerContextUpdate()
     useSequencerContextUpdate()
-    console.log(sequencerIndex)
 
     
 
