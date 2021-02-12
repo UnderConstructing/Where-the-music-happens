@@ -22,7 +22,7 @@ export default function Login() {
             )}
         })
         .catch(err => toast("Login not successful. Try again later."))
-    
+    }
     return (
         <div className="login-container">
         <div className="login-style">
