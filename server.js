@@ -4,11 +4,15 @@ const app = express();
 const PORT = process.env.PORT || 4000
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/User?readPreference=primary&appname=MongoDB%20Compass&ssl=false', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-
-}, () => { console.log('mongoosed') })
+mongoose.connect(
+    process.env.MONGODB_URI || 'mongodb://localhost/deep-thoughts',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false
+    }
+  );
 
 //MIDDLEWARE
 const bodyParser = require('body-parser');
