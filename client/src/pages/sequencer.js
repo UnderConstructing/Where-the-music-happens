@@ -67,7 +67,12 @@ export default function Sequencer() {
     userInfo.user.bassRowNine[sequencerindex]
   )
 
-
+  function stopSequence() {
+    Tone.Transport.stop()
+    Tone.Transport.clear()
+    Tone.Transport.dispose()
+  }
+  
   const [currentCol, setCurrentCol] = useState(1)
   const counter = () => {
     let count = ((currentCol + 1))
