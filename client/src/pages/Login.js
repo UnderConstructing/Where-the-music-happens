@@ -14,7 +14,14 @@ export default function Login() {
             username: loginUsername,
             password: loginPassword
         })
-        .then(response => <Redirect to={`/profile/${response.data.username}`} />)
+        .then(response => {
+            console.log(response)
+            if (!response.data.username) {
+                toast("Login or password doesn't match, please try again.")}
+            else {
+                window.location.href = `/profile/${response.data.username}`
+            }
+        })
         .catch(err => toast("Login not successful. Try again later."))
     }
     return (
