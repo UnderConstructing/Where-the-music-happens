@@ -333,6 +333,7 @@ export default function Sequencer() {
         console.error(err)
       })
   }
+  
   async function startSequence(event) {
     event.preventDefault()
     Tone.start()

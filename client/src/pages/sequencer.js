@@ -368,9 +368,9 @@ export default function Sequencer() {
   return (
     <div>
       <div style={{position: 'absolute', left:"0", zIndex: "100"}} >
-        <Link to={`/${userInfo.user.username}/profile`}>
+      <Link to={`/profile/${userInfo.user.username}`}>
       <button className='back-button'>Profile</button>
-        </Link>
+      </Link>
       </div>
       <div style={{position: 'absolute', right: "0", zIndex: "100"}}>
         <ChatApp />

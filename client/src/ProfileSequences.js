@@ -7,6 +7,7 @@ import AuthContext from './utils/Context/AuthContext'
 
 export default function ProfileSequences({ sequences }) {
     const userInfo = useContext(AuthContext)
+    console.log(`profile Sequences ${userInfo}`)
     const sequencerIndex = useSequencerContext()
     const changeIndex = useSequencerContextUpdate()
     useSequencerContextUpdate()

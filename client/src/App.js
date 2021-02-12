@@ -14,25 +14,23 @@ import MainBody from './pages/MainBody';
 import FourOhFour from './pages/FourOhFour'
 import Tutorial from './pages/Tutorial'
 import Confirm from  './pages/Confirm'
-import { SequencerContextProvider } from './utils/Context/SequencerContext';
 
 
 
 export default function App() {
   const [auth, setAuth] = useState(null)
   useEffect(() => {
+    console.log("show me my user")
     API.getUsers()
       .then(res => {
         setAuth(res.data);
-        console.log(auth)
+        localStorage.setItem('user', JSON.stringify(res.data))
       })
-  },[])
+  }, [])
 
   return (
-    <SequencerContextProvider>
     <AuthContext.Provider value={{ user: auth }}>
-      <div>
-        
+      <div>  
         <Router>
           <HeaderSection />
             <Switch>
@@ -58,6 +56,5 @@ export default function App() {
         </Router>
       </div>
     </AuthContext.Provider>
-    </SequencerContextProvider>
   )
 }

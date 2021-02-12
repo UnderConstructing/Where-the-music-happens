@@ -2,6 +2,7 @@ const router = require("express").Router()
 const User = require('../../models/user')
 
 router.get("/", (req, res) => {
+    console.log("route hit")
     if (req.user) {
         User.findOne(
             {
@@ -9,7 +10,7 @@ router.get("/", (req, res) => {
             }
         ).then(user => {
             res.json(user)
-
+            console.log(user)
         })
     }
 })
