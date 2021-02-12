@@ -14,7 +14,7 @@ export default function Login() {
             username: loginUsername,
             password: loginPassword
         })
-        .then(response => <Redirect to={`/profile/${response.data.username}}`?)
+        .then(response => <Redirect to={`/profile/${response.data.username}`} />)
         .catch(err => toast("Login not successful. Try again later."))
     }
     return (
