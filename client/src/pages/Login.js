@@ -6,11 +6,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../Login.css';
 
 export default function Login() {
+    const [loggedIn, setLoggedIn] = useState(false)
     const [userInfo, setUserInfo] = useState(null)
     const [loginUsername, setLoginUsername] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
     const login = (e) => {
-        const [loggedIn, setLoggedIn] = useState(false)
         e.preventDefault()
         API.login({
             username: loginUsername,
