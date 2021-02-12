@@ -21,7 +21,7 @@ export default function App() {
   const [auth, setAuth] = useState(null)
   useEffect(() => {
     console.log("show me my user")
-    await API.getUsers()
+    API.getUsers()
       .then(res => {
         setAuth(res.data);
         localStorage.setItem('user', JSON.stringify(res.data))

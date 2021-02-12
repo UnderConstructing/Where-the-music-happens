@@ -13,7 +13,7 @@ export default function Login() {
     const [loginPassword, setLoginPassword] = useState("");
     const login = (e) => {
         e.preventDefault()
-        let userInfo = await API.login({
+            API.login({
             username: loginUsername,
             password: loginPassword
         })
