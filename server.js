@@ -19,12 +19,9 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json({limit: '50mb'}))
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }))
 
-if (process.env.NODE_ENV === 'production') {
-    // Handle React routing, return all requests to React app
-    app.get('*', function(req, res) {
-      res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-    });
-  }
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+  });
   
 
 const expressSession = require('express-session')
