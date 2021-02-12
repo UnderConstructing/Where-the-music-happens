@@ -32,11 +32,9 @@ export default function Login() {
             <h1>Login</h1>
             <input className="login-input" placeholder="username" onChange={e => setLoginUsername(e.target.value)}></input>
             <input className="login-input" type="password" placeholder="password" onChange={e => setLoginPassword(e.target.value)}></input>
-            {loggedIn && 
-            <Link to={`/profile/${userInfo.user.username}`}>
+            <Link to={`/profile/${loginUsername}`}>
                 <button className="login-button" onClick={login}>Submit</button>
             </Link>
-            }
             <ToastContainer />
             <h3 className="login-p">Don't have an account? Sign up here</h3>
             <p className="main-p">

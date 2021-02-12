@@ -22,7 +22,9 @@ export default function Profile(props) {
                 <div className="inbox-container">
                     <h1 className='inbox-title'>INBOX</h1>
                     <div className='inbox'>
-                        {userInfo.receivedsnareArray.map((sequence, i) => {
+
+                        { userInfo &&
+                        userInfo.receivedsnareArray.map((sequence, i) => {
                             return (
                                 <Link to={`/dashboard/${userInfo.username}/received/${i}`}>
                                     <div className="inbox-item" key={sequence.id + i} id={i}>
