@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import API from "../utils/API"
 import { ToastContainer, toast } from 'react-toastify';
+import {Redirect} from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
 import '../Login.css';
 
@@ -13,7 +14,7 @@ export default function Login() {
             username: loginUsername,
             password: loginPassword
         })
-        .then(response => window.location.href = `/profile/${response.data.username}`)
+        .then(response => <Redirect to={`/profile/${response.data.username}}`?)
         .catch(err => toast("Login not successful. Try again later."))
     }
     return (
